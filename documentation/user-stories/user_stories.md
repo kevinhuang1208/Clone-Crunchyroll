@@ -61,7 +61,7 @@
 ### Viewing a Specific Anime Page
 * As a guest or logged in user, I should be able to click on an anime "tile" which takes me to a page which displays the anime's information including description, rating, reviews, and episodes
   * I should have the ability to click on an episode tile from the anime's page which will redirect me to another page to view the episode
-  * the ability to click on an anime's episodes should be disabled if I am viewing as a guest (not logged in)
+    * The ability to click on an anime's episodes should be disabled if I am viewing as a guest (not logged in)
 
 
 
