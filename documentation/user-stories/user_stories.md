@@ -24,28 +24,51 @@
     * I would like the website to inform me of the validations I failed to pass, and repopulate the form with my valid entries (except my password).
       * So that I can try again without needing to refill forms I entered valid data into.
 
+### Edit profile
+* As a registered/loged-in user, I want to be able to view my account information such as my credentials, profile picture, and all the reviews or anime I've posted.
+  * When at my profile page, I want the ability to edit the information pertaining my credentials and my profile picture.
+    * When I enter invalid information such as editing an email to not match proper email format, I should not be able to submit the edit.
+  * I should also be able to view all my reviews I've posted from my account.
+    * When clicking a review I've posted, I should be redirected to the page on which I created the review for and my review should be displayed at the top of all reviews for that link.
+
+
 ### Demo User
 
 * As an unregistered and unauthorized user, I would like an easy to find and clear button on both the `/signup` and `/login` pages to allow me to visit the site as a guest without signing up or logging in.
   * When I'm on either the `/signup` or `/login` pages:
-    * I can click on a Demo User button to log me in and allow me access as a normal user.
-      * So that I can test the site's features and functionality without needing to stop and enter credentials.
+    * I can click on a Demo User button for either a studio demo profile or a viewer user profile to log me in and allow me access the site's functionality based off the user's permissions.
 
 ### Log Out
 
 * As a logged in user, I want to log out via an easy to find log out button on the navigation bar.
   * While on any page of the site:
-    * I can log out of my account and be redirected to a page displaying recent FauxTweets.
-      * So that I can easily log out to keep my information secure.
+    * I can log out of my account and be redirected to a page displaying the landing page.
 
-## FauxTweets
+### Reviews
 
-### Create FauxTweets
+* I should have the ability to post a review for a certain anime only if I am not the poster of that anime.
+  * When I visit an anime where I have a posted review, buttons displaying options to delete and edit the review should be available for my review only.
+* I should be able to visit an anime and view all reviews for that pertaining anime.
+  * If I have a review for the anime, my review should be displayed at the top of the review list. 
 
-* As a logged in user, I want to be able to post new FauxTweets.
-  * When I'm on the `/new-fauxtweet` page:
-    * I can write and submit a new FauxTweet.
-      * So that I can share my thoughts and memes with my friends.
+## Anime
+
+### Viewing all Anime
+* I should be able to visit the home page of the website which displays all the available anime on the website.
+  * I should be able to continue to the home page as a guest user if I do not wish to log in
+    * 
+
+### Creating an Anime Page
+
+* As a logged in user with studio permission, an option to create an anime should be displayed
+  * When clicking on the create anime option, I should be redirected to another page/modal with a form to enter the anime details including the name, description, and picture
+* When logged into a user without studio permission, the button to create an anime should not be displayed and I should not have access to the create an anime page/modal
+* If I am the creator of the anime page, I should have the ability to edit the information for that anime along with having the option to delete it.
+
+### Posting Episode to the Anime Page
+
+* Only when logged in as a user with producer permissions, I should have the ability to add episodes to my anime's page.
+  * I should also have the ability to edit and delete the episodes only if I am the producer that posted the anime. 
 
 ### Viewing FauxTweets
 
