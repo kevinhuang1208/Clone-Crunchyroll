@@ -28,8 +28,10 @@
 
 ### Edit profile
 * As a registered/logged-in user, I want to be able to view my account information at `/user/:userId` such as my credentials, profile picture, and all the reviews or anime I've posted.
-  * When at my profile page, I want the ability to edit the information pertaining my credentials and my profile picture.
+  * When at my profile page, I want the ability to edit the information pertaining my credentials and my profile picture along with the option to delete my profile.
+    * When logged into a demo user, I should not have the option to update or delete the profile. 
     * When I enter invalid information such as editing an email to not match proper email format, I should not be able to submit the edit.
+    * Upon deleting my profile, I should be redirected to the signup page and have no user logged in. 
   * I should also be able to view all my reviews I've posted from my account.
     * When clicking a review I've posted, I should be redirected to the page on which I created the review for and my review should be displayed at the top of all reviews for that link.
 
