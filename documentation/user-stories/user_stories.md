@@ -1,7 +1,9 @@
 # User Stories
 
-## Users
+## Landing Page
+* When navigating to the website, I should see signup page `/signup` with an option to click login for already existing users.
 
+## Users (CRUD)
 ### Sign Up
 
 * As an unregistered and unauthorized user, I want to be able to sign up for the website via a sign-up form.
@@ -25,9 +27,11 @@
       * So that I can try again without needing to refill forms I entered valid data into.
 
 ### Edit profile
-* As a registered/loged-in user, I want to be able to view my account information such as my credentials, profile picture, and all the reviews or anime I've posted.
-  * When at my profile page, I want the ability to edit the information pertaining my credentials and my profile picture.
+* As a registered/logged-in user, I want to be able to view my account information at `/user/:userId` such as my credentials, profile picture, and all the reviews or anime I've posted.
+  * When at my profile page, I want the ability to edit the information pertaining my credentials and my profile picture along with the option to delete my profile.
+    * When logged into a demo user, I should not have the option to update or delete the profile. 
     * When I enter invalid information such as editing an email to not match proper email format, I should not be able to submit the edit.
+    * Upon deleting my profile, I should be redirected to the signup page and have no user logged in. 
   * I should also be able to view all my reviews I've posted from my account.
     * When clicking a review I've posted, I should be redirected to the page on which I created the review for and my review should be displayed at the top of all reviews for that link.
 
@@ -44,61 +48,47 @@
   * While on any page of the site:
     * I can log out of my account and be redirected to a page displaying the landing page.
 
-### Reviews
 
-* I should have the ability to post a review for a certain anime only if I am not the poster of that anime.
-  * When I visit an anime where I have a posted review, buttons displaying options to delete and edit the review should be available for my review only.
-* I should be able to visit an anime and view all reviews for that pertaining anime.
-  * If I have a review for the anime, my review should be displayed at the top of the review list. 
-
-## Anime
+## Anime (CRUD)
 
 ### Viewing all Anime
-* I should be able to visit the home page of the website which displays all the available anime on the website.
+* I should be able to visit the home page `/` of the website which displays all the available anime on the website.
   * I should be able to continue to the home page as a guest user if I do not wish to log in
     * I should be able to view all the anime available
+  * On hover over the anime tile, I should see the anime's title, description, avg rating, number of episodes, and number of seasons. I should also see a favorite button and a play button.
 
 ### Viewing a Specific Anime Page
-* As a guest or logged in user, I should be able to click on an anime "tile" which takes me to a page which displays the anime's information including description, rating, reviews, and episodes
-  * I should have the ability to click on an episode tile from the anime's page which will redirect me to another page to view the episode
+* As a guest or logged in user, I should be able to click on an anime "tile" which takes me to a page which displays the anime's information `/anime/:animeId` including description, rating, display image, the ability to favorite the anime, reviews, and episodes
+* I should see a episodes section with tiles for the episodes and below that, I should see a review section.
+  * I should have the ability to click on an episode tile from the anime's page which will redirect me to another page to view the episode `/:animeId/:episodeId`
     * The ability to click on an anime's episodes should be disabled if I am viewing as a guest (not logged in)
-
 
 
 ### Creating an Anime Page
 
 * As a logged in user with studio permission, an option to create an anime should be displayed
-  * When clicking on the create anime option, I should be redirected to another page/modal with a form to enter the anime details including the name, description, and picture
+  * When clicking on the create anime option, I should be redirected to another page/modal `/anime/new` with a form to enter the anime details including the name, description, and picture
 * When logged into a user without studio permission, the button to create an anime should not be displayed and I should not have access to the create an anime page/modal
 * If I am the creator of the anime page, I should have the ability to edit the information for that anime along with having the option to delete it.
 
 ### Posting Episode to the Anime Page
 
-* Only when logged in as a user with producer permissions, I should have the ability to add episodes to my anime's page.
+* Only when logged in as a user with producer permissions, I should have the ability to add episodes to my anime's page `/anime/:animeId/new`.
   * I should also have the ability to edit and delete the episodes only if I am the producer that posted the anime. 
 
-### Viewing FauxTweets
+## Reviews (CRUD)
 
-* As a logged in _or_ logged out user, I want to be able to view a selection of the most recent FauxTweets.
-  * When I'm on the `/fauxtweets` page:
-    * I can view the ten most recently posted FauxTweets.
-      * So that I can read and interact with the thoughts and memes of my friends.
+* I should have the ability to post a review for a certain anime only if I am not the poster of that anime `/anime/:animeId/review/new`.
+  * When I visit an anime where I have a posted review, buttons displaying options to delete and edit the review should be available for my review only.
+* I should be able to visit an anime and view all reviews for that pertaining anime. This should be displayed at the anime's page `/anime/:animeId`.
+  * If I have a review for the anime, my review should be displayed at the top of the review list. 
 
-* As a logged in _or_ logged out user, I want to be able to view a specific FauxTweet and its associated FauxComments and FauxLikes.
-  * When I'm on the `/fauxtweets/:id` page:
-    * I can view the content of the FauxTweet, as well as the associated FauxComments and FauxLikes.
-      * So that I can read and interact with the thoughts and memes of my friends, and add my own thoughts and memes in the FauxComments.
 
-### Updating FauxTweets
+## Favorites Section (CRD)
+* I should be able to click on another user's name (from the reviews section or anywhere else) `/user/:userId`. 
+  * If clicking on another user's name, I should be redirected to their user profile anime favorites section which will display all the anime the user has favorited as tiles (similar to the home page)
+* When navigating to my own profile I should be shown my profile page which also includes my favorites list.
+  * In the favorites list, I should be able to delete an item from my favorites list
 
-* As a logged in user, I want to be able to edit my FauxTweets by clicking an Edit button associated with the FauxTweet anywhere that FauxTweet appears.
-  * When I'm on the `/fauxtweets`, `/fauxtweets/:id`, or `/users/:id/fauxtweets` pages:
-    * I can click "Edit" to make permanent changes to FauxTweets I have posted.
-      * So that I can fix any errors I make in my FauxTweets.
 
-### Deleting FauxTweets
 
-* As a logged in user, I want to be able to delete my FauxTweets by clicking a Delete button associated with the FauxTweet anywhere that FauxTweet appears.
-  * When I'm on the `/fauxtweets`, `/fauxtweets/:id`, or `/users/:id/fauxtweets` pages:
-    * I can click "Delete" to permanently delete a FauxTweet I have posted.
-      * So that when I realize I shouldn't have publicly said something, I can easily remove it.
