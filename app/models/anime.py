@@ -8,3 +8,4 @@ class Anime(db.Model):
     desc = db.Column(db.String(300))
     cover_picture=db.Column(db.String(500), nullable = False)
     release_date = db.Column()
+    user_id = db.Column()
