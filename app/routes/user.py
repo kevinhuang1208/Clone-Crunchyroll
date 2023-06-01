@@ -5,3 +5,5 @@ from app.models.models import db
 user = Blueprint('user', __name__)
 
 @user.route('/signin')
+def swag():
+    pass
