@@ -33,4 +33,5 @@ class User(db.Model, UserMixin):
         }
 
     anime = db.relationship('Anime', back_populates = 'userid')
+    review = db.Relationship('Reviews', back_populates = 'review_user_id')
     
