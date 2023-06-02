@@ -8,7 +8,7 @@ class Genre(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key = True)
-    anime_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('anime.id')), nullable=False)
+    anime_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('animes.id')), nullable=False)
     genre = db.Column(db.String(70), nullable=False)
   
     anime_id_genre = db.relationship(

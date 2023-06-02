@@ -7,8 +7,8 @@ BUCKET_NAME=os.environ.get("S3_BUCKET")
 S3_LOCATION = f"https://{BUCKET_NAME}.s3.amazonaws.com/"
 
 # add the extensions
-ALLOWED_EXTENSIONS = {"mkv", "mp4", "jpeg", "gif"}
-
+ALLOWED_EXTENSIONS = {"m4a", "mp4", "wmv", "mov"}
+ALLOWED_IMAGES = {'png', 'jpeg', 'jpg'}
 
 s3 = boto3.client(
     "s3",
@@ -38,5 +38,5 @@ def upload_file_to_s3(file, acl="public-read"):
     except Exception as e:
         return {"errors": str(e)}
 
-
+    #url we save into the data base
     return {'url': f"{S3_LOCATION}{file.filename}"}
