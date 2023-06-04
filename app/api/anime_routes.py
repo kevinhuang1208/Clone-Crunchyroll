@@ -46,7 +46,12 @@ def get_one_episode(anime_id, episode_num):
 @anime_routes.route("/<int:id>/reviews")
 def get_anime_reviews(id):
     """Route to get the reviews for a specific anime"""
-    anime_reviews = Reviews.query.filter(Reviews.anime_id == id)
-    res = [review.to_dict() for review in anime_reviews]
-    return {"reviews": res}
+    anime_reviews = Reviews.query.filter(Reviews.anime_id == id).all()
+    # print('anime_reviews --->', anime_reviews)
+    if anime_reviews:
+        res = [review.to_dict() for review in anime_reviews]
+        return {"reviews": res}
+    else:
+        return {"reviews": "no reviews"}
+        
 

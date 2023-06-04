@@ -18,4 +18,12 @@ class Reviews(db.Model):
     review_anime_id = db.relationship('Anime', back_populates = 'review_name')
 
     def to_dict(self):
-        pass
+        """return json obj for fe"""
+        return {
+            'id': self.id,
+            'userId': self.user_id,
+            'animeId': self.anime_id,
+            'review': self.review,
+            'rating': self.rating,
+            'createdAt': self.createdAt
+        }
