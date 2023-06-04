@@ -1,6 +1,6 @@
 from .db import db, add_prefix_for_prod, SCHEMA, environment
 from .reviews import Reviews
-
+from .episodes import Episodes
 class Anime(db.Model):
     __tablename__ = 'animes'
 
@@ -37,6 +37,7 @@ class Anime(db.Model):
 
 
     def to_dict(self):
+        # need to revise this query to just grab the count of reviews meeting this criteria
         episode_reviews = Reviews.query.filter_by(anime_id = self.id).all()
         review_count = len(episode_reviews)
         review_sum = 0
@@ -45,15 +46,19 @@ class Anime(db.Model):
         avg_rating = 'no reviews'
         if review_count > 0:
             avg_rating = review_sum/review_count
+        #  need to revise this query to just grab the count of episodes meeting this criteria
+        episodes = Episodes.query.filter_by(anime_id = self.id).all()
+        episode_count = len(episodes)
 
         return{
             'id':self.id,
-            'userId':self.user_id,
+            'authorId':self.user_id,
             'showname':self.showname,
             'desc':self.desc,
             'reviewCount': review_count,
             'avgRating': avg_rating,
             'releaseDate':self.release_date.strftime('%m/%d/%Y'),
-            'coverPicture':self.cover_picture
+            'coverPicture':self.cover_picture,
+            'episodeCount': episode_count
         }
     

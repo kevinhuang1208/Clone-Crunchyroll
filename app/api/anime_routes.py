@@ -9,7 +9,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 
 anime_routes = Blueprint("anime", __name__)
 
-@anime_routes.route("/all")
+@anime_routes.route("/")
 def get_all_anime():
     """Route to get all of the anime information along with review count and avg"""
 
