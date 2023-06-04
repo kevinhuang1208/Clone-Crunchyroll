@@ -12,6 +12,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
+    studio = db.Column(db.Boolean, default=False)
     hashed_password = db.Column(db.String(255), nullable=False)
 
     @property
@@ -31,3 +32,7 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email
         }
+
+    anime = db.relationship('Anime', back_populates = 'userid')
+    review = db.relationship('Reviews', back_populates = 'review_user_id')
+    favorite = db.relationship('Favorites', back_populates = 'user_id_favorites')
