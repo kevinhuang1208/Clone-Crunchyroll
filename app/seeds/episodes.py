@@ -44,7 +44,7 @@ def seed_episodes():
         anime_id = 3,
         title="The Garden Party",
         desc = "The Freemans are adjusting to life in Woodcrest. Robert is invited to a ritzy garden party by tycoon Ed Wuncler, but is concerned that his grandsons will embarrass him in front of his new neighbors. At the party, Huey tries to enlighten the partygoers with the 'truth' and Ed III dares Riley to shoot him with a shotgun.",
-        release_date = date(2005, 6, 11),
+        release_date = date(2005, 11, 6),
         video_link = "test.com"
     )
 
@@ -53,7 +53,7 @@ def seed_episodes():
         anime_id = 3,
         title="The Garden Party",
         desc = "R. Kelly is brought to trial for urinating on an underage girl. Riley supports Kelly, but Huey sides with the law, thereby separating himself from many members of his own ethnicity who defend Kelly despite the overwhelming evidence against him.",
-        release_date = date(2005, 13, 11),
+        release_date = date(2005, 11, 13),
         video_link = "test.com"
     )
 
@@ -62,7 +62,7 @@ def seed_episodes():
         anime_id = 4,
         title="Cartman Gets an Anal Probe",
         desc = "Cartman tells his friends Stan, Kyle, and Kenny he had a dream about being abducted by aliens. The boys realize that this did actually happen when Kyle's baby brother, Ike is abducted also. They manage to rescue Ike while the aliens conclude that cows are the most intelligent species on the planet.",
-        release_date = date(1997, 13, 8),
+        release_date = date(1997, 8, 13),
         video_link = "test.com"
     )
     southpark2 = Episodes(
@@ -70,7 +70,7 @@ def seed_episodes():
         title="Volcano",
         anime_id = 4,
         desc = "Stan's uncle Jimbo and his friend Ned take the four boys on a hunting trip in the mountains. Stan's father, a geologist, discovers that the mountain is a volcano about to erupt and convinces the townspeople to dig a trench for diverting the lava.",
-        release_date = date(1997, 20, 8),
+        release_date = date(1997, 8, 20),
         video_link = "test.com"
     )
     

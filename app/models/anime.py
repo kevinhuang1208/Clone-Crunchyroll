@@ -53,7 +53,7 @@ class Anime(db.Model):
             'desc':self.desc,
             'reviewCount': review_count,
             'avgRating': avg_rating,
-            'releaseDate':self.release_date,
+            'releaseDate':self.release_date.strftime('%m/%d/%Y'),
             'coverPicture':self.cover_picture
         }
     

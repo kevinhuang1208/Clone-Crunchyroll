@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, session, request
 from app.models.anime import Anime
+from app.models.episodes import Episodes
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import login_required
@@ -9,7 +10,7 @@ anime_routes = Blueprint("anime", __name__)
 
 @anime_routes.route("/all")
 def get_all_anime():
-    """route to get all of the anime information"""
+    """Route to get all of the anime information along with review count and avg"""
 
     all_anime = Anime.query.all()
 
@@ -17,4 +18,23 @@ def get_all_anime():
 
     return {"anime": res}
 
+
+@anime_routes.route("/<int:id>")
+def get_one_anime(id):
+    """Route to get the details of one anime based on id"""
+    anime = Anime.query.get(id)
+    return anime.to_dict()
+
+@anime_routes.route("/<int:id>/episodes")
+def get_all_episodes(id):
+    """query to get all the episodes for an anime"""
+    anime_episodes = Episodes.query.filter(Episodes.anime_id == id).all()
+    res = [episode.to_dict() for episode in anime_episodes]
+    return {"episodes": res}
+
+
+@anime_routes.route("/<int:anime_id>/episodes/<int:episode_id>")
+def get_one_episode(anime_id, episode_id):
+    """Route to get the details of one episode"""
+    pass
 
