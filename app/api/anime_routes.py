@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, session, request
 from app.models.anime import Anime
 from app.models.episodes import Episodes
+from app.models.reviews import Reviews
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import login_required
@@ -37,7 +38,15 @@ def get_all_episodes(id):
 @anime_routes.route("/<int:anime_id>/episodes/<int:episode_num>")
 def get_one_episode(anime_id, episode_num):
     """Route to get the details of one episode"""
+    ## Change from episode num to episode id?
     anime_episode = Episodes.query.filter(Episodes.anime_id == anime_id, Episodes.episode_number == episode_num)
     res = [episode.to_dict() for episode in anime_episode]
     return {"episode": res}
+
+@anime_routes.route("/<int:id>/reviews")
+def get_anime_reviews(id):
+    """Route to get the reviews for a specific anime"""
+    anime_reviews = Reviews.query.filter(Reviews.anime_id == id)
+    res = [review.to_dict() for review in anime_reviews]
+    return {"reviews": res}
 
