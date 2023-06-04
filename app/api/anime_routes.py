@@ -23,7 +23,8 @@ def get_all_anime():
 def get_one_anime(id):
     """Route to get the details of one anime based on id"""
     anime = Anime.query.get(id)
-    return anime.to_dict()
+    anime_dict = anime.to_dict()
+    return {"anime": anime_dict}
 
 @anime_routes.route("/<int:id>/episodes")
 def get_all_episodes(id):
@@ -33,8 +34,10 @@ def get_all_episodes(id):
     return {"episodes": res}
 
 
-@anime_routes.route("/<int:anime_id>/episodes/<int:episode_id>")
-def get_one_episode(anime_id, episode_id):
+@anime_routes.route("/<int:anime_id>/episodes/<int:episode_num>")
+def get_one_episode(anime_id, episode_num):
     """Route to get the details of one episode"""
-    pass
+    anime_episode = Episodes.query.filter(Episodes.anime_id == anime_id, Episodes.episode_number == episode_num)
+    res = [episode.to_dict() for episode in anime_episode]
+    return {"episode": res}
 
