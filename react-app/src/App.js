@@ -5,6 +5,7 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import LandingPage from "./components/LandingPage"
 import Footer from "./components/Footer"
+import AnimeDetail from './components/AnimeDetail'
 import HomePage from "./components/HomePage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
@@ -24,8 +25,13 @@ function App() {
       </Route>
       {isLoaded && (
         <Switch>
-          <Route path="/anime">
+          <Route exact path="/anime">
             <HomePage />
+            
+          </Route>
+
+          <Route exact path="/anime/:animeId">
+            <AnimeDetail/>
           </Route>
           <Route path="/login" >
             <LoginFormPage />

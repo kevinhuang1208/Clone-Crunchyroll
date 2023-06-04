@@ -10,22 +10,21 @@ function HomePage() {
   const history = useHistory()
   const animes = useSelector((state) => state.anime)
   // console.log('anime --->',animes)
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     dispatch(getAllAnimeThunk())
   }, [dispatch])
   const animesArr = Object.values(animes)
-  
-  return (
-    <div>
-      <h1> TEST!!!!</h1>
+    return (
+      <div>
+        <h1> TEST!!!!</h1>
         {
-            animesArr.map(anime => (
-                <AnimeTile anime={anime} />
-            ))
+          animesArr.map(anime => (
+            <AnimeTile anime={anime} />
+          ))
         }
-    </div>
-  )
+      </div>
+    )
 }
 
 export default HomePage;

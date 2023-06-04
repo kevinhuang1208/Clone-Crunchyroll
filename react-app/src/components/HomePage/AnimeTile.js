@@ -9,7 +9,7 @@ function AnimeTile({anime}){
         history.push(`/anime/${anime.id}`)
       }
 
-      console.log('single anime ->>>>>>>>------wakanda4life',anime)
+    //   console.log('single anime ->>>>>>>>------wakanda4life',anime)
       if(!anime) return null
 
     //   <img className = 'animeTileCoverPicture' onClick = {handleClick}  src = {anime.coverPicture}/>
@@ -23,14 +23,13 @@ function AnimeTile({anime}){
             </div>
 
             <div className ='reviewTotalsTile'>
-                <p>{anime.reviewCount}</p>
-                <p>{anime.avgRating}</p>
+                <p>Total Reviews: {anime.reviewCount}</p>
+                <p>Average Rating: {anime.avgRating}</p>
             </div>
 
             <div className = 'releaseDateTileDiv'>
-                <p>{anime.releaseDate}</p>
+                <p>Release Date: {anime.releaseDate}</p>
             </div>
-
 
             <div  className = 'animeDescription'>
                 <p>{anime.desc}</p>

@@ -22,10 +22,11 @@ export const getAllAnimeThunk = () => async(dispatch) =>{
             console.log("normalAnime: ", normalAnime)
             return normalAnime
         }
-        console.log("response NOT ok")
+        console.log("anime response NOT ok")
         console.log("response: ",response)
         console.log("---------------")
         console.log("data: ",data)
+        return null
 }
 
 const initialState = {}

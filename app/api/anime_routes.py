@@ -1,11 +1,15 @@
-from flask import Blueprint, jsonify, session, request
+from flask import Blueprint, jsonify, session, request, redirect
 from app.models.anime import Anime
 from app.models.episodes import Episodes
 from app.models.reviews import Reviews
+from app.models.db import db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import login_required
 from flask_login import current_user, login_user, logout_user, login_required
+from app.forms.post_anime_form import AnimeForm
+
+
 
 anime_routes = Blueprint("anime", __name__)
 
@@ -14,6 +18,7 @@ def get_all_anime():
     """Route to get all of the anime information along with review count and avg"""
 
     all_anime = Anime.query.all()
+    # print('CURRENT USER ----->',current_user.id)
 
     res = [anime.to_dict() for anime in all_anime]
 
@@ -46,6 +51,7 @@ def get_one_episode(anime_id, episode_num):
 @anime_routes.route("/<int:id>/reviews")
 def get_anime_reviews(id):
     """Route to get the reviews for a specific anime"""
+
     anime_reviews = Reviews.query.filter(Reviews.anime_id == id).all()
     # print('anime_reviews --->', anime_reviews)
     if anime_reviews:
@@ -53,5 +59,29 @@ def get_anime_reviews(id):
         return {"reviews": res}
     else:
         return {"reviews": "no reviews"}
-        
+    
 
+@anime_routes.route("/new", methods=['GET', 'POST'])
+def post_anime():
+    """Display and post an anime"""
+
+    form = AnimeForm()
+
+    form["csrf_token"].data = request.cookies["csrf_token"]
+
+    if form.validate_on_submit():
+
+        new_post = Anime(
+            showname=form.data["showname"],
+            desc=form.data["description"],
+            release_date =form.data["release_date"],
+            cover_picture = form.data["cover_picture"]
+        )
+
+
+@anime_routes.route("/delete/<int:anime_id>")
+def delete(anime_id):
+    anime_to_delete = Anime.query.get(anime_id)
+    db.session.delete(anime_to_delete)
+    db.session.commit()
+    return redirect("/anime")      
