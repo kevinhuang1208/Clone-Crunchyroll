@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { postEpisodeThunk } from "../../store/animeDetail"
 import { useHistory } from 'react-router-dom'
 import { useParams } from "react-router-dom";
@@ -14,6 +14,18 @@ const EpisodeForm = () => {
     const [title, setTitle] = useState('')
     const [errors, setErrors] = useState([])
     const {animeId} = useParams();
+
+    const userId = useSelector(state => state.session)
+    const allAnime = useSelector(state => state.anime)
+    const anime = allAnime.animeId
+    if (userId !== 1) {
+        console.log('placfeholder')
+    }
+
+
+
+
+
 
     const resetFile = (e) => {
         console.log("this isisi siis is hit")
