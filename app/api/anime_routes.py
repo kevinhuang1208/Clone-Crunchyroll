@@ -47,7 +47,7 @@ def get_all_episodes(id):
     return {"episodes": res}
 
 
-@anime_routes.route("/<int:anime_id>/episodes/new")
+@anime_routes.route("/<int:anime_id>/episodes/new", methods = ["POST"])
 @login_required
 def post_anime_episode(anime_id):
     """"Route to post an anime episode to an anime"""
@@ -121,7 +121,7 @@ def post_anime():
         picture.filename = get_unique_filename(picture.filename)
         uploaded_pic = upload_file_to_s3(picture)
         aws_link = uploaded_pic['url']
-        print('this is the aws_link ~~~~~>',aws_link)
+        # print('this is the aws_link ~~~~~>',aws_link)
         release_date_string = form.data["release_date"]
         [year, month, day] = release_date_string.split("-")
 

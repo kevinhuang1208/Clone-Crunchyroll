@@ -10,6 +10,7 @@ import HomePage from "./components/HomePage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import AnimeForm from "./components/AnimeForm";
+import ProfilePage from "./components/ProfilePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -45,10 +46,12 @@ function App() {
           <Route exact path="/anime/:animeId">
             <AnimeDetail/>
           </Route>
+          <Route path="/user/:userId" >
+            <ProfilePage />
+          </Route>
           <Route path="/login" >
             <LoginFormPage />
           </Route>
-
           <Route path="/signup">
             <SignupFormPage />
           </Route>

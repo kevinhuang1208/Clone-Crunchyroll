@@ -19,7 +19,7 @@ function AnimeDetail() {
   const user = useSelector((state) => state.session.user);
   console.log("user", user);
 
-  const episodesOfAnime = userSelector((state)=>state.episodes);
+  const episodesOfAnime = useSelector((state)=>state.episodes);
 
 useEffect(() => {
     dispatch(getAllAnimeThunk());
