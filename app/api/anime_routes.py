@@ -52,9 +52,11 @@ def get_all_episodes(id):
 def post_anime_episode(anime_id):
     """"Route to post an anime episode to an anime"""
     # user_id = current_user.id
+    print('INSIDE THE POST ANIME ROUTE!!!!')
     form = EpisodeForm()
 
     form["csrf_token"].data = request.cookies["csrf_token"]
+
 
     if form.validate_on_submit():
         episode_file =form.data["video_link"]
@@ -112,13 +114,15 @@ def post_anime():
     """Display and post an anime"""
 
     form = AnimeForm()
-
+    print('INSIDE THE POST ANIME ROUTE!!!')
     user_id = current_user.id
     # print ('THIS IS THE USER ID ~~~~~~~~~~>', user_id)
 
     form["csrf_token"].data = request.cookies["csrf_token"]
 
     if form.validate_on_submit():
+        print('form data~~~~~>', form.data)
+        print('video data~~~~~>', form.data['cover_picture'])
         ##need to add aws stuff here
         picture = form.data['cover_picture']
         picture.filename = get_unique_filename(picture.filename)

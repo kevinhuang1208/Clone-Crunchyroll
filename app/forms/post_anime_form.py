@@ -12,5 +12,5 @@ class AnimeForm(FlaskForm):
     description = StringField('description', validators=[DataRequired()])
     # release_date = DateField('release_date', validators=[DataRequired()])
     release_date = StringField('release_date')
-    cover_picture =StringField('cover_picture')
-    # cover_picture= FileField('cover_picture', validators=[FileRequired(),FileAllowed(['png', 'jpeg', 'jpg'])])
+    # cover_picture =StringField('cover_picture')
+    cover_picture= FileField('cover_picture', validators=[FileRequired(),FileAllowed(['png', 'jpeg', 'jpg'])])
