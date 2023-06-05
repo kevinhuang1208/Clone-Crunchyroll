@@ -12,6 +12,7 @@ import Navigation from "./components/Navigation";
 import AnimeForm from "./components/AnimeForm";
 import ProfilePage from "./components/ProfilePage";
 import EpisodeComponent from './components/EpisodeComponent'
+import EpisodeForm from './components/EpisodeForm'
 
 function App() {
   const dispatch = useDispatch();
@@ -42,6 +43,10 @@ function App() {
 
           <Route exact path='/anime/new'>
             <AnimeForm />
+          </Route>
+
+          <Route exact path='/anime/:animeId/episodes/new'>
+            <EpisodeForm/>
           </Route>
 
           <Route exact path="/anime/:animeId">

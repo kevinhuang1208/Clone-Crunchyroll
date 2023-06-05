@@ -1,4 +1,32 @@
 const GET_SINGLE_ANIME = "anime/getSingleAnime"
+const POST_EPISODE = "anime/postEpisode"
+
+const postEpisode = (episode) => {
+    return {
+        type: POST_EPISODE,
+        payload: episode
+    }
+}
+
+export const postEpisodeThunk = (animeId, episode) => async (dispatch) => {
+    const response = await fetch(`/api/anime/${animeId}/episodes/new`,{
+        method: 'post',
+        body: episode
+    })
+    const data = await response.json()
+    if(response.ok){
+        console.log("------------////////////")
+        console.log("POST EPISODE DATA: ", data)
+        console.log("///////////-------------")
+        dispatch(postEpisode(data))
+        return data
+    }
+    console.log("episode POST response NOT ok")
+    console.log("response: ",response)
+    console.log("---------------")
+    console.log("data: ",data)
+    return null
+}
 
 const getSingleAnimeEpisodes = (episodes) => {
     return {
@@ -33,6 +61,11 @@ const animeEpisodesReducer = (state = initialState, action) => {
         case GET_SINGLE_ANIME:{
             let newState = {}
             newState = {...action.payload}
+            return newState
+        }
+        case POST_EPISODE:{
+            let newState = {...state}
+            newState[action.payload.id] = action.payload
             return newState
         }
         default:
