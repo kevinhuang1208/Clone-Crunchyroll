@@ -29,10 +29,10 @@ function EpisodeComponent(){
 
       return(
         <div>
-                DID YOU MAKE IT HERE BROOODIEEE
+                <h2></h2>
                 <div>
                 <video width='700px' height = '400px' controls>
-                    <source src = 'https://crunchyclone.s3.us-east-2.amazonaws.com/%5Bpseudo%5D+Rick+and+Morty+S01E01+Pilot+%5BBDRip%5D+%5B1080p%5D+%5Bh.265%5D.mp4' type= 'video/mp4'>
+                    <source src = {currentEpisode.videoLink} type= 'video/mp4'>
                     </source>
                 </video>
                 </div>
