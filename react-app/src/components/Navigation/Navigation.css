@@ -5,3 +5,17 @@
 .hidden {
   display: none;
 }
+
+ul > li > .navlink > img {
+  height: 50px;
+  width: 320px;
+}
+
+ul > li {
+  list-style-type: none;
+}
+
+/* ul {
+  display: flex;
+  justify-content: space-between;
+} */
