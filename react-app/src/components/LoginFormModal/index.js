@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
+import * as sessionActions from "../../store/session";
 import "./LoginForm.css";
 
 function LoginFormModal() {
@@ -19,6 +20,12 @@ function LoginFormModal() {
     } else {
         closeModal()
     }
+  };
+
+  const handleDemoSubmit = (e) => {
+    e.preventDefault();
+    return dispatch(sessionActions.login("demo@aa.io", "password"))
+      .then(closeModal)
   };
 
   return (
@@ -50,6 +57,10 @@ function LoginFormModal() {
         </label>
         <button type="submit">Log In</button>
       </form>
+      <div className="demo-button">
+      <button type="submit"
+         onClick={handleDemoSubmit}>Demo User Login</button>
+      </div>
     </>
   );
 }
