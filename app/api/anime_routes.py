@@ -18,7 +18,9 @@ def get_all_anime():
     """Route to get all of the anime information along with review count and avg"""
 
     all_anime = Anime.query.all()
-    # print('CURRENT USER ----->',current_user.id)
+    # if current_user.is_authenticated:
+    #     print('CURRENT USER ----->',current_user.id)
+
 
     res = [anime.to_dict() for anime in all_anime]
 
@@ -61,7 +63,8 @@ def get_anime_reviews(id):
         return {"reviews": "no reviews"}
     
 
-@anime_routes.route("/new", methods=['GET', 'POST'])
+@anime_routes.route("/new", methods=['POST'])
+@login_required
 def post_anime():
     """Display and post an anime"""
 
@@ -70,12 +73,13 @@ def post_anime():
     form["csrf_token"].data = request.cookies["csrf_token"]
 
     if form.validate_on_submit():
+        ##need to add aws stuff here
 
         new_post = Anime(
             showname=form.data["showname"],
             desc=form.data["description"],
             release_date =form.data["release_date"],
-            cover_picture = form.data["cover_picture"]
+            cover_picture = "aws stuff here"
         )
 
 

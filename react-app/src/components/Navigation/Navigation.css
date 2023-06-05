@@ -8,14 +8,14 @@
 
 ul > li > .navlink > img {
   height: 50px;
-  width: 400px;
+  width: 320px;
 }
 
 ul > li {
   list-style-type: none;
 }
 
-ul {
+/* ul {
   display: flex;
   justify-content: space-between;
-}
+} */

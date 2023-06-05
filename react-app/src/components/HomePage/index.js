@@ -17,7 +17,7 @@ function HomePage() {
   const animesArr = Object.values(animes)
     return (
       <div>
-        <h1> TEST!!!!</h1>
+        
         {
           animesArr.map(anime => (
             <AnimeTile anime={anime} />
