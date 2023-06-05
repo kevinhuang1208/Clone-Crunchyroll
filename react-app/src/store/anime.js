@@ -11,9 +11,10 @@ const postAnime = (anime) => {
 }
 
 export const postAnimeThunk = (anime) => async (dispatch) => {
+    console.log("anime in thunk: ", anime)
     const response = await fetch("/api/anime/new", {
         method: "post",
-        body: JSON.stringify(anime)
+        body: anime
     })
     const data = await response.json()
     if(response.ok){

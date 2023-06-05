@@ -35,22 +35,30 @@ const AnimeForm = () => {
             newFormErrors.coverPicture = "Your show MUST have a cover picture."
         }
         if(Object.values(newFormErrors).length > 0){
-            
+            setErrors(newFormErrors)
         }
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
+        console.log("coverpic : ", Object.keys(coverPicture))
 
-        const newAnime = {
-            "showname": showname,
-            "description": description,
-            "release_date": releaseDate,
-            "cover_picture": coverPicture
-        }
+        const formData = new FormData()
+        formData.append("showname", showname)
+        formData.append("description", description)
+        formData.append("release_date", releaseDate)
+        formData.append("cover_picture", coverPicture)
+
+        console.log('FORM DATA FROM REACT COMPONENT ->', formData)
+        // const newAnime = {
+        //     "showname": showname,
+        //     "description": description,
+        //     "release_date": releaseDate,
+        //     "cover_picture": coverPicture
+        // }
 
         if (!Object.values(errors).length) {
-
-            const res = await dispatch(postAnimeThunk(newAnime))
+            console.log("anime:", formData)
+            const res = await dispatch(postAnimeThunk(formData))
             if(res.id) {
                 history.push(`/anime/${res.id}`)
             }
