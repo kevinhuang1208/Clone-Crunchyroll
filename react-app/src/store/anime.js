@@ -4,7 +4,8 @@ const DELETE_ANIME = "anime/deleteAnime"
 
 const deleteAnime = (animeId) => {
     return {
-        type:
+        type: DELETE_ANIME,
+        payload: animeId
     }
 }
 
