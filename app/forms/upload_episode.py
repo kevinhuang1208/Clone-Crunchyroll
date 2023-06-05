@@ -6,7 +6,7 @@ from flask_wtf.file import FileField, FileAllowed,FileRequired
 
 class EpisodeForm(FlaskForm):
     episode_number = IntegerField('Episode #',validators=[DataRequired()])
-    desc =StringField('Description', validators = [DataRequired()])
+    description =StringField('Description', validators = [DataRequired()])
     # release_date = DateField('Date' , validators = [DataRequired()])
     release_date = StringField('Date', validators=[DataRequired()])
     # video_link = FileField('Video File' , validators=[FileRequired(), FileAllowed(['mp4','mov'])])

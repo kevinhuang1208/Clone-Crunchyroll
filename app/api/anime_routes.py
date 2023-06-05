@@ -69,7 +69,7 @@ def post_anime_episode(anime_id):
         new_episode = Episodes(
             episode_number=form.data["episode_number"],
             anime_id = anime_id,
-            desc = form.data["desc"],
+            desc = form.data["description"],
             release_date = date(int(year), int(month), int(day)),
             video_link = aws_link,
             # video_link = form.data["video_link"],
