@@ -81,7 +81,7 @@ useEffect(() => {
       <div className ='listOfEpisodesDiv'>
         {episodesOfAnime.map((episode) => (
           <div className="singleEpisodeDiv" key={episode.id}>
-            <h2>{singleAnime.}</h2>
+            <h2>{singleAnime.showname}</h2>
             <p>Episode {episode.episodeNumber}</p>
             <p>{episode.desc}</p>
           </div>

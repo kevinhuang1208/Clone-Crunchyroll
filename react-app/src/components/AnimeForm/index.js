@@ -32,7 +32,10 @@ const AnimeForm = () => {
             newFormErrors.releaseDate = "Your show MUST have a release date specified."
         }
         if(!coverPicture){
-            newFormErrors
+            newFormErrors.coverPicture = "Your show MUST have a cover picture."
+        }
+        if(Object.values(newFormErrors).length > 0){
+            
         }
     }
     const handleSubmit = async (e) => {
@@ -44,15 +47,15 @@ const AnimeForm = () => {
             "release_date": releaseDate,
             "cover_picture": coverPicture
         }
-        
+
         if (!Object.values(errors).length) {
-            
+
             const res = await dispatch(postAnimeThunk(newAnime))
             if(res.id) {
                 history.push(`/anime/${res.id}`)
             }
         }
-        
+
 
     }
     useEffect(() => {
