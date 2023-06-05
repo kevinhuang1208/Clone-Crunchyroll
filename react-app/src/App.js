@@ -17,17 +17,26 @@ function App() {
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
+
+  // <Navigation isLoaded={isLoaded} />
+  // <Route exact path='/'>
+  //   <LandingPage />
+  // </Route>
   return (
     <>
+
+
       <Navigation isLoaded={isLoaded} />
-      <Route exact path='/'>
-        <LandingPage />
-      </Route>
       {isLoaded && (
         <Switch>
+
+        <Route exact path='/'>
+          <LandingPage />
+        </Route>
+
           <Route exact path="/anime">
             <HomePage />
-            
+
           </Route>
 
           <Route exact path="/anime/:animeId">
@@ -40,6 +49,9 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
+
+
+
         </Switch>
       )}
       <Footer />

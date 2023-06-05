@@ -1,4 +1,5 @@
 const GET_SINGLE_ANIME = "anime/getSingleAnime"
+const GET_ANIME_REVIEWS = ""
 
 const getSingleAnimeEpisodes = (episodes) => {
     return {
@@ -24,7 +25,7 @@ export const getAnimeEpisodesThunk = (animeId) => async (dispatch) => {
     console.log("---------------")
     console.log("data: ",data)
     return null
-}   
+}
 
 const initialState = {}
 
