@@ -8,8 +8,13 @@ import { getAllAnimeThunk } from "../../store/anime";
 import OpenModalButton from "../OpenModalButton";
 
 function ProfilePage() {
+    const user = useSelector((state) => state.session.user);
+
     return (
-        <>Can you read this</>
+        <>
+            <h2>Hello, {user.username}</h2>
+
+        </>
     )
 }
 

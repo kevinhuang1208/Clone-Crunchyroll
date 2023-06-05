@@ -11,6 +11,8 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import AnimeForm from "./components/AnimeForm";
 import ProfilePage from "./components/ProfilePage";
+import EpisodeComponent from './components/EpisodeComponent'
+import EpisodeForm from './components/EpisodeForm'
 
 function App() {
   const dispatch = useDispatch();
@@ -43,18 +45,30 @@ function App() {
             <AnimeForm />
           </Route>
 
+          <Route exact path='/anime/:animeId/episodes/new'>
+            <EpisodeForm/>
+          </Route>
+
           <Route exact path="/anime/:animeId">
             <AnimeDetail/>
           </Route>
+
           <Route path="/user/:userId" >
             <ProfilePage />
           </Route>
+
           <Route path="/login" >
             <LoginFormPage />
           </Route>
+
           <Route path="/signup">
             <SignupFormPage />
           </Route>
+
+          <Route path='/anime/:animeId/episodes/:episodeId'>
+            <EpisodeComponent/>
+          </Route>
+
 
 
 
