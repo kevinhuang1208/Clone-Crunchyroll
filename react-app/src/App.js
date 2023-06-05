@@ -9,7 +9,7 @@ import AnimeDetail from './components/AnimeDetail'
 import HomePage from "./components/HomePage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
-
+import AnimeForm from "./components/AnimeForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,13 +30,16 @@ function App() {
       {isLoaded && (
         <Switch>
 
-        <Route exact path='/'>
-          <LandingPage />
-        </Route>
+          <Route exact path='/'>
+            <LandingPage />
+          </Route>
 
           <Route exact path="/anime">
             <HomePage />
+          </Route>
 
+          <Route exact path='/anime/new'>
+            <AnimeForm />
           </Route>
 
           <Route exact path="/anime/:animeId">

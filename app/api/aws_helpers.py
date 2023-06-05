@@ -7,7 +7,7 @@ BUCKET_NAME=os.environ.get("S3_BUCKET")
 S3_LOCATION = f"https://{BUCKET_NAME}.s3.amazonaws.com/"
 
 # add the extensions
-ALLOWED_EXTENSIONS = {"m4a", "mp4", "wmv", "mov"}
+ALLOWED_VIDEOS = {"mp4","mov"}
 ALLOWED_IMAGES = {'png', 'jpeg', 'jpg'}
 
 s3 = boto3.client(

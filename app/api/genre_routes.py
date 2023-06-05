@@ -5,7 +5,7 @@ from app.models import Genre
 genre_route = Blueprint('genre', __name__)
 
 
-@genre_route.route('/')
+@genre_route.route("")
 @login_required
 def genres():
     """

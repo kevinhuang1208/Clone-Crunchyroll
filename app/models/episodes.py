@@ -13,6 +13,7 @@ class Episodes(db.Model):
     release_date = db.Column(db.Date, nullable=False)
     video_link = db.Column(db.String(500), nullable=False)
     title = db.Column(db.String(100), nullable=False)
+
     animeid = db.relationship(
         "Anime", back_populates = 'episodes'
     )

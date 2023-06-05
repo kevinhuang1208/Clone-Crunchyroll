@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 // import { useParams } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 // import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
@@ -7,17 +8,19 @@ import { useModal } from "../../context/Modal";
 import "./DeleteAnime.css"
 
 
-const DeleteAnimeModal = () => { //{anime} inside params,will have access via componentin animeDetail
+const DeleteAnimeModal = ({anime}) => {
     const dispatch = useDispatch()
     const { closeModal } = useModal();
+    const history = useHistory()
 
     const handleClick = (e) => {
         e.preventDefault();
 
 
         return closeModal
-        // dispatch(deleteSpot(spot.id)) replace
+        // dispatch(deleteAnimeThunk(anime.id))
         //   .then(closeModal)
+        //history.push("/anime")
     };
 
     //   useEffect(() => {

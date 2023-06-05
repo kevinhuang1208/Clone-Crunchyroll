@@ -1,0 +1,12 @@
+from flask_wtf import FlaskForm
+from wtforms import StringField,DateField,FileField,IntegerField
+from wtforms.validators import DataRequired
+from flask_wtf.file import FileField, FileAllowed,FileRequired
+# from app.api.aws_helpers import ALLOWED_VIDEOS
+
+class EpisodeForm(FlaskForm):
+    episode_number = IntegerField('Episode #',validators=[DataRequired()])
+    desc =StringField('Description', validators = [DataRequired()])
+    release_date = DateField('Date' , validators = [DataRequired()])
+    video_link = FileField('Video File' , validators=[FileRequired(), FileAllowed(['mp4','mov'])])
+    title = StringField('Title', validators=[DataRequired()])

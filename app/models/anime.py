@@ -1,6 +1,7 @@
 from .db import db, add_prefix_for_prod, SCHEMA, environment
 from .reviews import Reviews
 from .episodes import Episodes
+from .user import User
 class Anime(db.Model):
     __tablename__ = 'animes'
 
@@ -49,10 +50,12 @@ class Anime(db.Model):
         #  need to revise this query to just grab the count of episodes meeting this criteria
         episodes = Episodes.query.filter_by(anime_id = self.id).all()
         episode_count = len(episodes)
+        author = User.query.get(self.user_id)
 
         return{
             'id':self.id,
             'authorId':self.user_id,
+            'authorName': author.username,
             'showname':self.showname,
             'desc':self.desc,
             'reviewCount': review_count,
@@ -61,4 +64,3 @@ class Anime(db.Model):
             'coverPicture':self.cover_picture,
             'episodeCount': episode_count
         }
-    
