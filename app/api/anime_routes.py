@@ -121,19 +121,23 @@ def post_anime():
         picture.filename = get_unique_filename(picture.filename)
         uploaded_pic = upload_file_to_s3(picture)
         aws_link = uploaded_pic['url']
+        print('this is the aws_link ~~~~~>',aws_link)
+        release_date_string = form.data["release_date"]
+        [year, month, day] = release_date_string.split("-")
 
         new_anime = Anime(
-            user_id=user_id,
+            user_id=int(user_id),
             showname=form.data["showname"],
             desc=form.data["description"],
-            release_date =date(form.data["release_date"]),
+            release_date = date(int(year), int(month), int(day)),
             cover_picture = aws_link
+            # cover_picture = form.data["cover_picture"]
         )
         db.session.add(new_anime)
         db.session.commit()
         return new_anime.to_dict()
     else:
-        return jsonify({'error': 'bad data'})
+        return jsonify({'error': form.errors})
 
 
 

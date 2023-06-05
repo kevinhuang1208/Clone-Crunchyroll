@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom"
 // import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-// import { deleteSpot, getOwnerSpots } from "../../store/spots"; this will be the thunk/action to be imported
+// import { deleteAnimeThunk } from "../../store/anime"; this will be the thunk/action to be imported
 import "./DeleteAnime.css"
 
 
