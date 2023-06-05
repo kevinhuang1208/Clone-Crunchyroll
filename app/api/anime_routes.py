@@ -61,20 +61,23 @@ def post_anime_episode(anime_id):
         episode_file.filename = get_unique_filename(episode_file.filename)
         uploaded_episode = upload_file_to_s3(episode_file)
         aws_link = uploaded_episode['url']
+        release_date_string = form.data["release_date"]
+        [year, month, day] = release_date_string.split("-")
 
         new_episode = Episodes(
             episode_number=form.data["episode_number"],
             anime_id = anime_id,
             desc = form.data["desc"],
-            release_data = date(form.data["release_date"]),
+            release_date = date(int(year), int(month), int(day)),
             video_link = aws_link,
+            # video_link = form.data["video_link"],
             title = form.data["title"]
         )
         db.session.add(new_episode)
         db.session.commit()
         return new_episode.to_dict()
     else:
-        return jsonify({'error': 'bad data'})
+        return jsonify({'error': form.errors})
 
 
 

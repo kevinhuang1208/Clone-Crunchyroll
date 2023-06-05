@@ -23,6 +23,11 @@ const postAnimeThunk = (anime) => async (dispatch) => {
         dispatch(postAnime(data))
         return data
     }
+    console.log("anime POST response NOT ok")
+    console.log("response: ",response)
+    console.log("---------------")
+    console.log("data: ",data)
+    return null
 }
 
 const deleteAnime = (animeId) => {
