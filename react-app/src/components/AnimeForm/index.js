@@ -85,7 +85,7 @@ const AnimeForm = () => {
                     <p className="formError">{errors.description}</p>
                 </label>
                 <label>
-                    Release Date
+                    Release Date - test
                     <input
                         placeholder=""
                         type="date"
