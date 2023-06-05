@@ -8,6 +8,7 @@ from app.forms import SignUpForm
 from flask_login import login_required
 from flask_login import current_user, login_user, logout_user, login_required
 from app.forms.post_anime_form import AnimeForm
+from datetime import date
 
 
 
@@ -61,7 +62,7 @@ def get_anime_reviews(id):
         return {"reviews": res}
     else:
         return {"reviews": "no reviews"}
-    
+
 
 @anime_routes.route("/new", methods=['POST'])
 @login_required
@@ -76,9 +77,10 @@ def post_anime():
         ##need to add aws stuff here
 
         new_post = Anime(
+            user_id="how to get user ID D:",
             showname=form.data["showname"],
             desc=form.data["description"],
-            release_date =form.data["release_date"],
+            release_date =date(form.data["release_date"]),
             cover_picture = "aws stuff here"
         )
 
@@ -88,4 +90,4 @@ def delete(anime_id):
     anime_to_delete = Anime.query.get(anime_id)
     db.session.delete(anime_to_delete)
     db.session.commit()
-    return redirect("/anime")      
+    return redirect("/anime")

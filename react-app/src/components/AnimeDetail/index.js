@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { getAnimeEpisodesThunk } from "../../store/animeDetail"
+import { getAnimeReviewsThunk } from "../../store/reviews";
 
 
 function AnimeDetail() {
@@ -16,6 +17,7 @@ function AnimeDetail() {
 
     useEffect(() => {
         dispatch(getAnimeEpisodesThunk(animeId))
+        dispatch(getAnimeReviewsThunk(animeId))
     }, [dispatch])
 
 

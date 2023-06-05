@@ -1,6 +1,12 @@
 
 const GET_ALL_ANIME = "anime/getAllAnime"
+const DELETE_ANIME = "anime/deleteAnime"
 
+const deleteAnime = (animeId) => {
+    return {
+        type:
+    }
+}
 
 const getAllAnime = (anime) => {
     return {

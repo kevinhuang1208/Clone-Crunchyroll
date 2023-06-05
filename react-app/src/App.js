@@ -18,6 +18,7 @@ function App() {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
+
   // <Navigation isLoaded={isLoaded} />
   // <Route exact path='/'>
   //   <LandingPage />
