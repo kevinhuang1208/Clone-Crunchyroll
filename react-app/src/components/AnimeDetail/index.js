@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams,NavLink } from "react-router-dom";
 import { useEffect } from "react";
 import { getAnimeEpisodesThunk } from "../../store/animeDetail";
 import { getAnimeReviewsThunk } from "../../store/reviews";
@@ -8,6 +8,7 @@ import { getAllAnimeThunk } from "../../store/anime";
 import OpenModalButton from "../OpenModalButton";
 import { useHistory } from "react-router-dom";
 import "./animeDetail.css"
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 
 function AnimeDetail() {
   const dispatch = useDispatch();
@@ -53,11 +54,7 @@ useEffect(() => {
   return (
     <div className="">
 
-      <div className = 'CoverPhotoAnimeDetail'>
-        <img src =''></img>
-      </div>
 
-      <div></div>
       <div className="TitleAnimeDetail">
         <h2>{singleAnime.showname}</h2>
       </div>
@@ -82,7 +79,14 @@ useEffect(() => {
         {episodesOfAnime.map((episode) => (
           <div className="singleEpisodeDiv" key={episode.id}>
             <h2>{singleAnime.showname}</h2>
-            <p>Episode {episode.episodeNumber}</p>
+
+              <div className ='episodeWatchNow'>
+                <p>Episode {episode.episodeNumber}</p>
+                <NavLink exact to={`/anime/${singleAnime.id}/episodes/${episode.id}`}>
+                Watch Now!
+                </NavLink>
+              </div>
+
             <p>{episode.desc}</p>
           </div>
         ))}
@@ -90,15 +94,11 @@ useEffect(() => {
 
 
         {(singleAnime.authorId === user.id) ? (
-           <div className="delete-anime" key={singleAnime.id}>
-             <button>
-               <OpenModalButton
-                 className="delete-button"
-                 itemText="Delete"
-                 modalComponent={<DeleteAnimeModal anime={singleAnime} />}
-               />
-             </button>
-           </div>
+            <OpenModalMenuItem
+              className="delete-button"
+              itemText="Delete this Anime"
+              modalComponent={<DeleteAnimeModal anime={singleAnime} key={singleAnime.id}/>}
+            />
          )
 
          : null

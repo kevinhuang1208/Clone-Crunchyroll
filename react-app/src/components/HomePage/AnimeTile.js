@@ -1,5 +1,5 @@
 import { useHistory } from "react-router-dom";
-
+import './index.css'
 
 
 function AnimeTile({anime}){
@@ -20,6 +20,10 @@ function AnimeTile({anime}){
 
             <div className = 'animeShowName'>
                 <h2>{anime.showname}</h2>
+            </div>
+
+            <div className = 'tileCoverPhotoHomePageDiv'>
+                <img onClick = {handleClick} className = 'tileCoverPhotoHomePage' src = {anime.coverPicture}/>
             </div>
 
             <div className ='reviewTotalsTile'>
