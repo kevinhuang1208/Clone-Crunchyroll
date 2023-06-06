@@ -5,6 +5,7 @@ from app.models.reviews import Reviews
 from app.models.db import db
 from app.forms import LoginForm
 from app.forms import SignUpForm
+from app.forms.review_form import ReviewForm
 from app.forms.upload_episode import EpisodeForm
 
 from app.api.aws_helpers import get_unique_filename,upload_file_to_s3,remove_file_from_s3
@@ -144,9 +145,25 @@ def get_anime_reviews(id):
     else:
         return {"reviews": []}
 
-@anime_routes.route("/<int:id>/reviews")
+@anime_routes.route("/<int:id>/reviews/new", methods=["POST"])
 def post_anime_review(id):
-    pass
+    user_id = current_user.id
+    anime_id=id
+    form = ReviewForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        new_review = Reviews(
+            user_id=user_id,
+            anime_id=anime_id,
+            review=form.data["review"],
+            rating=form.data["rating"]
+        )
+        db.session.add(new_review)
+        db.session.commit()
+        return new_review.to_dict()
+    else:
+        return jsonify({'error': form.errors})
+
 
 
 

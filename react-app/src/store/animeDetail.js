@@ -9,7 +9,7 @@ const deleteEpisode = (episodeId) => {
     }
 }
 
-export const deleteEpisodeThunk = (animeId) => async(dispatch) => {
+export const deleteEpisodeThunk = (episodeId) => async(dispatch) => {
     const response = await fetch(`---`,{
         method: 'delete',
         body: episodeId
@@ -82,7 +82,9 @@ const initialState = {}
 const animeEpisodesReducer = (state = initialState, action) => {
     switch(action.type){
         case DELETE_EPISODE:{
-            
+            let newState = {...state}
+            delete newState[action.payload]
+            return newState
         }
         case GET_ANIME_EPISODES:{
             let newState = {}

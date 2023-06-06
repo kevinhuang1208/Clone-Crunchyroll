@@ -93,7 +93,7 @@ useEffect(() => {
       </div>
 
 
-        {(singleAnime.authorId === user.id) ? (
+        {(!user) ? null : (singleAnime.authorId === user.id) ? (
             <OpenModalMenuItem
               className="delete-button"
               itemText="Delete this Anime"
