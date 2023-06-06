@@ -33,7 +33,7 @@ class User(db.Model, UserMixin):
         reviews = []
         for review in reviews_Search:
             reviews.append(review.review)
-
+        
         return {
             'id': self.id,
             'username': self.username,

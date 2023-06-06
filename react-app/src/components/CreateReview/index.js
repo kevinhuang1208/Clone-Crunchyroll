@@ -1,9 +1,15 @@
 import { useState,useEffect } from "react"
 import { useModal } from "../../context/Modal"
 import { useDispatch} from "react-redux"
-import {}
+import {useParams} from 
 
-const CreateReview = ({user, animeId}) =>{
+const CreateReview = ({user) =>{
 
+    return(
+
+        <div>
+
+        </div>
+    )
 
 }
