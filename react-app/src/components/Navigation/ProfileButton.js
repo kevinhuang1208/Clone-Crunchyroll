@@ -34,10 +34,10 @@ function ProfileButton({ user }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
-  const handleLogout = (e) => {
+  const handleLogout = async (e) => {
     e.preventDefault();
+    await dispatch(logout());
     history.push('/')
-    dispatch(logout());
     console.log("logout handled")
   };
 

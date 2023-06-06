@@ -19,7 +19,7 @@ const EpisodeForm = () => {
     const allAnime = useSelector(state => state.anime)
     const anime = allAnime.animeId
     if (userId !== 1) {
-        console.log('placfeholder')
+        console.log('placeholder')
     }
 
 

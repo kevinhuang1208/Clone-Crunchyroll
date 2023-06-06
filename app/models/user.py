@@ -1,6 +1,8 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from .reviews import Reviews
+from .episodes import Episodes
 
 
 class User(db.Model, UserMixin):
@@ -27,10 +29,16 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
     def to_dict(self):
+        reviews_Search = Reviews.query.filter_by(user_id = self.id).all()
+        reviews = []
+        for review in reviews_Search:
+            reviews.append(review.review)
+
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'reviews': reviews
         }
 
     anime = db.relationship('Anime', back_populates = 'userid')

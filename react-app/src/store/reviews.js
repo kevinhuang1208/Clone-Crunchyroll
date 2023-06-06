@@ -1,4 +1,47 @@
 const GET_ANIME_REVIEWS = "anime/getSingleReviews"
+const POST_ANIME_REVIEW = "anime/postReview"
+const DELETE_ANIME_REVIEW = "anime/deleteReview"
+
+const postAnimeReview = (review) => {
+    return {
+        type: POST_ANIME_REVIEW,
+        payload: review
+    }
+}
+
+export const postAnimeReviewThunk = (review, animeId) => async (dispatch) =>{
+    const response = await fetch(`/api/anime/${animeId}/reviews/new`, {
+        method: 'post',
+        body: review
+    })
+    const data = await response.json()
+    console.log("-----------")
+    console.log(data)
+    console.log("-----------")
+    if(response.ok){
+        dispatch(postAnimeReview(data))
+        return data
+    }
+    console.log("episode POST response NOT ok")
+    console.log("response: ",response)
+    console.log("---------------")
+    console.log("data: ",data)
+    return null
+}
+
+export const editAnimeReviewThunk = (review) => async (dispatch) =>{
+    const response = await fetch(`-----`, {
+        method: 'put',
+        body: review
+    })
+    const data = await response.json()
+    console.log("-----------")
+    console.log(data)
+    console.log("-----------")
+    if(response.ok){
+
+    }
+}
 
 const getSingleAnimeReviews = (reviews) => {
     return {
@@ -40,6 +83,11 @@ const animeReviewsReducer = (state = initialState, action) => {
         case GET_ANIME_REVIEWS:{
             let newState = {}
             newState = {...action.payload}
+            return newState
+        }
+        case POST_ANIME_REVIEW:{
+            let newState = {...state}
+            newState[action.payload.id] = action.payload
             return newState
         }
         default:

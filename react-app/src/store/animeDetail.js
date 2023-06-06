@@ -1,5 +1,28 @@
-const GET_SINGLE_ANIME = "anime/getSingleAnime"
+const GET_ANIME_EPISODES = "anime/getSingleAnime"
 const POST_EPISODE = "anime/postEpisode"
+const DELETE_EPISODE = "anime/deleteEpisode"
+
+const deleteEpisode = (episodeId) => {
+    return {
+        type: DELETE_EPISODE,
+        payload: episodeId
+    }
+}
+
+export const deleteEpisodeThunk = (episodeId) => async(dispatch) => {
+    const response = await fetch(`---`,{
+        method: 'delete',
+        body: episodeId
+    })
+    const data = await response.json()
+    if(response.ok){
+        console.log("------------////////////")
+        console.log("DELETE EPISODE DATA: ", data)
+        console.log("///////////-------------")
+        dispatch(deleteEpisode(data))
+        return data
+    }
+}
 
 const postEpisode = (episode) => {
     return {
@@ -30,7 +53,7 @@ export const postEpisodeThunk = (animeId, episode) => async (dispatch) => {
 
 const getSingleAnimeEpisodes = (episodes) => {
     return {
-        type: GET_SINGLE_ANIME,
+        type: GET_ANIME_EPISODES,
         payload: episodes
     }
 }
@@ -58,7 +81,12 @@ const initialState = {}
 
 const animeEpisodesReducer = (state = initialState, action) => {
     switch(action.type){
-        case GET_SINGLE_ANIME:{
+        case DELETE_EPISODE:{
+            let newState = {...state}
+            delete newState[action.payload]
+            return newState
+        }
+        case GET_ANIME_EPISODES:{
             let newState = {}
             newState = {...action.payload}
             return newState
