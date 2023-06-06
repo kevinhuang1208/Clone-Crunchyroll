@@ -14,6 +14,12 @@ export const getSingleUserThunk = (userId) => async (dispatch) => {
     console.log(data)
     console.log("-----------")
     if(response.ok){
+        // IF WE WANT TO NORMALIZE FAVORITES:
+        // const normalFavorites = {}
+        // data.favorites.forEach((favorite)=>{
+        //     normalFavorites[favorite.id] = favorite
+        // })
+        // data.favorites = normalFavorites
         dispatch(getSingleUser(data))
         return data
     }

@@ -2,7 +2,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from .reviews import Reviews
-from .episodes import Episodes
+from .favorites import Favorites
 
 
 class User(db.Model, UserMixin):
@@ -32,13 +32,21 @@ class User(db.Model, UserMixin):
         reviews_Search = Reviews.query.filter_by(user_id = self.id).all()
         reviews = []
         for review in reviews_Search:
-            reviews.append(review.review)
+            reviews.append(review.to_dict())
+
+        favorites_Search = Favorites.query.filter_by(user_id = self.id).all()
+        favorites_Id = []
+        for eachAnime in favorites_Search:
+            favorites_Id.append(eachAnime.anime_id)
+
 
         return {
             'id': self.id,
             'username': self.username,
             'email': self.email,
-            'reviews': reviews
+            'studio': self.studio,
+            'reviews': reviews,
+            'favorites': favorites_Id
         }
 
     anime = db.relationship('Anime', back_populates = 'userid')
