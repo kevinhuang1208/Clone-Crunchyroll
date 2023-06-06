@@ -15,3 +15,10 @@ class Favorites(db.Model):
     anime_id_favorites = db.relationship("Anime",back_populates = 'animefavorites')
     user_id_favorites = db.relationship('User', back_populates = 'favorite')
 
+    def to_dict(self):
+        return{
+            'id': self.id,
+            'userId': self.user_id,
+            'animeId': self.anime_id,
+            'date_added': self.date_added.strftime('%m/%d/%Y')
+        }

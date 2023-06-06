@@ -1,5 +1,6 @@
 from .db import db, add_prefix_for_prod, SCHEMA, environment
 from datetime import date
+
 class Reviews(db.Model):
 
     if environment == "production":
@@ -19,9 +20,13 @@ class Reviews(db.Model):
 
     def to_dict(self):
         """return json obj for fe"""
+        # from .user import User
+        # user = User.query.filter_by(id = self.user_id)
+        # user = user.to_dict()
         return {
             'id': self.id,
             'userId': self.user_id,
+            # 'user': user,
             'animeId': self.anime_id,
             'review': self.review,
             'rating': self.rating,

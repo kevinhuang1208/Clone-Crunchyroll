@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { getAnimeEpisodesThunk } from "../../store/animeDetail";
 import { getAnimeReviewsThunk } from "../../store/reviews";
 import DeleteAnimeModal from "../DeleteAnime";
+import Review from '../Review'
 import CreateReview from '../CreateReview'
 import { getAllAnimeThunk } from "../../store/anime";
 import OpenModalButton from "../OpenModalButton";
@@ -12,8 +13,9 @@ import "./animeDetail.css"
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 
 function AnimeDetail() {
+
   const dispatch = useDispatch();
-  const { animeId } = useParams();
+  const {animeId} = useParams();
   const history = useHistory();
   // array of episodes and we have a link to each one infividually to a video player with the AWS url
   const animeObj = useSelector((state) => state.anime);
@@ -25,9 +27,7 @@ function AnimeDetail() {
   console.log("user", user);
 
   const episodesOfAnimeObj = useSelector((state) => state.episodes);
-
   const episodesOfAnime = Object.values(episodesOfAnimeObj)
-
   console.log('Episodes for this specific anime --------', episodesOfAnime)
 
   // array starts at 0, but the first animeId is 1
@@ -35,11 +35,16 @@ function AnimeDetail() {
   console.log('this is the anime', singleAnime)
 
   // console.log("this is the id of the url", animeId)
+  console.log(animeId)
 
+  const reviewsObj = useSelector((state) => state.reviews)
+  console.log('what is the reviewsObj---------',reviewsObj) // what is this?
+  
+  const reviewsArr = Object.values(reviewsObj)
+  console.log('Reviews array is this -------',reviewsArr)
+ 
   const handleClick = (e) => {
     e.preventDefault();
-
-
     return alert("Added to Favorites!")
   };
 
@@ -49,12 +54,12 @@ function AnimeDetail() {
     dispatch(getAnimeEpisodesThunk(animeId));
     //there will? be a thunk to add the anime to the user's favorites
   }, [dispatch]);
+
   if (!singleAnime) return null
 
   else
     return (
       <div className="">
-
 
         <div className="TitleAnimeDetail">
           <h2>{singleAnime.showname}</h2>
@@ -93,9 +98,7 @@ function AnimeDetail() {
           ))}
         </div>
 
-
-
-
+        
         {(!user) ? null : (singleAnime.authorId === user.id) ? (
           <OpenModalMenuItem
             className="delete-button"
@@ -114,6 +117,12 @@ function AnimeDetail() {
             </div>)
         }
 
+        <div className = 'reviewsMapDiv'>
+          { reviewsArr.map((review) => (
+            <Review review = {review} key = {review.id}/>
+        ))}
+        </div>
+       
 
       </div>
     )

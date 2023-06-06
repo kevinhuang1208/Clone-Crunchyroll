@@ -13,6 +13,7 @@ import AnimeForm from "./components/AnimeForm";
 import ProfilePage from "./components/ProfilePage";
 import EpisodeComponent from './components/EpisodeComponent'
 import EpisodeForm from './components/EpisodeForm'
+import EditAnime from "./components/EditAnime";
 
 function App() {
   const dispatch = useDispatch();
@@ -46,11 +47,15 @@ function App() {
           </Route>
 
           <Route exact path='/anime/:animeId/episodes/new'>
-            <EpisodeForm/>
+            <EpisodeForm />
+          </Route>
+
+          <Route exact path='/anime/:animeId/edit'>
+            <EditAnime />
           </Route>
 
           <Route exact path="/anime/:animeId">
-            <AnimeDetail/>
+            <AnimeDetail />
           </Route>
 
           <Route path="/user/:userId" >
@@ -66,7 +71,7 @@ function App() {
           </Route>
 
           <Route path='/anime/:animeId/episodes/:episodeId'>
-            <EpisodeComponent/>
+            <EpisodeComponent />
           </Route>
 
 

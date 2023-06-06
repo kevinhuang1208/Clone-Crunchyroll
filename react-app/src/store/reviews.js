@@ -51,10 +51,11 @@ const getSingleAnimeReviews = (reviews) => {
 }
 
 export const getAnimeReviewsThunk = (animeId) => async (dispatch) =>{
+    // console.log('is this even working---------------------')
     const response = await fetch(`/api/anime/${animeId}/reviews`)
     const data = await response.json()
     console.log("-----------")
-    console.log(data)
+    // console.log('what is data',data)
     console.log("-----------")
     if(response.ok){
         const normalReviews = {}

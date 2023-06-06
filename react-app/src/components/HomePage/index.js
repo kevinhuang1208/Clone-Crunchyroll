@@ -11,14 +11,19 @@ function HomePage() {
   const history = useHistory()
   const animes = useSelector((state) => state.anime)
   const user = useSelector((state) => state.session.user)
-  const animeIds = useSelector((state) => state.user.favorites)
+  let animeIds = []
+  if(user){
+    animeIds = user.favorites
+  }
   // console.log('anime --->',animes)
 
   console.log('this one ------->',animeIds)
 
   useEffect(() => {
     dispatch(getAllAnimeThunk())
-    dispatch(getSingleUserThunk(user.id))
+    if(user){
+      dispatch(getSingleUserThunk(user.id))
+    }
   }, [dispatch])
   const animesArr = Object.values(animes)
     return (

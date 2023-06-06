@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import * as sessionActions from "../../store/session";
 import "./LoginForm.css";
+import getSingleUserThunk from "../../store/user"
 
 function LoginFormModal() {
   const dispatch = useDispatch();
@@ -15,6 +16,11 @@ function LoginFormModal() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
+    // console.log("-/-/-/--/-/--//-")
+    // console.log(data)
+    // console.log(data)
+    // console.log("-/-/-/--/-/--//-")
+    // dispatch(getSingleUserThunk(data.id))
     if (data) {
       setErrors(data);
     } else {
@@ -22,7 +28,7 @@ function LoginFormModal() {
     }
   };
 
-  const handleDemoSubmit = (e) => {
+  const handleDemoSubmit = async (e) => {
     e.preventDefault();
     return dispatch(sessionActions.login("demo@aa.io", "password"))
       .then(closeModal)

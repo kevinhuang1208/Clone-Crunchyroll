@@ -14,6 +14,7 @@ from flask_login import login_required
 from flask_login import current_user, login_user, logout_user, login_required
 
 from app.forms.post_anime_form import AnimeForm
+from app.forms.edit_anime_form import EditAnimeForm
 from datetime import date
 
 
@@ -44,8 +45,8 @@ def post_anime():
     form["csrf_token"].data = request.cookies["csrf_token"]
 
     if form.validate_on_submit():
-        print('form data~~~~~>', form.data)
-        print('video data~~~~~>', form.data['cover_picture'])
+        # print('form data~~~~~>', form.data)
+        # print('video data~~~~~>', form.data['cover_picture'])
         ##need to add aws stuff here
         picture = form.data['cover_picture']
         picture.filename = get_unique_filename(picture.filename)
@@ -131,7 +132,38 @@ def get_one_episode(anime_id, episode_num):
     return {"episode": res}
 
 
+@anime_routes.route("/<int:id>/edit", methods=["PUT"])
+@login_required
+def edit_anime(id):
+    """Route to edit an anime"""
+    anime = Anime.query.get(id)
+    user_id = current_user.id
 
+    aws_link=''
+
+    form = EditAnimeForm()
+    print(form.data)
+    if form.data['cover_picture']:
+        picture = form.data['cover_picture']
+        picture.filename = get_unique_filename(picture.filename)
+        uploaded_pic = upload_file_to_s3(picture)
+        aws_link = uploaded_pic['url']
+    release_date_string = form.data["release_date"]
+    [year, month, day] = release_date_string.split("-")
+
+    form["csrf_token"].data = request.cookies["csrf_token"]
+
+    if form.validate_on_submit():
+        anime.showname = form.data["showname"]
+        anime.desc = form.data["description"]
+        anime.release_date = date(int(year), int(month), int(day))
+        if len(aws_link) > 0:
+            anime.cover_picture = aws_link
+        db.session.commit()
+        edited_anime = anime.to_dict()
+        return {'editedAnime': edited_anime}
+    else:
+        return {'error': form.errors}
 
 @anime_routes.route("/<int:id>/reviews")
 def get_anime_reviews(id):
@@ -140,7 +172,14 @@ def get_anime_reviews(id):
     anime_reviews = Reviews.query.filter(Reviews.anime_id == id).all()
     # print('anime_reviews --->', anime_reviews)
     if anime_reviews:
-        res = [review.to_dict() for review in anime_reviews]
+        res = []
+        for review in anime_reviews:
+            reviewDict = review.to_dict()
+            print("review---: ", review.review_user_id)
+            print("review---: ", review.review_user_id.to_dict())
+            reviewDict["user"] = review.review_user_id.to_dict()
+            res.append(reviewDict)
+        # res = [review.to_dict() for review in anime_reviews]
         return {"reviews": res}
     else:
         return {"reviews": []}
