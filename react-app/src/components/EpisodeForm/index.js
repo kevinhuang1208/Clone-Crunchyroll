@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { postEpisodeThunk } from "../../store/animeDetail"
 import { useHistory } from 'react-router-dom'
 import { useParams } from "react-router-dom";
+import { getAllAnimeThunk } from '../../store/anime';
+
 
 const EpisodeForm = () => {
     const history = useHistory()
@@ -13,14 +15,32 @@ const EpisodeForm = () => {
     const [videoLink, setVideoLink] = useState(undefined)
     const [title, setTitle] = useState('')
     const [errors, setErrors] = useState([])
-    const {animeId} = useParams();
+    const { animeId } = useParams();
 
-    const userId = useSelector(state => state.session)
+    const userId = useSelector(state => state.session.user)
     const allAnime = useSelector(state => state.anime)
-    const anime = allAnime.animeId
-    if (userId !== 1) {
-        console.log('placfeholder')
+    // const anime = allAnime.animeId
+    useEffect(() => {
+        dispatch(getAllAnimeThunk())
+    }, [dispatch])
+
+    const anime = allAnime[animeId]
+    if (!anime) {
+        return (
+            <h3> Loading... </h3>
+        )
     }
+
+    // console.log('user id --->>>>', userId)
+    // // console.log('anime ---->>>>', animeId)
+    // console.log('anime from state', anime)
+    // // if anime.authorId == userId.id
+    if (userId.user === null || userId.id !== anime.authorId) {
+        // alert('You are not authorized to post an episode for this anime')
+        alert('Not authorized to post an episode on this anime page')
+        history.push('/')
+    }
+
 
 
 
@@ -32,27 +52,27 @@ const EpisodeForm = () => {
         console.log("e.target -> ", e.target)
         // console.log("e.target -> ",e.tar)
         // e.target.files[0] = null
-        e.target.value = undefined
+        e.preventDefault()
         setVideoLink(undefined)
     }
     const formValidate = () => {
         const newFormErrors = {}
-        if(!episodeNum){
+        if (!episodeNum) {
             newFormErrors.episodeNum = "Your show MUST have a episode number."
         }
-        if(!description || description.length > 1000){
+        if (!description || description.length > 1000) {
             newFormErrors.description = "Your show MUST have a description and it must be less than 1000 characters long."
         }
-        if(!releaseDate){
+        if (!releaseDate) {
             newFormErrors.releaseDate = "Your show MUST have a release date specified."
         }
-        if(!videoLink){
+        if (!videoLink) {
             newFormErrors.videoLink = "Your show MUST have a video link to the episode."
         }
-        if(!title || title.length > 100) {
-          newFormErrors.title= "Your show MUST have a title and it must be less than 100 characters"
+        if (!title || title.length > 100) {
+            newFormErrors.title = "Your show MUST have a title and it must be less than 100 characters"
         }
-        if(Object.values(newFormErrors).length > 0){
+        if (Object.values(newFormErrors).length > 0) {
             setErrors(newFormErrors)
         }
     }
@@ -78,19 +98,21 @@ const EpisodeForm = () => {
         if (!Object.values(errors).length) {
             console.log("anime:", formData)
             const res = await dispatch(postEpisodeThunk(animeId, formData))
-            if(res.id) {
+            if (res.id) {
                 history.push(`/anime/${animeId}/episodes/${res.id}`)
             }
         }
 
 
     }
-    useEffect(() => {
+    // useEffect(() => {
+    //     dispatch(getAllAnimeThunk())
+    // }, [dispatch])
 
-        console.log(videoLink)
+    // useEffect(() => {
+    //     // console.log(videoLink)
+    // }, [episodeNum, description, releaseDate, videoLink])
 
-
-    }, [episodeNum, description, releaseDate, videoLink])
     return (
         <div className="createAnimeFormContainer">
             <h1 className="formHeader">Create an Episode for your Anime</h1>
@@ -146,11 +168,10 @@ const EpisodeForm = () => {
                         onChange={(e) => setVideoLink(e.target.files[0])}
                     />
                     <p className="formError">{errors}</p>
+                </label>
                     {videoLink && videoLink.name && (
-
                         <button onClick={(e) => resetFile(e)}>Remove File</button>
                     )}
-                </label>
                 <button>Submit Episode</button>
 
             </form>

@@ -4,11 +4,13 @@ import session from './session'
 import animeReducer from './anime'
 import animeEpisodesReducer from './animeDetail';
 import animeReviewsReducer from './reviews';
+import userReducer from "./user"
 const rootReducer = combineReducers({
   session,
   anime: animeReducer,
   episodes:  animeEpisodesReducer,
-  reviews: animeReviewsReducer
+  reviews: animeReviewsReducer,
+  user: userReducer
 });
 
 

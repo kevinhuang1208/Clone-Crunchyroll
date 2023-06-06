@@ -27,7 +27,7 @@ def seed_episodes():
         anime_id = 2,
         desc = "Strickland propane salesman and family man, Hank Hill, is accused of beating his son, Bobby, after Bobby gets a black eye from getting hit in the face with a baseball during a Little League game and rumors spread that Hank beat up a teenaged Megalo-Mart employee (when really he just yelled at him for not knowing if the store sells a tap and die and some WD-40). Meanwhile, Hank's friends, conspiracy nut Dale Gribble, down-and-out Army barber Bill Dauterive, and fast-talking womanizer Jeff Boomhauer, try to fix Hank's truck, while Luanne Platter (Hank's niece) moves in with the Hills after her parents get sent to jail over a domestic disturbance. The episode is also known as 'Bobby the Baseball Phenom'.",
         release_date = date(1997,1,12),
-        video_link = "https://d1wj713u40rmlf.cloudfront.net"
+        video_link = "https://crunchyclone.s3.us-east-2.amazonaws.com/King+of+the+Hill+(1997)+-+S01E01+-+Pilot+(480p+DVD+x265+r00t).mp4"
     )
 
     koth2 = Episodes(
@@ -36,7 +36,7 @@ def seed_episodes():
         desc = "Peggy is mortified and tongue-tied when she finds out she has been chosen to teach the middle school's sexual education class, while Hank does everything he can to keep his son from learning about sex.",
         anime_id = 2,
         release_date = date(1997,1,19),
-        video_link = "https://d1wj713u40rmlf.cloudfront.net"
+        video_link = "https://crunchyclone.s3.us-east-2.amazonaws.com/King+of+the+Hill+(1997)+-+S01E02+-+Square+Peg+(480p+DVD+x265+r00t).mp4"
     )
 
     boondocks1 = Episodes(
@@ -45,7 +45,7 @@ def seed_episodes():
         title="The Garden Party",
         desc = "The Freemans are adjusting to life in Woodcrest. Robert is invited to a ritzy garden party by tycoon Ed Wuncler, but is concerned that his grandsons will embarrass him in front of his new neighbors. At the party, Huey tries to enlighten the partygoers with the 'truth' and Ed III dares Riley to shoot him with a shotgun.",
         release_date = date(2005, 11, 6),
-        video_link = "https://d1wj713u40rmlf.cloudfront.net"
+        video_link = "https://crunchyclone.s3.us-east-2.amazonaws.com/The+Boondocks+(2005)+-+S01E01+-+The+Garden+Party+(1080p+HMAX+WEB-DL+x265+YOGI).mp4"
     )
 
     boondocks2 = Episodes(
@@ -54,7 +54,7 @@ def seed_episodes():
         title="The Garden Party",
         desc = "R. Kelly is brought to trial for urinating on an underage girl. Riley supports Kelly, but Huey sides with the law, thereby separating himself from many members of his own ethnicity who defend Kelly despite the overwhelming evidence against him.",
         release_date = date(2005, 11, 13),
-        video_link = "https://d1wj713u40rmlf.cloudfront.net"
+        video_link = "https://crunchyclone.s3.us-east-2.amazonaws.com/The+Boondocks+(2005)+-+S01E02+-+The+Trial+of+Robert+Kelly+(1080p+HMAX+WEB-DL+x265+YOGI).mp4"
     )
 
     southpark1 = Episodes(

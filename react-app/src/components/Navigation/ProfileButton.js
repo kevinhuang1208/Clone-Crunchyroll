@@ -5,6 +5,8 @@ import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import { useHistory } from "react-router-dom";
+import ProfilePage from "../ProfilePage"
+import { NavLink } from "react-router-dom";
 
 
 function ProfileButton({ user }) {
@@ -32,10 +34,10 @@ function ProfileButton({ user }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
-  const handleLogout = (e) => {
+  const handleLogout = async (e) => {
     e.preventDefault();
+    await dispatch(logout());
     history.push('/')
-    dispatch(logout());
     console.log("logout handled")
   };
 
@@ -52,6 +54,12 @@ function ProfileButton({ user }) {
           <>
             <li>{user.username}</li>
             <li>{user.email}</li>
+            <li>
+            <NavLink exact to={`/user/${user.id}`} onClick={closeMenu}>
+                Profile Page
+            </NavLink>
+
+            </li>
             <li>
               <button onClick={handleLogout}>Log Out</button>
             </li>

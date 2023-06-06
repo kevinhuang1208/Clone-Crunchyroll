@@ -11,7 +11,10 @@ function LoginFormPage() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser) return <Redirect to="/anime" />;
+  if (sessionUser){
+    console.log("redirecting to /anime")
+    return <Redirect to="/anime" />;
+  } 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
