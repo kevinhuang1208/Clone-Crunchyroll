@@ -161,7 +161,7 @@ def edit_anime(id):
             anime.cover_picture = aws_link
         db.session.commit()
         edited_anime = anime.to_dict()
-        return {'editedAnime': edited_anime}
+        return edited_anime
     else:
         return {'error': form.errors}
 

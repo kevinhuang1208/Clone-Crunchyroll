@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import {postAnimeReviewThunk} from '../../store/reviews'
 
-const CreateReview = ({anime,user,formType}) =>{
+const CreateReview = ({anime,user}) =>{
 
     const dispatch = useDispatch()
     const {closeModal} = useModal();

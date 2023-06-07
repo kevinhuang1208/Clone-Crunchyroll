@@ -86,7 +86,7 @@ const AnimeForm = ({ anime, formType }) => {
         if (formType === 'edit') {
             const res = await dispatch(editAnimeThunk(anime.id, formData))
             if (res.id) {
-                history.push(`/anime/${res.id}`)
+                history.push(`/anime/${anime.id}`)
             }
         }
         // const newAnime = {

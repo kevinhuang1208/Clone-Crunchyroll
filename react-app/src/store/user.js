@@ -45,11 +45,22 @@ export const editSingleUserThunk = (user, userId) => async (dispatch) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
     })
-    if (response.ok) {
+    console.log("this is response before json", response)
+    try {
         const data = await response.json();
-        dispatch(editSingleUser(data));
-        return data;
-      }
+        console.log("this is data", data)
+        
+    } catch (error) {
+        console.log("this is error for try/catch", error)
+    }
+    // if (response.ok) {
+    //     dispatch(editSingleUser(data));
+    //     return data;
+    //   }
+    // console.log("user PUT response NOT ok")
+    // console.log("response: ",response)
+    // console.log("---------------")
+    // console.log("data: ",data)
 }
 
 // code above is to be editted

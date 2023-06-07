@@ -24,7 +24,7 @@ function AnimeDetail() {
 
 
   const user = useSelector((state) => state.session.user);
-  console.log("user", user);
+  // console.log("user~~~~~>", user);
 
   const episodesOfAnimeObj = useSelector((state) => state.episodes);
   const episodesOfAnime = Object.values(episodesOfAnimeObj)
@@ -32,10 +32,11 @@ function AnimeDetail() {
 
   // array starts at 0, but the first animeId is 1
   const singleAnime = anime[animeId - 1]
-  console.log('this is the anime', singleAnime)
+  console.log('this is the anime ~~~~~~~>', singleAnime)
+  ///singleAnime.authorId == user.id
 
   // console.log("this is the id of the url", animeId)
-  console.log(animeId)
+  console.log('anime id ~~~~~~>',animeId)
 
   const reviewsObj = useSelector((state) => state.reviews)
   console.log('what is the reviewsObj---------',reviewsObj) // what is this?
@@ -80,6 +81,11 @@ function AnimeDetail() {
         <div>
           <button onClick={handleClick}>Add Anime to Favorites</button>
         </div>
+        {(user && user.id === singleAnime.ownerId) && (
+          <div className="edit-button">
+
+          </div>
+        )}
 
         <div className='listOfEpisodesDiv'>
           {episodesOfAnime.map((episode) => (
@@ -111,7 +117,7 @@ function AnimeDetail() {
             <div className='CreateReviewModal'>
               <OpenModalMenuItem
                 className='createReview'
-                button='Create a Review!'
+                itemText='Create a Review!'
                 modalComponent={<CreateReview anime = {singleAnime} key={singleAnime.id} user = {user}/>} 
               />
             </div>)
