@@ -35,6 +35,7 @@ function ProfilePage() {
 
     useEffect(() => {
       dispatch(getSingleUserThunk(userId));
+      console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
       dispatch(getAllAnimeThunk())
     }, [dispatch]);
 

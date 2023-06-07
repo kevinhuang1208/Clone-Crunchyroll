@@ -49,6 +49,6 @@ class User(db.Model, UserMixin):
             'favorites': favorites_Id
         }
 
-    anime = db.relationship('Anime', back_populates = 'userid')
-    review = db.relationship('Reviews', back_populates = 'review_user_id')
-    favorite = db.relationship('Favorites', back_populates = 'user_id_favorites')
+    anime = db.relationship('Anime', cascade="all,delete-orphan", back_populates = 'userid')
+    review = db.relationship('Reviews', cascade="all,delete-orphan", back_populates = 'review_user_id')
+    favorite = db.relationship('Favorites', cascade="all,delete-orphan", back_populates = 'user_id_favorites')

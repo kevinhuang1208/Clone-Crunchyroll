@@ -9,12 +9,15 @@ const DeleteUser = ({user}) =>{
     const dispatch = useDispatch();
     const history = useHistory()
 
-    const handleClick = async (e) => {
+    const handleClick = (e) => {
         e.preventDefault();
 
-
-        await dispatch(deleteSingleUserThunk(user.id))
-        history.push(`/`)
+        return (
+        dispatch(deleteSingleUserThunk(user.id))
+            .then(closeModal())
+            .then(history.push(`/`))
+            .then(window.location.reload())
+        )
     };
 
 

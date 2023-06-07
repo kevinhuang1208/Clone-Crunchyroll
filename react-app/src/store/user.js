@@ -1,4 +1,6 @@
 // import { editSingleSessionUser } from "./session"
+// import { removeUser } from "./session"
+
 const GET_SINGLE_USER = "user/getSingleUser"
 const DELETE_USER_FAVORITE = "user/deleteFavorite"
 const POST_USER_FAVORITE = "user/postFavorite"
@@ -6,10 +8,9 @@ const EDIT_SINGLE_USER = "user/editSingleUser"
 const DELETE_SINGLE_USER = "user/deleteSingleUser"
 
 //code below is to be editted
-const deleteSingleUser = (user) => {
+const deleteSingleUser = () => {
     return {
         type: DELETE_SINGLE_USER,
-        payload: user
     }
 }
 
@@ -18,7 +19,9 @@ export const deleteSingleUserThunk = (userId) => async (dispatch) => {
         method: 'DELETE'
     })
     if(response.ok) {
-        dispatch(deleteSingleUser(userId))
+        console.log("BGFEIWUBGFIWEBGIWEBIGBIWEG")
+        dispatch(deleteSingleUser())
+        // dispatch(removeUser())
         return
     }
 }
