@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import {postAnimeReviewThunk} from '../../store/reviews'
 
-const CreateReview = ({anime,user}) =>{
+const CreateReview = ({anime,user,formType}) =>{
 
     const dispatch = useDispatch()
     const {closeModal} = useModal();
@@ -50,7 +50,7 @@ const CreateReview = ({anime,user}) =>{
                     onMouseEnter={() => setStars(index)}
                     onClick={() => setStars(stars)}
                 >
-                    <img className="fa-solid fa-star medium-big-star clickable" src='https://cdn.discordapp.com/attachments/1113213089702228038/1115026569237368953/image-removebg-preview.png' ></img>
+                    <img className="sushis" src='https://cdn.discordapp.com/attachments/1113213089702228038/1115026569237368953/image-removebg-preview.png' ></img>
                 </div>)
             })}
             </div>

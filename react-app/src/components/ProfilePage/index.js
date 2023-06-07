@@ -40,11 +40,6 @@ function ProfilePage() {
 
     if (!user) return null
     if(!paramUser) return null
-    // if(!paramUser) {
-    //   return (
-    //     <h1>Loading...</h1>
-    //   )
-    // }
 
 
     return (

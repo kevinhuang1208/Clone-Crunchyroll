@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { postAnimeThunk } from "../../store/anime"
+import { editAnimeThunk, postAnimeThunk } from "../../store/anime"
 import { useHistory } from 'react-router-dom'
 
 const dateHelper = (dateParam) => {
@@ -72,7 +72,7 @@ const AnimeForm = ({ anime, formType }) => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log("coverpic : ", Object.keys(coverPicture))
+        // console.log("coverpic : ", Object.keys(coverPicture))
         formValidate()
         const formData = new FormData()
         formData.append("showname", showname)
@@ -84,7 +84,10 @@ const AnimeForm = ({ anime, formType }) => {
         console.log('FORM DATA FROM REACT COMPONENT ->', formData)
 
         if (formType === 'edit') {
-            return console.log('need to add thunk')
+            const res = await dispatch(editAnimeThunk(anime.id, formData))
+            if (res.id) {
+                history.push(`/anime/${res.id}`)
+            }
         }
         // const newAnime = {
         //     "showname": showname,

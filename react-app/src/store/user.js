@@ -123,7 +123,7 @@ const userReducer = (state = initialState, action) => {
         }
         case POST_USER_FAVORITE: {
             let newState = {...state}
-            newState[action.payload.animeId] = action.payload.animeId
+            newState.favorites[action.payload.animeId] = action.payload.animeId
         }
         //case below is to be editted
         case EDIT_SINGLE_USER:{

@@ -111,7 +111,7 @@ function AnimeDetail() {
             <div className='CreateReviewModal'>
               <OpenModalMenuItem
                 className='createReview'
-                itemText='Create a Review!'
+                button='Create a Review!'
                 modalComponent={<CreateReview anime = {singleAnime} key={singleAnime.id} user = {user}/>} 
               />
             </div>)
@@ -119,7 +119,7 @@ function AnimeDetail() {
 
         <div className = 'reviewsMapDiv'>
           { reviewsArr.map((review) => (
-            <Review review = {review} key = {review.id}/>
+            <Review review = {review} user = {user} key = {review.id}/>
         ))}
         </div>
        
