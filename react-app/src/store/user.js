@@ -1,4 +1,4 @@
-import { editSingleSessionUser } from "./session"
+// import { editSingleSessionUser } from "./session"
 const GET_SINGLE_USER = "user/getSingleUser"
 const DELETE_USER_FAVORITE = "user/deleteFavorite"
 const POST_USER_FAVORITE = "user/postFavorite"
@@ -13,15 +13,15 @@ const deleteSingleUser = (user) => {
     }
 }
 
-// export const deleteSingleUserThunk = (userId) => async (dispatch) => {
-//     const response = await fetch(`/api/spots/${spotId}`, {
-//         method: 'DELETE'
-//     })
-//     if(response.ok) {
-//         dispatch(removeSpot(spotId))
-//         return
-//     }
-// }
+export const deleteSingleUserThunk = (userId) => async (dispatch) => {
+    const response = await fetch(`/api/users/delete/${userId}`, {
+        method: 'DELETE'
+    })
+    if(response.ok) {
+        dispatch(deleteSingleUser(userId))
+        return
+    }
+}
 
 // code above is to be editted
 
@@ -67,7 +67,7 @@ export const editSingleUserThunk = (user, userId) => async (dispatch) => {
     const response = await fetch(`/api/users/${userId}/edit`, {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
-        body: user
+        body: JSON.stringify(user)
     })
     console.log("this is response before json", response)
     const data = await response.json();
@@ -167,6 +167,10 @@ const userReducer = (state = initialState, action) => {
                 favoritesObj[favorite.animeId] = favorite.animeId
             })
             newState.favorites = favoritesObj
+            return newState
+        }
+        case DELETE_SINGLE_USER: {
+            let newState = {}
             return newState
         }
         default:

@@ -52,12 +52,13 @@ const ChangeCredentialModal = ({user}) => {
         // formData.append("password", password)
 
         // console.log("THIS IS FORM DATAAAAAAAAAAAAAAAAAAAAA", formData)
+        console.log("THIS IS USER ID", user.id)
         console.log("THIS IS NEW CREDENTIALS", newCredentials)
         let res = await dispatch(editSingleUserThunk(newCredentials, user.id))
         console.log("THIS IS RES", res)
         if (res) {
           // await dispatch(editSingleSessionUser(res))
-          await closeModal()
+          closeModal()
           window.location.reload()
         }
         else {

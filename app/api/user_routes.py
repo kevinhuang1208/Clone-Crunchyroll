@@ -10,6 +10,12 @@ from datetime import date
 
 user_routes = Blueprint('users', __name__)
 
+@user_routes.route('/favorites/<int:anime_id>/delete', methods=["DELETE"])
+@login_required
+def deleteFavorite(anime_id):
+    """"Remove a favorite from a users favorite table""""
+    favorite_to_delete = Favorites.query.get()
+
 
 @user_routes.route('/favorites/new', methods=["POST"])
 @login_required
@@ -107,12 +113,16 @@ def edit_credential(id):
             customError = make_response(errors)
             customError.status_code = 400
             return customError
+    else:
+        print(form.errors)
+        return {"errors": form.errors}
 
 
 
 @user_routes.route("/delete/<int:id>")
 def delete(id):
     user_to_delete = User.query.get(id)
+    print("THIS IS USER TO DELETE", user_to_delete)
     db.session.delete(user_to_delete)
     db.session.commit()
     return redirect("/anime")
