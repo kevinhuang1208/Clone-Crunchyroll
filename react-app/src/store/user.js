@@ -1,3 +1,4 @@
+import { editSingleSessionUser } from "./session"
 const GET_SINGLE_USER = "user/getSingleUser"
 const DELETE_USER_FAVORITE = "user/deleteFavorite"
 const POST_USER_FAVORITE = "user/postFavorite"
@@ -40,18 +41,21 @@ const editSingleUser = (user) => {
 }
 
 export const editSingleUserThunk = (user, userId) => async (dispatch) => {
+    console.log("user: ", user)
+    console.log("user: ", user)
     const response = await fetch(`/api/users/${userId}/edit`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(user)
+        body: user
     })
     console.log("this is response before json", response)
     const data = await response.json();
     console.log("this is data", data)
     if (response.ok) {
         dispatch(editSingleUser(data));
+        // dispatch(editSingleSessionUser(data))
         return data;
       }
+    return data
     // console.log("user PUT response NOT ok")
     // console.log("response: ",response)
     // console.log("---------------")

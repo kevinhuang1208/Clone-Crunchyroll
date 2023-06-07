@@ -19,7 +19,7 @@ export const addUserFavorite = (favorite) => {
 	}
 }
 
-export const editSingleUser = (user) => {
+export const editSingleSessionUser = (user) => {
     return {
         type: EDIT_USER,
         payload: user
@@ -39,11 +39,17 @@ export const authenticate = () => async (dispatch) => {
 		if (data.errors) {
 			return;
 		}
-		let normalFavorites = {}
-		data.favorites.forEach((favorite) =>{
-			normalFavorites[favorite] = favorite
-		})
-		data.favorites = normalFavorites
+		const normalFavorites = {}
+        const normalReviews = {}
+        data.favorites.forEach((favorite) => {
+            normalFavorites[favorite] = favorite
+        })
+        data.favorites = normalFavorites
+
+        data.reviews.forEach((review) => {
+            normalReviews[review.id] = review
+        })
+        data.reviews = normalReviews
 		dispatch(setUser(data));
 	}
 };
@@ -62,11 +68,17 @@ export const login = (email, password) => async (dispatch) => {
 
 	if (response.ok) {
 		const data = await response.json();
-		let normalFavorites = {}
-		data.favorites.forEach((favorite) =>{
-			normalFavorites[favorite] = favorite
-		})
-		data.favorites = normalFavorites
+		const normalFavorites = {}
+        const normalReviews = {}
+        data.favorites.forEach((favorite) => {
+            normalFavorites[favorite] = favorite
+        })
+        data.favorites = normalFavorites
+
+        data.reviews.forEach((review) => {
+            normalReviews[review.id] = review
+        })
+        data.reviews = normalReviews
 		dispatch(setUser(data));
 		return null;
 	} else if (response.status < 500) {
@@ -106,11 +118,17 @@ export const signUp = (username, email, password) => async (dispatch) => {
 
 	if (response.ok) {
 		const data = await response.json();
-		let normalFavorites = {}
-		data.favorites.forEach((favorite) =>{
-			normalFavorites[favorite] = favorite
-		})
-		data.favorites = normalFavorites
+		const normalFavorites = {}
+        const normalReviews = {}
+        data.favorites.forEach((favorite) => {
+            normalFavorites[favorite] = favorite
+        })
+        data.favorites = normalFavorites
+
+        data.reviews.forEach((review) => {
+            normalReviews[review.id] = review
+        })
+        data.reviews = normalReviews
 		dispatch(setUser(data));
 		return null;
 	} else if (response.status < 500) {
