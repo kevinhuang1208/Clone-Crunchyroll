@@ -57,18 +57,27 @@ export const postAnimeThunk = (anime) => async (dispatch) => {
 const deleteAnime = (animeId) => {
     return {
         type: DELETE_ANIME,
-        payload: animeId
+        animeId
     }
 }
 // need to get our anime to have a cascading delete before we implement delete anime
-const deleteAnimeThunk = (animeId) => {
-    // const response = await fetch('/api/anime/')
-}
 
 const getAllAnime = (anime) => {
     return {
         type: GET_ALL_ANIME,
         payload: anime
+    }
+}
+
+export const deleteAnimeThunk = (animeId) => async (dispatch) => {
+    // const response = await fetch('/api/anime/')
+    const res = await fetch(`/api/anime/${animeId}`, {
+        method: 'DELETE'
+    })
+    if (res.ok) {
+        dispatch(deleteAnime(animeId))
+    } else {
+        return false
     }
 }
 
@@ -109,6 +118,11 @@ const animeReducer = (state = initialState, action) => {
         case EDIT_ANIME: {
             let newState = { ...state }
             newState[action.payload.id] = action.payload
+            return newState
+        }
+        case DELETE_ANIME: {
+            let newState = { ...state }
+            delete newState[action.animeId]
             return newState
         }
         default:

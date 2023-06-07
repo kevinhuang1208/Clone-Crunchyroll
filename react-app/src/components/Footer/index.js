@@ -6,8 +6,9 @@ import './footer.css';
 function Footer() {
 
     return (
-        <div className="footerContainer">
+        <div className="allFooterContainer">
             <h2>Technologies Used:</h2>
+            <div className = 'allColumns'>
             <div className="footerColumn1">
                 <div className="">Javascript</div>
                 <div className="">REACT</div>
@@ -21,15 +22,16 @@ function Footer() {
                 <div className="">PostgreSQL</div>
             </div>
             <div className="footerColumn3">
-                <h2>Contributors:</h2>
+                <h2 className = 'contributers'>Contributors:</h2>
 
+                <div className = 'danishKevin'> 
                 <div className="footerNameBlock">
                     <p className="footerNameTag">Danish Prasla</p>
                     <a href="https://www.linkedin.com/in/danish-prasla-819a7199/">
                         <img className="linkedinLogo" src="https://cdn.discordapp.com/attachments/1113213089702228038/1115021661377400832/linkedinLogo.png" />
                     </a>
                     <a href="https://github.com/danishprasla">
-                        <img className="githubLogo" src="https://cdn.discordapp.com/attachments/1113213089702228038/1115021661092192387/githubLogo.png" />
+                        <img className="githubLogo" src="https://cdn.discordapp.com/attachments/1116044689452322926/1116106706192187422/github-icon-256x249-eb1fu3cu.png" />
                     </a>
                 </div>
 
@@ -39,17 +41,18 @@ function Footer() {
                         <img className="linkedinLogo" src="https://cdn.discordapp.com/attachments/1113213089702228038/1115021661377400832/linkedinLogo.png" />
                     </a>
                     <a href="https://github.com/kevinhuang1208">
-                        <img className="githubLogo" src="https://cdn.discordapp.com/attachments/1113213089702228038/1115021661092192387/githubLogo.png" />
+                        <img className="githubLogo" src="https://cdn.discordapp.com/attachments/1116044689452322926/1116106706192187422/github-icon-256x249-eb1fu3cu.png" />
                     </a>
                 </div>
-
+                </div>
+                <div className = 'taylorSteven'> 
                 <div className="footerNameBlock">
                     <p className="footerNameTag">Taylor Lim</p>
                     <a href="https://www.linkedin.com/in/tayjlim0592/">
                         <img className="linkedinLogo" src="https://cdn.discordapp.com/attachments/1113213089702228038/1115021661377400832/linkedinLogo.png" />
                     </a>
                     <a href="https://github.com/tayjlim">
-                        <img className="githubLogo" src="https://cdn.discordapp.com/attachments/1113213089702228038/1115021661092192387/githubLogo.png" />
+                        <img className="githubLogo" src="https://cdn.discordapp.com/attachments/1116044689452322926/1116106706192187422/github-icon-256x249-eb1fu3cu.png" />
                     </a>
                 </div>
 
@@ -59,11 +62,13 @@ function Footer() {
                         <img className="linkedinLogo" src="https://cdn.discordapp.com/attachments/1113213089702228038/1115021661377400832/linkedinLogo.png" />
                     </a>
                     <a href="https://github.com/taylorcornwall766">
-                        <img className="githubLogo" src="https://cdn.discordapp.com/attachments/1113213089702228038/1115021661092192387/githubLogo.png" />
+                        <img className="githubLogo" src="https://cdn.discordapp.com/attachments/1116044689452322926/1116106706192187422/github-icon-256x249-eb1fu3cu.png" />
                     </a>
+                </div>
                 </div>
 
 
+                </div>
             </div>
         </div>
     )

@@ -82,10 +82,13 @@ def delete(anime_id):
     """Route to delete the anime along with children"""
     anime_to_delete = Anime.query.get(anime_id)
     print('<<<<<<<THIS IS THE ANIME TO DELETE >>>>>>>', anime_to_delete)
+
+    if anime_to_delete is None:
+        return {"message": "anime not found"}
     db.session.delete(anime_to_delete)
     db.session.commit()
-    # return {"message": "video deleted"}
-    return redirect("/anime")
+    return {"message": "video deleted"}
+    # return redirect("/anime")
 
 @anime_routes.route("/<int:id>/episodes")
 def get_all_episodes(id):

@@ -6,37 +6,40 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 // import { deleteAnimeThunk } from "../../store/anime"; this will be the thunk/action to be imported
 import "./DeleteAnime.css"
+import { deleteAnimeThunk } from "../../store/anime";
 
 
-const DeleteAnimeModal = ({anime}) => {
-    const dispatch = useDispatch()
-    const { closeModal } = useModal();
-    const history = useHistory()
+const DeleteAnimeModal = ({ anime }) => {
+  const dispatch = useDispatch()
+  const { closeModal } = useModal();
+  const history = useHistory()
+  // const animeId = singleAnime.id
+  console.log(anime)
 
-    const handleClick = (e) => {
-        e.preventDefault();
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    dispatch(deleteAnimeThunk(anime.id))
+    closeModal()
+    // dispatch(deleteAnimeThunk(anime.id))
+    //   .then(closeModal)
+    history.push("/anime")
+  };
 
-        return closeModal
-        // dispatch(deleteAnimeThunk(anime.id))
-        //   .then(closeModal)
-        //history.push("/anime")
-    };
+  //   useEffect(() => {
+  //     dispatch(getOwnerSpots())
+  // }, [dispatch, spot])
 
-    //   useEffect(() => {
-    //     dispatch(getOwnerSpots())
-    // }, [dispatch, spot])
-
-    return (
-        <>
-          <h1>Confirm Delete</h1>
-          <div className="random-text">Are you sure you want to remove this Anime?</div>
-          <div className="delete-two-buttons">
-            <button onClick={handleClick}>Yes (Delete Anime)</button>
-            <button onClick={closeModal}>No (Keep Anime)</button>
-          </div>
-        </>
-      );
+  return (
+    <>
+      <h1>Confirm Delete</h1>
+      <div className="random-text">Are you sure you want to remove this Anime?</div>
+      <div className="delete-two-buttons">
+        <button onClick={(e) => handleClick(e)}>Yes (Delete Anime)</button>
+        <button onClick={(e) => closeModal()}>No (Keep Anime)</button>
+      </div>
+    </>
+  );
 }
 
 export default DeleteAnimeModal;

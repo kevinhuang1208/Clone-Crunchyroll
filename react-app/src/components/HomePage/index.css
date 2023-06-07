@@ -5,4 +5,9 @@
 }
 .allAnimeContainer{
    display:flex;
+   flex-wrap:wrap;
+}
+
+.animeTileHomePage{
+   width: 23%;
 }

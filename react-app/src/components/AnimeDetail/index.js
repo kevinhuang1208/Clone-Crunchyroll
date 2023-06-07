@@ -74,7 +74,7 @@ function AnimeDetail() {
 
   useEffect(() => {
     dispatch(getAllAnimeThunk());
-    console.log('<<<<<<inside first use effect>>>>>>')
+    // console.log('<<<<<<inside first use effect>>>>>>')
     dispatch(getAnimeReviewsThunk(animeId));
     dispatch(getAnimeEpisodesThunk(animeId));
     //there will? be a thunk to add the anime to the user's favorites
@@ -110,6 +110,12 @@ function AnimeDetail() {
             <button onClick={()=> history.push(`/anime/${animeId}/edit`)}>
               Edit your anime
             </button>
+            {/* <button>
+              <OpenModalMenuItem
+              itemText="Delete Anime"
+              modalComponent={<DeleteAnimeModal animeId={animeId}/>} 
+              />
+            </button> */}
           </div>
         )}
 
