@@ -65,6 +65,8 @@ function AnimeDetail() {
   // console.log(renderCreateReview(reviewsArr,user))-------------------
   // testing the createReviewhelper
 
+  console.log('EPISODES OF ANIME ---------',episodesOfAnime)
+
   useEffect(() => {
     dispatch(getAllAnimeThunk());
     dispatch(getAnimeReviewsThunk(animeId));
@@ -112,9 +114,11 @@ function AnimeDetail() {
 
               <div className='episodeWatchNow'>
                 <p>Episode {episode.episodeNumber}</p>
+
                 <NavLink exact to={`/anime/${singleAnime.id}/episodes/${episode.id}`}>
-                  Watch Now!
+                 <img src = {episode.episodeCoverImage}/>
                 </NavLink>
+
               </div>
 
               <p>{episode.desc}</p>

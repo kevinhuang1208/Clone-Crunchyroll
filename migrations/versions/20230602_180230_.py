@@ -38,6 +38,7 @@ def upgrade():
     sa.Column('desc', sa.String(length=1000), nullable=False),
     sa.Column('release_date', sa.Date(), nullable=False),
     sa.Column('video_link', sa.String(length=500), nullable=False),
+    sa.Column('episode_cover_image', sa.String(length=500), nullable=False),
     sa.ForeignKeyConstraint(['anime_id'], ['animes.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

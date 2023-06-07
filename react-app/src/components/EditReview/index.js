@@ -8,6 +8,7 @@ const EditReview = ({review,user}) =>{
 
     const dispatch = useDispatch();
     const history = useHistory();
+    const {closeModal} = useModal()
 
     const [writeReview, setWriteReview] = useState(review?.review)
     // const [stars, setStars] = useState(review.)
@@ -20,9 +21,10 @@ const EditReview = ({review,user}) =>{
 
         formData.append('review', writeReview)
         // formData.append('rating',stars)
-
-        const res = await dispatch(editAnimeReviewThunk(formData,review))
-        return 
+        
+        const res = await dispatch(editAnimeReviewThunk(formData,review.anime_id))
+        
+        return closeModal()
     }
 
     return(
@@ -35,8 +37,10 @@ const EditReview = ({review,user}) =>{
         type = 'text'
         rows={8}
         cols={40}
+        onChange = {(e)=>(setWriteReview(e.target.value))}
         />
-        <button> Submit </button>
+        
+        <button className = "submitButtonReview " disabled={writeReview.length<100}>Submit your review</button>
         </form>
         </div>
     )

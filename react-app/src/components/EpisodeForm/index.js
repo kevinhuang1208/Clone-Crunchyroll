@@ -89,7 +89,7 @@ const EpisodeForm = () => {
         formData.append("release_date", releaseDate)
         formData.append("video_link", videoLink)
         formData.append("title", title)
-        formData.append("episode_cover_image", coverPicture)
+        formData.append("episode_cover_picture", coverPicture)
 
         console.log('EPISODE FORM DATA FROM REACT COMPONENT ->', formData)
         // const newAnime = {

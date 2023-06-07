@@ -22,6 +22,7 @@ const CreateReview = ({anime,user}) =>{
         formData.append('review',writeReview)
         formData.append('rating',stars)
         const res = await dispatch(postAnimeReviewThunk(formData,anime.id))
+        
         return closeModal();
     }
 
