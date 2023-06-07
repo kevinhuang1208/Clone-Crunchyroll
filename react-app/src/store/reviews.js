@@ -29,8 +29,8 @@ export const postAnimeReviewThunk = (review, animeId) => async (dispatch) =>{
     return null
 }
 
-export const editAnimeReviewThunk = (review) => async (dispatch) =>{
-    const response = await fetch(`-----`, {
+export const editAnimeReviewThunk = (review,animeId,reviewId) => async (dispatch) =>{
+    const response = await fetch(`/api/anime/${animeId}/reviews/${reviewId}`, {
         method: 'put',
         body: review
     })

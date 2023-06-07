@@ -211,6 +211,24 @@ def post_anime_review(id):
     else:
         return jsonify({'error': form.errors})
 
+@anime_routes.route("/<int:anime_id>/reviews/<int:review_id>", methods=["PUT"])
+def edit_review_route(anime_id, review_id):
+    """Route to edit a review"""
+    # user_id = current_user.id
+    review = Reviews.query.get(review_id)
+    form = ReviewForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        review.review = form.data["review"]
+        review.rating = form.data["rating"]
+        db.session.commit()
+        edited_review = review.to_dict()
+        return edited_review
+    else:
+        return {'error': form.errors}
+
+
+
 
 
 

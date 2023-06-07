@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, NavLink } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getAnimeEpisodesThunk } from "../../store/animeDetail";
 import { getAnimeReviewsThunk } from "../../store/reviews";
 import DeleteAnimeModal from "../DeleteAnime";
@@ -21,6 +21,7 @@ function AnimeDetail() {
   const animeObj = useSelector((state) => state.anime);
   const anime = Object.values(animeObj)
   console.log("anime", anime);
+  const [stateTest, setStateTest] = useState()
 
 
   const user = useSelector((state) => state.session.user);
@@ -39,7 +40,7 @@ function AnimeDetail() {
   // console.log('anime id ~~~~~~>',animeId)
 
   const reviewsObj = useSelector((state) => state.reviews)
-  // console.log('what is the reviewsObj---------',reviewsObj) // what is this?
+  console.log('what is the reviewsObj---------',reviewsObj) // what is this?
   
   const reviewsArr = Object.values(reviewsObj)
   // console.log('Reviews array is this -------',reviewsArr)
@@ -67,8 +68,13 @@ function AnimeDetail() {
 
   console.log('EPISODES OF ANIME ---------',episodesOfAnime)
 
+  // useEffect(()=> {
+
+  // }, [reviewsObj])
+
   useEffect(() => {
     dispatch(getAllAnimeThunk());
+    console.log('<<<<<<inside first use effect>>>>>>')
     dispatch(getAnimeReviewsThunk(animeId));
     dispatch(getAnimeEpisodesThunk(animeId));
     //there will? be a thunk to add the anime to the user's favorites

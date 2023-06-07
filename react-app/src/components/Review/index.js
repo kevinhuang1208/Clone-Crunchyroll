@@ -11,8 +11,9 @@ const Review = ({review,user})=> {
 
     console.log('what is a single review do ---------', review)
     // if user.id == review.userId render the button if not do null if no user, do null
+   
     if(!review.user) return null
-
+   
     else 
     return (
         <div> 
