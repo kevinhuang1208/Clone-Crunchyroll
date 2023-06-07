@@ -101,7 +101,14 @@ def post_anime_episode(anime_id):
         episode_file =form.data["video_link"]
         episode_file.filename = get_unique_filename(episode_file.filename)
         uploaded_episode = upload_file_to_s3(episode_file)
-        aws_link = uploaded_episode['url']
+        aws_link_video = uploaded_episode['url']
+
+        picture = form.data['episode_cover_picture']
+        picture.filename = get_unique_filename(picture.filename)
+        uploaded_pic = upload_file_to_s3(picture)
+        aws_link_cover_picture = uploaded_pic['url']
+
+
         release_date_string = form.data["release_date"]
         [year, month, day] = release_date_string.split("-")
 
@@ -110,9 +117,10 @@ def post_anime_episode(anime_id):
             anime_id = anime_id,
             desc = form.data["description"],
             release_date = date(int(year), int(month), int(day)),
-            video_link = aws_link,
+            video_link = aws_link_video,
             # video_link = form.data["video_link"],
-            title = form.data["title"]
+            title = form.data["title"],
+            episode_cover_image = aws_link_cover_picture
         )
         db.session.add(new_episode)
         db.session.commit()
@@ -202,6 +210,24 @@ def post_anime_review(id):
         return new_review.to_dict()
     else:
         return jsonify({'error': form.errors})
+
+@anime_routes.route("/<int:anime_id>/reviews/<int:review_id>", methods=["PUT"])
+def edit_review_route(anime_id, review_id):
+    """Route to edit a review"""
+    # user_id = current_user.id
+    review = Reviews.query.get(review_id)
+    form = ReviewForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        review.review = form.data["review"]
+        review.rating = form.data["rating"]
+        db.session.commit()
+        edited_review = review.to_dict()
+        return edited_review
+    else:
+        return {'error': form.errors}
+
+
 
 
 

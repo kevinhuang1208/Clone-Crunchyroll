@@ -147,7 +147,9 @@ const AnimeForm = ({ anime, formType }) => {
                 </label>
                 {formType === 'edit' &&
                     <div>
-                        Current cover image below. Please upload another file if you would like to overwrite this image.
+                        <p>
+                            Current cover image below. Please upload another file if you would like to overwrite this image.
+                        </p>
                         <img className="animeFormImage" src={anime.coverPicture} />
                     </div>
                 }
@@ -161,10 +163,6 @@ const AnimeForm = ({ anime, formType }) => {
                         onChange={(e) => setCoverPicture(e.target.files[0])}
                     />
                     <p className="formError">{errors}</p>
-                    {coverPicture && coverPicture.name && (
-
-                        <button onClick={(e) => resetFile(e)}>Remove File</button>
-                    )}
                 </label>
                 <button>Submit Anime</button>
 

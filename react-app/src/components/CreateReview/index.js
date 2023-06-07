@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom"
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import {postAnimeReviewThunk} from '../../store/reviews'
+import {postAnimeReviewThunk,getAnimeReviewsThunk} from '../../store/reviews'
 
 const CreateReview = ({anime,user}) =>{
 
@@ -22,8 +22,11 @@ const CreateReview = ({anime,user}) =>{
         formData.append('review',writeReview)
         formData.append('rating',stars)
         const res = await dispatch(postAnimeReviewThunk(formData,anime.id))
+        await dispatch(getAnimeReviewsThunk(anime.id))
         return closeModal();
     }
+
+    
 
     return(
     <div>

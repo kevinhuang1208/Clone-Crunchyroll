@@ -14,6 +14,7 @@ const EpisodeForm = () => {
     const [releaseDate, setReleaseDate] = useState('')
     const [videoLink, setVideoLink] = useState(undefined)
     const [title, setTitle] = useState('')
+    const [coverPicture, setCoverPicture] = useState('')
     const [errors, setErrors] = useState([])
     const { animeId } = useParams();
 
@@ -37,7 +38,6 @@ const EpisodeForm = () => {
     // // if anime.authorId == userId.id
     if (userId.user === null || userId.id !== anime.authorId) {
         // alert('You are not authorized to post an episode for this anime')
-        alert('Not authorized to post an episode on this anime page')
         history.push('/')
     }
 
@@ -58,19 +58,22 @@ const EpisodeForm = () => {
     const formValidate = () => {
         const newFormErrors = {}
         if (!episodeNum) {
-            newFormErrors.episodeNum = "Your show MUST have a episode number."
+            newFormErrors.episodeNum = "Your episode MUST have a episode number."
         }
         if (!description || description.length > 1000) {
-            newFormErrors.description = "Your show MUST have a description and it must be less than 1000 characters long."
+            newFormErrors.description = "Your episode MUST have a description and it must be less than 1000 characters long."
         }
         if (!releaseDate) {
-            newFormErrors.releaseDate = "Your show MUST have a release date specified."
+            newFormErrors.releaseDate = "Your episode MUST have a release date specified."
         }
         if (!videoLink) {
             newFormErrors.videoLink = "Your show MUST have a video link to the episode."
         }
         if (!title || title.length > 100) {
-            newFormErrors.title = "Your show MUST have a title and it must be less than 100 characters"
+            newFormErrors.title = "Your episode MUST have a title and it must be less than 100 characters"
+        }
+        if (!coverPicture) {
+            newFormErrors.coverPicture = "Your episode MUST have a cover image"
         }
         if (Object.values(newFormErrors).length > 0) {
             setErrors(newFormErrors)
@@ -86,6 +89,7 @@ const EpisodeForm = () => {
         formData.append("release_date", releaseDate)
         formData.append("video_link", videoLink)
         formData.append("title", title)
+        formData.append("episode_cover_picture", coverPicture)
 
         console.log('EPISODE FORM DATA FROM REACT COMPONENT ->', formData)
         // const newAnime = {
@@ -157,6 +161,17 @@ const EpisodeForm = () => {
                         onChange={(e) => setEpisodeNum(e.target.value)}
                     />
                     <p className="formError">{errors.episodeNum}</p>
+                </label>
+                <label>
+                    Episode Cover Image:
+                    <input
+                        placeholder="insert a file here "
+                        type="file"
+                        accept='image/*'
+                        filename={coverPicture && coverPicture.name}
+                        onChange={(e) => setCoverPicture(e.target.files[0])}
+                    />
+                    <p className="formError">{errors}</p>
                 </label>
                 <label>
                     Video File:

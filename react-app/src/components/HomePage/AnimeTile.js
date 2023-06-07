@@ -16,7 +16,7 @@ function AnimeTile({anime}){
 
       else
     return(
-        <div id = {anime.id} className = 'animeTileHomePage'>
+        <div key ={anime.id} id = {anime.id} className = 'animeTileHomePage'>
 
             <div className = 'animeShowName'>
                 <h2>{anime.showname}</h2>
