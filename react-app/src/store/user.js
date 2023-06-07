@@ -1,7 +1,29 @@
+// import { editSingleSessionUser } from "./session"
 const GET_SINGLE_USER = "user/getSingleUser"
 const DELETE_USER_FAVORITE = "user/deleteFavorite"
 const POST_USER_FAVORITE = "user/postFavorite"
 const EDIT_SINGLE_USER = "user/editSingleUser"
+const DELETE_SINGLE_USER = "user/deleteSingleUser"
+
+//code below is to be editted
+const deleteSingleUser = (user) => {
+    return {
+        type: DELETE_SINGLE_USER,
+        payload: user
+    }
+}
+
+export const deleteSingleUserThunk = (userId) => async (dispatch) => {
+    const response = await fetch(`/api/users/delete/${userId}`, {
+        method: 'DELETE'
+    })
+    if(response.ok) {
+        dispatch(deleteSingleUser(userId))
+        return
+    }
+}
+
+// code above is to be editted
 
 const postUserFavorite = (favorite) => {
     return {
@@ -40,9 +62,11 @@ const editSingleUser = (user) => {
 }
 
 export const editSingleUserThunk = (user, userId) => async (dispatch) => {
+    console.log("user: ", user)
+    console.log("userId: ", userId)
     const response = await fetch(`/api/users/${userId}/edit`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(user)
     })
     console.log("this is response before json", response)
@@ -50,8 +74,10 @@ export const editSingleUserThunk = (user, userId) => async (dispatch) => {
     console.log("this is data", data)
     if (response.ok) {
         dispatch(editSingleUser(data));
+        // dispatch(editSingleSessionUser(data))
         return data;
       }
+    return data
     // console.log("user PUT response NOT ok")
     // console.log("response: ",response)
     // console.log("---------------")
@@ -141,6 +167,10 @@ const userReducer = (state = initialState, action) => {
                 favoritesObj[favorite.animeId] = favorite.animeId
             })
             newState.favorites = favoritesObj
+            return newState
+        }
+        case DELETE_SINGLE_USER: {
+            let newState = {}
             return newState
         }
         default:

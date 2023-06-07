@@ -5,7 +5,7 @@ import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { editSingleUserThunk } from "../../store/user"
-import { editSingleUser } from "../../store/session"
+import { editSingleSessionUser } from "../../store/session"
 
 
 
@@ -46,12 +46,23 @@ const ChangeCredentialModal = ({user}) => {
           email,
           password
         }
+        // const formData = new FormData()
+        // formData.append("username", username)
+        // formData.append("email", email)
+        // formData.append("password", password)
 
+        // console.log("THIS IS FORM DATAAAAAAAAAAAAAAAAAAAAA", formData)
+        console.log("THIS IS USER ID", user.id)
+        console.log("THIS IS NEW CREDENTIALS", newCredentials)
         let res = await dispatch(editSingleUserThunk(newCredentials, user.id))
-        await dispatch(editSingleUser(res))
-        await closeModal()
+        console.log("THIS IS RES", res)
         if (res) {
+          // await dispatch(editSingleSessionUser(res))
+          closeModal()
           window.location.reload()
+        }
+        else {
+          console.log("res not ok")
         }
 
 

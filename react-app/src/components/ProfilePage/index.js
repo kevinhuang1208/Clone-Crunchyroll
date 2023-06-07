@@ -9,6 +9,7 @@ import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import ChangeCredentialModal from "../ChangeCredentials";
 import { getSingleUserThunk } from "../../store/user"
 import FavoritesBar from '../Favorite';
+import DeleteUser from "../DeleteUser";
 
 function ProfilePage() {
     const dispatch = useDispatch();
@@ -54,7 +55,13 @@ function ProfilePage() {
               itemText="Change My Credentials"
               modalComponent={<ChangeCredentialModal user={user} key={user.id}/>}
             />
+            <OpenModalMenuItem
+              className="delete-button"
+              itemText="Delete My Account (PERMANENT)"
+              modalComponent={<DeleteUser user={user} key={user.id}/>}
+            />
             </>
+
             :
             <>
             <h2>This is {paramUser.username}'s Profile Page</h2>
