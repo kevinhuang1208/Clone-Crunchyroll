@@ -46,17 +46,12 @@ export const editSingleUserThunk = (user, userId) => async (dispatch) => {
         body: JSON.stringify(user)
     })
     console.log("this is response before json", response)
-    try {
-        const data = await response.json();
-        console.log("this is data", data)
-        
-    } catch (error) {
-        console.log("this is error for try/catch", error)
-    }
-    // if (response.ok) {
-    //     dispatch(editSingleUser(data));
-    //     return data;
-    //   }
+    const data = await response.json();
+    console.log("this is data", data)
+    if (response.ok) {
+        dispatch(editSingleUser(data));
+        return data;
+      }
     // console.log("user PUT response NOT ok")
     // console.log("response: ",response)
     // console.log("---------------")
@@ -139,7 +134,13 @@ const userReducer = (state = initialState, action) => {
         //case below is to be editted
         case EDIT_SINGLE_USER:{
             let newState = {}
-            newState = {...action.payload}
+            let favoritesObj = {}
+            newState = {...action.payload.editedUser}
+            console.log("THIS IS NEW STATE BEFORE FOREACH", newState)
+            newState.favorites.forEach((favorite) => {
+                favoritesObj[favorite.animeId] = favorite.animeId
+            })
+            newState.favorites = favoritesObj
             return newState
         }
         default:

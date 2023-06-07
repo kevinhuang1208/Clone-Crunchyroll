@@ -20,7 +20,7 @@ def addFavorite():
     if form.validate_on_submit():
         anime_id = form.data['animeId']
         date_added = date.today()
-        
+
         new_favorite = Favorites(
             anime_id = anime_id,
             user_id = int(user_id),
@@ -34,7 +34,7 @@ def addFavorite():
 
 
 
-    
+
 
 
 @user_routes.route('/')
@@ -61,16 +61,26 @@ def user(id):
 def edit_credential(id):
     """Route to edit a user's credentials"""
     user = User.query.get(id)
-    form = EditCredentialForm() 
+    print('>>>>>>>>>>>>>>>')
+    print("THIS IS USER TO DICT", user.to_dict())
+    print('>>>>>>>>>>>>>>>')
+    form = EditCredentialForm()
 
     form["csrf_token"].data = request.cookies["csrf_token"]
-
     if form.validate_on_submit():
+        print("THIS IS FORM DATA", form.data)
         user.username = form.data["username"]
         user.email = form.data["email"]
         user.password = form.data["password"]
+        print("THIS IS FORM DATA", form.data)
+        print('>>>>>>>>>>>>>>>')
+        print("AFTER CHANGES", user.to_dict())
+        print('>>>>>>>>>>>>>>>')
         db.session.commit()
         edited_user = user.to_dict()
+        print('>>>>>>>>>>>>>>>')
+        print(edited_user)
+        print('>>>>>>>>>>>>>>>')
         return {'editedUser': edited_user}
     else:
         return {'error': form.errors}

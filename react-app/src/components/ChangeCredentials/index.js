@@ -8,6 +8,7 @@ import { editSingleUserThunk } from "../../store/user"
 import { editSingleUser } from "../../store/session"
 
 
+
 const ChangeCredentialModal = ({user}) => {
     const dispatch = useDispatch()
     const { closeModal } = useModal();
@@ -17,33 +18,41 @@ const ChangeCredentialModal = ({user}) => {
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
 
-    // const handleClick = (e) => {
-    //     e.preventDefault();
+  //   const formValidate = () => {
+  //     const newFormErrors = {}
+  //     if (!showname || showname.length > 255) {
+  //         newFormErrors.showname = "Your show MUST have a showname and it must be less than 255 characters long."
+  //     }
+  //     if (!description || description.length > 1000) {
+  //         newFormErrors.description = "Your show MUST have a description and it must be less than 1000 characters long."
+  //     }
+  //     if (!releaseDate) {
+  //         newFormErrors.releaseDate = "Your show MUST have a release date specified."
+  //     }
+  //     if (!coverPicture && formType !== 'edit') {
+  //         newFormErrors.coverPicture = "Your show MUST have a cover picture."
+  //     }
+  //     if (Object.values(newFormErrors).length > 0) {
+  //         setErrors(newFormErrors)
+  //     }
+  // }
 
-
-    //     return 
-    //     dispatch(editSingleUserThunk(user, user.id))
-    //       .then(closeModal)
-        
-    // };
-
-    //   useEffect(() => {
-    //     dispatch(getOwnerSpots())
-    // }, [dispatch, spot])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const formData = new FormData()
-        formData.append("username", username)
-        formData.append("email", email)
-        formData.append("password", password)
+        const newCredentials = {
+          username,
+          email,
+          password
+        }
 
-        let res = await dispatch(editSingleUserThunk(formData, user.id))
-        dispatch(editSingleUser(res))
+        let res = await dispatch(editSingleUserThunk(newCredentials, user.id))
+        await dispatch(editSingleUser(res))
+        await closeModal()
         if (res) {
-          history.push(`/anime/${res.id}`)
-      }
+          window.location.reload()
+        }
 
 
       }
