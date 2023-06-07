@@ -13,6 +13,7 @@ class Episodes(db.Model):
     release_date = db.Column(db.Date, nullable=False)
     video_link = db.Column(db.String(500), nullable=False)
     title = db.Column(db.String(100), nullable=False)
+    episode_cover_image = db.Column(db.String(500), nullable=False)
 
     animeid = db.relationship(
         "Anime", back_populates = 'episodes'
@@ -26,5 +27,6 @@ class Episodes(db.Model):
             'desc': self.desc,
             'releaseDate': self.release_date.strftime('%m/%d/%Y'),
             'videoLink': self.video_link,
-            'title': self.title
+            'title': self.title,
+            'episodeCoverImage': self.episode_cover_image
         }

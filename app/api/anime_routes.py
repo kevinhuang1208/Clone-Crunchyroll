@@ -101,7 +101,14 @@ def post_anime_episode(anime_id):
         episode_file =form.data["video_link"]
         episode_file.filename = get_unique_filename(episode_file.filename)
         uploaded_episode = upload_file_to_s3(episode_file)
-        aws_link = uploaded_episode['url']
+        aws_link_video = uploaded_episode['url']
+
+        picture = form.data['episode_cover_picture']
+        picture.filename = get_unique_filename(picture.filename)
+        uploaded_pic = upload_file_to_s3(picture)
+        aws_link_cover_picture = uploaded_pic['url']
+
+
         release_date_string = form.data["release_date"]
         [year, month, day] = release_date_string.split("-")
 
@@ -110,9 +117,10 @@ def post_anime_episode(anime_id):
             anime_id = anime_id,
             desc = form.data["description"],
             release_date = date(int(year), int(month), int(day)),
-            video_link = aws_link,
+            video_link = aws_link_video,
             # video_link = form.data["video_link"],
-            title = form.data["title"]
+            title = form.data["title"],
+            episode_cover_image = aws_link_cover_picture
         )
         db.session.add(new_episode)
         db.session.commit()
