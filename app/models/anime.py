@@ -25,7 +25,7 @@ class Anime(db.Model):
         "Episodes", cascade="all,delete-orphan", back_populates = 'animeid'
     )
     anime_genre = db.relationship(
-        "Genre", back_populates = 'anime_id_genre'
+        "Genre", cascade="all,delete-orphan", back_populates = 'anime_id_genre'
     )
 
     review_name = db.relationship(

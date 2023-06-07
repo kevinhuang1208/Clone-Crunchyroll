@@ -26,15 +26,16 @@ function ProfilePage() {
     // console.log("this is userId params", userId)
 
     let animeIds = []
-    console.log("animeIds got changed",animeIds)
+    // console.log("animeIds got changed",animeIds)
     if(Object.values(paramUser).length){ ///
       animeIds = Object.values(paramUser.favorites) ///
-      console.log("animeIds got changed INSIDE IF",animeIds)
+      // console.log("animeIds got changed INSIDE IF",animeIds)
     }
-    console.log('anime ids for the profile page ---->',animeIds)
+    // console.log('anime ids for the profile page ---->',animeIds)
 
     useEffect(() => {
       dispatch(getSingleUserThunk(userId));
+      // console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
       dispatch(getAllAnimeThunk())
     }, [dispatch]);
 

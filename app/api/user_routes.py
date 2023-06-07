@@ -13,8 +13,11 @@ user_routes = Blueprint('users', __name__)
 @user_routes.route('/favorites/<int:anime_id>/delete', methods=["DELETE"])
 @login_required
 def deleteFavorite(anime_id):
-    """"Remove a favorite from a users favorite table""""
-    favorite_to_delete = Favorites.query.get()
+    """Remove a favorite from a users favorite table"""
+    favorite_to_delete = Favorites.query.filter(Favorites.user_id == current_user.id, Favorites.anime_id == anime_id).one()
+    db.session.delete(favorite_to_delete)
+    db.session.commit()
+    return {"messsage": "favorite deleted"}
 
 
 @user_routes.route('/favorites/new', methods=["POST"])
@@ -70,20 +73,10 @@ def edit_credential(id):
     user = User.query.get(id)
 
     form = EditCredentialForm()
-    print("-------")
-    print(form.data)
-    print(form.data)
-    print("-------")
-    print("-------")
-    print("-------")
 
     form["csrf_token"].data = request.cookies["csrf_token"]
 
     errors = {}
-    # errors["info"] = user.to_dict()
-    # errors["userFormInfo"] = form.data["username"]
-    # errors["emailFormInfo"] = form.data["email"]
-    # print(User.query.filter(User.username == form.data["username"]))
 
 
     # errors["queryInfo"] = [User.query.filter(User.username == form.data["username"])[0].to_dict(), User.query.filter(User.email == form.data["email"])[0].to_dict()]
@@ -119,10 +112,11 @@ def edit_credential(id):
 
 
 
-@user_routes.route("/delete/<int:id>")
+@user_routes.route("/delete/<int:id>", methods=["DELETE"])
+@login_required
 def delete(id):
     user_to_delete = User.query.get(id)
     print("THIS IS USER TO DELETE", user_to_delete)
     db.session.delete(user_to_delete)
     db.session.commit()
-    return redirect("/anime")
+    return "user deleted brah"
