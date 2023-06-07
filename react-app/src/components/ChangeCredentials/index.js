@@ -59,7 +59,7 @@ const ChangeCredentialModal = ({user}) => {
         if (res) {
           // await dispatch(editSingleSessionUser(res))
           closeModal()
-          window.location.reload()
+          // window.location.reload()
         }
         else {
           console.log("res not ok")
