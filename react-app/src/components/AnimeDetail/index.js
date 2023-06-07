@@ -11,11 +11,13 @@ import OpenModalButton from "../OpenModalButton";
 import { useHistory } from "react-router-dom";
 import "./animeDetail.css"
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import { addUserFavorite, addUserFavoriteThunk } from "../../store/session";
+import { getSingleUserThunk, postUserFavoriteThunk } from "../../store/user";
 
 function AnimeDetail() {
 
   const dispatch = useDispatch();
-  const {animeId} = useParams();
+  const { animeId } = useParams();
   const history = useHistory();
   // array of episodes and we have a link to each one infividually to a video player with the AWS url
   const animeObj = useSelector((state) => state.anime);
@@ -25,6 +27,7 @@ function AnimeDetail() {
 
 
   const user = useSelector((state) => state.session.user);
+  const userStore = useSelector((state) => state.user)
   // console.log("user~~~~~>", user);
 
   const episodesOfAnimeObj = useSelector((state) => state.episodes);
@@ -40,33 +43,41 @@ function AnimeDetail() {
   // console.log('anime id ~~~~~~>',animeId)
 
   const reviewsObj = useSelector((state) => state.reviews)
-  console.log('what is the reviewsObj---------',reviewsObj) // what is this?
-  
+  console.log('what is the reviewsObj---------', reviewsObj) // what is this?
+
   const reviewsArr = Object.values(reviewsObj)
   // console.log('Reviews array is this -------',reviewsArr)
 
-  
+
   // console.log('USER ID ------>',user.id)
   // console.log('anime author id ------>', singleAnime.authorId)
- 
+
   const handleClick = (e) => {
     e.preventDefault();
+    dispatch(postUserFavoriteThunk(animeId))
+    dispatch(addUserFavoriteThunk(animeId))
+    dispatch(getSingleUserThunk(user.id))
     return alert("Added to Favorites!")
   };
+  const handleClickDeleteFavorite = (e) => {
+    e.preventDefault();
+    dispatch(postUserFavoriteThunk(animeId))
+    return alert("Removed from Favorites!")
+  };
 
- // render the createReview button helper function -------------
-  const renderCreateReview = (reviewsArr, user) =>{
-    for (let review of reviewsArr){
+  // render the createReview button helper function -------------
+  const renderCreateReview = (reviewsArr, user) => {
+    for (let review of reviewsArr) {
       // console.log('iterating the index? or the arr[0]',i)
-      if(review.userId === user.id)
-      return false
+      if (review.userId === user.id)
+        return false
     }
     return true
   }
   // console.log(renderCreateReview(reviewsArr,user))-------------------
   // testing the createReviewhelper
 
-  console.log('EPISODES OF ANIME ---------',episodesOfAnime)
+  console.log('EPISODES OF ANIME ---------', episodesOfAnime)
 
   // useEffect(()=> {
 
@@ -103,11 +114,11 @@ function AnimeDetail() {
         </div>
 
         <div>
-          <button onClick={handleClick}>Add Anime to Favorites</button>
+          <button onClick={(e) => handleClick(e)}>Add Anime to Favorites</button>
         </div>
         {(user && user.id === singleAnime.authorId) && (
           <div className="anime-page-edit-button">
-            <button onClick={()=> history.push(`/anime/${animeId}/edit`)}>
+            <button onClick={() => history.push(`/anime/${animeId}/edit`)}>
               Edit your anime
             </button>
             {/* <button>
@@ -128,7 +139,7 @@ function AnimeDetail() {
                 <h3>Episode: {episode.episodeNumber}, {episode.title}</h3>
 
                 <NavLink exact to={`/anime/${singleAnime.id}/episodes/${episode.id}`}>
-                 <img src = {episode.episodeCoverImage}/>
+                  <img src={episode.episodeCoverImage} />
                 </NavLink>
 
               </div>
@@ -138,32 +149,34 @@ function AnimeDetail() {
           ))}
         </div>
 
-        
+
         {(!user) ? null : (singleAnime.authorId === user.id) ? (
-          <OpenModalMenuItem
-            className="delete-button"
-            itemText="Delete this Anime"
-            modalComponent={<DeleteAnimeModal anime={singleAnime} key={singleAnime.id} />}
-          />
+          <button>
+            <OpenModalMenuItem
+              className="delete-button"
+              itemText="Delete this Anime"
+              modalComponent={<DeleteAnimeModal anime={singleAnime} key={singleAnime.id} />}
+            />
+          </button>
         )
 
-          : (renderCreateReview(reviewsArr,user)) ? (
-            <div className='CreateReviewModal'>
+          : (renderCreateReview(reviewsArr, user)) ? (
+            <button className='CreateReviewModal'>
               <OpenModalMenuItem
                 className='createReview'
                 itemText='Create a Review!'
-                modalComponent={<CreateReview anime = {singleAnime} key={singleAnime.id} user = {user}/>} 
+                modalComponent={<CreateReview anime={singleAnime} key={singleAnime.id} user={user} />}
               />
-            </div>) : null
+            </button>) : null
         }
 
-        <h1>Review!!!!!!!!</h1> 
-        <div className = 'reviewsMapDiv'>
-          { reviewsArr.map((review) => (
-            <Review review = {review} user = {user} key = {review.id}/>
-        ))}
+        <h1>Reviews:</h1>
+        <div className='reviewsMapDiv'>
+          {reviewsArr.map((review) => (
+            <Review review={review} user={user} key={review.id} />
+          ))}
         </div>
-       
+
 
       </div>
     )

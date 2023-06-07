@@ -74,6 +74,26 @@ export const getAnimeReviewsThunk = (animeId) => async (dispatch) =>{
     return null
 }
 
+const deleteAnimeReview = (reviewId) => {
+    return{
+        type: DELETE_ANIME_REVIEW,
+        reviewId
+    }
+
+}
+
+export const deleteAnimeReviewThunk = (reviewId) => async(dispatch)=>{
+    
+    // console.log('is thunk hitting?')
+    const res = await fetch(`/api/anime/reviews/${reviewId}/delete`,{
+        method: 'DELETE'
+    })
+    if(res.ok){
+        dispatch(deleteAnimeReview(reviewId))
+    }
+    return'wtf what is happening'
+}
+
 
 const initialState = {}
 // we could change the state here to be instead a dictionary of animeIDs and make it so that
@@ -89,6 +109,11 @@ const animeReviewsReducer = (state = initialState, action) => {
         case POST_ANIME_REVIEW:{
             let newState = {...state}
             newState[action.payload.id] = action.payload
+            return newState
+        }
+        case DELETE_ANIME_REVIEW:{
+            let newState={...state}
+            delete newState[action.reviewId]
             return newState
         }
         default:

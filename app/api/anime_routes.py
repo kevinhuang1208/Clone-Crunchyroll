@@ -241,7 +241,18 @@ def edit_review_route(anime_id, review_id):
     else:
         return {'error': form.errors}
 
+@anime_routes.route('/reviews/<int:review_id>/delete',methods =['DELETE'])
+def delete_review_route(review_id):
+    print('what is this even working')
+    review_to_delete = Reviews.query.get(review_id)
+    print('------review to delete------',review_to_delete)
 
+    if review_to_delete is None:
+        return {'message': 'review cannot be found'}
+
+    db.session.delete(review_to_delete)
+    db.session.commit()
+    return {'message': 'review deleted'}
 
 
 

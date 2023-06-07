@@ -28,27 +28,32 @@ export const deleteSingleUserThunk = (userId) => async (dispatch) => {
 const postUserFavorite = (favorite) => {
     return {
         type: POST_USER_FAVORITE,
-        payload: favorite
+        favorite
     }
 }
 
-export const postUserFavoriteThunk = (favorite) => async (dispatch)=>{
+export const postUserFavoriteThunk = (favorite) => async (dispatch) => {
     const response = await fetch(`/api/users/favorites/new`, {
-        method: "post",
-        body: favorite
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            animeId: favorite
+        }),
     })
     const data = await response.json()
-    if(response.ok){
-        console.log("------------////////////")
-        console.log("POST USERFAVORITE DATA: ", data)
-        console.log("///////////-------------")
-        dispatch(postUserFavorite(data))
+    if (response.ok) {
+        // console.log("------------////////////")
+        // console.log("POST USERFAVORITE DATA: ", data)
+        // console.log("///////////-------------")
+        dispatch(postUserFavorite(favorite))
         return data
     }
-    console.log("favorite POST response NOT ok")
-    console.log("response: ",response)
-    console.log("---------------")
-    console.log("data: ",data)
+    // console.log("favorite POST response NOT ok")
+    // console.log("response: ", response)
+    // console.log("---------------")
+    // console.log("data: ", data)
     return null
 
 }
@@ -94,12 +99,12 @@ const deleteFavorite = (favoriteId) => {
 }
 
 export const deleteUserFavoriteThunk = (favoriteId) => async (dispatch) => {
-    const response = await fetch(``,{
+    const response = await fetch(``, {
         method: 'delete',
         body: favoriteId
     })
     const data = await response.json()
-    if(response.ok){
+    if (response.ok) {
 
     }
 
@@ -154,14 +159,15 @@ const userReducer = (state = initialState, action) => {
             return newState
         }
         case POST_USER_FAVORITE: {
-            let newState = {...state}
-            newState.favorites[action.payload.animeId] = action.payload.animeId
+            let newState = { ...state }
+            newState.favorites[action.favorite] = action.favorite
+            return newState
         }
         //case below is to be editted
-        case EDIT_SINGLE_USER:{
+        case EDIT_SINGLE_USER: {
             let newState = {}
             let favoritesObj = {}
-            newState = {...action.payload.editedUser}
+            newState = { ...action.payload.editedUser }
             console.log("THIS IS NEW STATE BEFORE FOREACH", newState)
             newState.favorites.forEach((favorite) => {
                 favoritesObj[favorite.animeId] = favorite.animeId
