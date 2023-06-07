@@ -3,6 +3,27 @@ const GET_SINGLE_USER = "user/getSingleUser"
 const DELETE_USER_FAVORITE = "user/deleteFavorite"
 const POST_USER_FAVORITE = "user/postFavorite"
 const EDIT_SINGLE_USER = "user/editSingleUser"
+const DELETE_SINGLE_USER = "user/deleteSingleUser"
+
+//code below is to be editted
+const deleteSingleUser = (user) => {
+    return {
+        type: DELETE_SINGLE_USER,
+        payload: user
+    }
+}
+
+// export const deleteSingleUserThunk = (userId) => async (dispatch) => {
+//     const response = await fetch(`/api/spots/${spotId}`, {
+//         method: 'DELETE'
+//     })
+//     if(response.ok) {
+//         dispatch(removeSpot(spotId))
+//         return
+//     }
+// }
+
+// code above is to be editted
 
 const postUserFavorite = (favorite) => {
     return {
@@ -42,9 +63,10 @@ const editSingleUser = (user) => {
 
 export const editSingleUserThunk = (user, userId) => async (dispatch) => {
     console.log("user: ", user)
-    console.log("user: ", user)
+    console.log("userId: ", userId)
     const response = await fetch(`/api/users/${userId}/edit`, {
         method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
         body: user
     })
     console.log("this is response before json", response)

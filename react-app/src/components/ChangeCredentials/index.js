@@ -5,7 +5,7 @@ import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { editSingleUserThunk } from "../../store/user"
-import { editSingleUser } from "../../store/session"
+import { editSingleSessionUser } from "../../store/session"
 
 
 
@@ -56,7 +56,7 @@ const ChangeCredentialModal = ({user}) => {
         let res = await dispatch(editSingleUserThunk(newCredentials, user.id))
         console.log("THIS IS RES", res)
         if (res) {
-          // await dispatch(editSingleUser(res))
+          // await dispatch(editSingleSessionUser(res))
           await closeModal()
           window.location.reload()
         }

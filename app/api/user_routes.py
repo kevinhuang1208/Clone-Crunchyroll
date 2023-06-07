@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, make_response
+from flask import Blueprint, jsonify, request, make_response, redirect
 from flask_login import login_required, current_user
 from app.models import User
 from app.models.favorites import Favorites
@@ -64,6 +64,12 @@ def edit_credential(id):
     user = User.query.get(id)
 
     form = EditCredentialForm()
+    print("-------")
+    print(form.data)
+    print(form.data)
+    print("-------")
+    print("-------")
+    print("-------")
 
     form["csrf_token"].data = request.cookies["csrf_token"]
 
@@ -76,27 +82,16 @@ def edit_credential(id):
 
     # errors["queryInfo"] = [User.query.filter(User.username == form.data["username"])[0].to_dict(), User.query.filter(User.email == form.data["email"])[0].to_dict()]
     if form.validate_on_submit():
-        # print("---------------------------")
-        # print("---------------------------")
-        # print("---------------------------")
-        # print("---------------------------")
-        # print("---------------------------")
-        # print("---------------------------")
-        # print(User.query.filter(User.username == form.data["username"]))
-        # print("---------------------------")
-        # print("---------------------------")
-        # print("---------------------------")
-        # print("---------------------------")
-        # print("---------------------------")
+        print("INSIDE VALIDEATE ON SUBMIT", form.data)
         # or form.data["username"] == user.username
         if len(form.data["username"]) > 0:
-            if User.query.filter(User.username == form.data["username"]) == -1:
+            if User.query.filter(User.username == form.data["username"]).first() == -1:
                 user.username = form.data["username"]
             else:
                 errors["username"] = "Username is already taken!"
 
         if len(form.data["email"]) > 0:
-            if User.query.filter(User.email == form.data["email"]) == -1:
+            if User.query.filter(User.email == form.data["email"]).first() == -1:
                 user.email = form.data["email"]
             else:
                 errors["email"] = "Email is already in use!"
@@ -112,3 +107,12 @@ def edit_credential(id):
             customError = make_response(errors)
             customError.status_code = 400
             return customError
+
+
+
+@user_routes.route("/delete/<int:id>")
+def delete(id):
+    user_to_delete = User.query.get(id)
+    db.session.delete(user_to_delete)
+    db.session.commit()
+    return redirect("/anime")
