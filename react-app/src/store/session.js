@@ -3,6 +3,7 @@ const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
 const EDIT_USER = "session/EDIT_USER";
 const ADD_FAVORITE = "session/addUserFavorite"
+const REMOVE_FAVORITE = "session/removeUserFavorite"
 const setUser = (user) => ({
 	type: SET_USER,
 	payload: user,
@@ -15,6 +16,12 @@ export const removeUser = () => ({
 export const addUserFavorite = (favorite) => {
 	return {
 		type: ADD_FAVORITE,
+		favorite
+	}
+}
+export const removeUserFavorite = (favorite) => {
+	return {
+		type: REMOVE_FAVORITE,
 		favorite
 	}
 }
@@ -161,6 +168,11 @@ export default function reducer(state = initialState, action) {
 		case ADD_FAVORITE: {
 			let newState = { ...state }
 			newState.user.favorites[action.favorite] = action.favorite
+		}
+		case REMOVE_FAVORITE: {
+			let newState = {...state}
+			delete newState.user.favorites[action.favorite]
+			return newState
 		}
 		default:
 			return state;

@@ -14,10 +14,16 @@ user_routes = Blueprint('users', __name__)
 @login_required
 def deleteFavorite(anime_id):
     """Remove a favorite from a users favorite table"""
-    favorite_to_delete = Favorites.query.filter(Favorites.user_id == current_user.id, Favorites.anime_id == anime_id).one()
-    db.session.delete(favorite_to_delete)
-    db.session.commit()
-    return {"messsage": "favorite deleted"}
+    try:
+        favorite_to_delete = Favorites.query.filter(Favorites.user_id == current_user.id, Favorites.anime_id == anime_id).one()
+        print(favorite_to_delete)
+        db.session.delete(favorite_to_delete)
+        db.session.commit()
+        return {"messsage": "favorite deleted"}
+    except:
+        return {"message": "favorite not found"}
+
+        
 
 
 @user_routes.route('/favorites/new', methods=["POST"])

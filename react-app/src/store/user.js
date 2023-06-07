@@ -94,21 +94,21 @@ export const editSingleUserThunk = (user, userId) => async (dispatch) => {
 
 // code above is to be editted
 
-const deleteFavorite = (favoriteId) => {
+const deleteFavorite = (animeId) => {
     return {
         type: DELETE_USER_FAVORITE,
-        payload: favoriteId
+        animeId
     }
 }
 
-export const deleteUserFavoriteThunk = (favoriteId) => async (dispatch) => {
-    const response = await fetch(``, {
-        method: 'delete',
-        body: favoriteId
+export const deleteUserFavoriteThunk = (animeId) => async (dispatch) => {
+    const response = await fetch(`/api/users/favorites/${animeId}/delete`, {
+        method: 'DELETE',
     })
     const data = await response.json()
     if (response.ok) {
-
+        dispatch(deleteFavorite(animeId))
+        return data
     }
 
 
@@ -164,6 +164,12 @@ const userReducer = (state = initialState, action) => {
         case POST_USER_FAVORITE: {
             let newState = { ...state }
             newState.favorites[action.favorite] = action.favorite
+            return newState
+        }
+        case DELETE_USER_FAVORITE: {
+            let newState = {...state}
+            console.log('REDUCER FAV ID --->',action.animeId)
+            delete newState.favorites[action.animeId]
             return newState
         }
         //case below is to be editted

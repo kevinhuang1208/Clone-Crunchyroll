@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import { NavLink } from "react-router-dom";
 import EditReview from '../EditReview'
 import DeleteReview from "../DeleteReview";
 import { useSelector, useDispatch } from "react-redux";
@@ -18,7 +19,9 @@ const Review = ({review,user})=> {
     else 
     return (
         <div> 
-            <h2>{review.user.username}</h2>
+            <NavLink exact to={`/user/${review.user.id}`}>
+                  <h2>{review.user.username}</h2>
+            </NavLink>
             <h3>Rating: {review.rating}</h3>
             <p>{review.review}</p>
             {(!user) ? null :

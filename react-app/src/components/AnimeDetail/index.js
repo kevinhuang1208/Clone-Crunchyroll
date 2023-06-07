@@ -11,8 +11,8 @@ import OpenModalButton from "../OpenModalButton";
 import { useHistory } from "react-router-dom";
 import "./animeDetail.css"
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
-import { addUserFavorite, addUserFavoriteThunk } from "../../store/session";
-import { getSingleUserThunk, postUserFavoriteThunk } from "../../store/user";
+import { addUserFavorite, addUserFavoriteThunk, removeUserFavorite } from "../../store/session";
+import { deleteUserFavoriteThunk, getSingleUserThunk, postUserFavoriteThunk } from "../../store/user";
 
 function AnimeDetail() {
 
@@ -27,7 +27,13 @@ function AnimeDetail() {
 
 
   const user = useSelector((state) => state.session.user);
-  const userStore = useSelector((state) => state.user)
+  console.log('THIS IS THE USER ---->>>', user)
+  const userFavorites = user.favorites
+
+  // useEffect(() => {
+
+  // }, [Object.values(userFavorites).length])
+  // const userStore = useSelector((state) => state.user)
   // console.log("user~~~~~>", user);
 
   const episodesOfAnimeObj = useSelector((state) => state.episodes);
@@ -55,13 +61,14 @@ function AnimeDetail() {
   const handleClick = (e) => {
     e.preventDefault();
     dispatch(postUserFavoriteThunk(animeId))
-    dispatch(addUserFavoriteThunk(animeId))
+    dispatch(addUserFavoriteThunk(animeId))///this htunk is not adding anything to the db. It's only altering the store!
     dispatch(getSingleUserThunk(user.id))
     return alert("Added to Favorites!")
   };
-  const handleClickDeleteFavorite = (e) => {
+  const handleClickDeleteFavorite =  (e) => {
     e.preventDefault();
-    dispatch(postUserFavoriteThunk(animeId))
+    // dispatch(deleteUserFavoriteThunk(animeId))
+    // dispatch(removeUserFavorite(animeId))
     return alert("Removed from Favorites!")
   };
 
@@ -112,10 +119,11 @@ function AnimeDetail() {
         <div className='DescriptionAnimeDetail'>
           {singleAnime.desc}
         </div>
-
+        {(user && !userFavorites[animeId]) ?
         <div>
           <button onClick={(e) => handleClick(e)}>Add Anime to Favorites</button>
-        </div>
+        </div> : <div><button onClick={(e) => handleClickDeleteFavorite(e)}>Remove Anime from Favorite</button></div>
+        }
         {(user && user.id === singleAnime.authorId) && (
           <div className="anime-page-edit-button">
             <button onClick={() => history.push(`/anime/${animeId}/edit`)}>
