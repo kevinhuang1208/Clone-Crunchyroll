@@ -77,6 +77,15 @@ def get_one_anime(id):
     anime_dict = anime.to_dict()
     return {"anime": anime_dict}
 
+@anime_routes.route("/<int:anime_id>", methods=["DELETE"])
+def delete(anime_id):
+    """Route to delete the anime along with children"""
+    anime_to_delete = Anime.query.get(anime_id)
+    print('<<<<<<<THIS IS THE ANIME TO DELETE >>>>>>>', anime_to_delete)
+    db.session.delete(anime_to_delete)
+    db.session.commit()
+    # return {"message": "video deleted"}
+    return redirect("/anime")
 
 @anime_routes.route("/<int:id>/episodes")
 def get_all_episodes(id):
@@ -173,6 +182,8 @@ def edit_anime(id):
     else:
         return {'error': form.errors}
 
+
+
 @anime_routes.route("/<int:id>/reviews")
 def get_anime_reviews(id):
     """Route to get the reviews for a specific anime"""
@@ -232,9 +243,3 @@ def edit_review_route(anime_id, review_id):
 
 
 
-@anime_routes.route("/delete/<int:anime_id>")
-def delete(anime_id):
-    anime_to_delete = Anime.query.get(anime_id)
-    db.session.delete(anime_to_delete)
-    db.session.commit()
-    return redirect("/anime")

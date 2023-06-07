@@ -18,14 +18,19 @@ const Review = ({review,user})=> {
     return (
         <div> 
             <h2>{review.user.username}</h2>
+            <h3>Rating: {review.rating}</h3>
             <p>{review.review}</p>
             {(!user) ? null :
             (user.id == review.userId) ? 
-            (<OpenModalMenuItem
+            (<button>
+                <OpenModalMenuItem
               className = 'editReview'
               itemText = 'Edit Review!'
               modalComponent={<EditReview review = {review} user = {user} key = {review.id}/>}
-              />) : null}
+              />
+            </button>
+
+              ) : null}
         </div>
     )
 }

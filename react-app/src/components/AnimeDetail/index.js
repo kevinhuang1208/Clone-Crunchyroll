@@ -91,7 +91,7 @@ function AnimeDetail() {
         </div>
 
         <div className="AverageRatingAnimeDetail">
-          {singleAnime.avgRating}
+          Average Rating: {singleAnime.avgRating}
         </div>
 
         <div className="ReviewCountAnimeDetail">
@@ -116,10 +116,10 @@ function AnimeDetail() {
         <div className='listOfEpisodesDiv'>
           {episodesOfAnime.map((episode) => (
             <div className="singleEpisodeDiv" key={episode.id}>
-              <h2>{singleAnime.showname}</h2>
+              <h2>{singleAnime.showname} </h2>
 
               <div className='episodeWatchNow'>
-                <p>Episode {episode.episodeNumber}</p>
+                <h3>Episode: {episode.episodeNumber}, {episode.title}</h3>
 
                 <NavLink exact to={`/anime/${singleAnime.id}/episodes/${episode.id}`}>
                  <img src = {episode.episodeCoverImage}/>

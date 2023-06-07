@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom"
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import {editAnimeReviewThunk,getAnimeReviewsThunk} from '../../store/reviews'
+import { getAllAnimeThunk } from "../../store/anime";
+import './index.css'
 
 const EditReview = ({review,user}) =>{
 
@@ -27,12 +29,13 @@ const EditReview = ({review,user}) =>{
         console.log('-------------',review.animeId, review.id)
         const res = await dispatch(editAnimeReviewThunk(formData,review.animeId,review.id))
         await dispatch(getAnimeReviewsThunk(review.animeId))
+        await dispatch(getAllAnimeThunk())
         return closeModal()
     }
 
     return(
         <div> 
-        Edit! 
+        <h2>Edit your review!</h2>
         <form onSubmit={handleSubmit}>  
         <textarea
         value = {writeReview}

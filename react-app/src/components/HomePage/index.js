@@ -36,11 +36,15 @@ function HomePage() {
           // user && animeIds && animeIds.length && (<FavoritesBar animes={animes} user={user} animeIds={animeIds}/>)
           (user && animeIds && animeIds.length) ? <FavoritesBar animes={animes} user={user} animeIds={animeIds}/> : null
         }
+        <div className = 'allAnimeContainer'>
         {
+          
           animesArr.map(anime => (
             <AnimeTile anime={anime} />
           ))
+         
         }
+        </div>
       </div>
     )
 }

@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom"
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import {postAnimeReviewThunk,getAnimeReviewsThunk} from '../../store/reviews'
+import { getAllAnimeThunk } from "../../store/anime";
 
 const CreateReview = ({anime,user}) =>{
 
@@ -23,6 +24,7 @@ const CreateReview = ({anime,user}) =>{
         formData.append('rating',stars)
         const res = await dispatch(postAnimeReviewThunk(formData,anime.id))
         await dispatch(getAnimeReviewsThunk(anime.id))
+        await dispatch(getAllAnimeThunk())
         return closeModal();
     }
 
@@ -36,7 +38,7 @@ const CreateReview = ({anime,user}) =>{
             <label>
                 What are your thoughts?
                 <textarea 
-                    placeholder = 'Write a Review'
+                    placeholder = 'Write a Review (100 characters)'
                     type = 'text'
                     value = {writeReview}
                     rows={8}
