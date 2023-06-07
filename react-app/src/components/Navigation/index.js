@@ -12,7 +12,7 @@ function Navigation({ isLoaded }){
 		return null
 	}
 	return (
-		<ul>
+		<ul className='nav-ul'>
 			<li>
 				<NavLink className='navlink' exact to="/anime"><img src='https://cdn.discordapp.com/attachments/1113213089702228038/1115025363232378891/phillyroll-low-resolution-logo-color-on-transparent-background.png'/></NavLink>
 			</li>

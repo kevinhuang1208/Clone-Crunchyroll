@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import EditReview from '../EditReview'
+import DeleteReview from "../DeleteReview";
 import { useSelector, useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 
@@ -22,13 +23,23 @@ const Review = ({review,user})=> {
             <p>{review.review}</p>
             {(!user) ? null :
             (user.id == review.userId) ? 
-            (<button>
+
+            (<div> 
+              <button>
                 <OpenModalMenuItem
               className = 'editReview'
               itemText = 'Edit Review!'
               modalComponent={<EditReview review = {review} user = {user} key = {review.id}/>}
               />
             </button>
+            <button>
+            <OpenModalMenuItem
+            className = 'editReview'
+            itemText = 'Delete Review!'
+            modalComponent={<DeleteReview review = {review} user = {user} key = {review.id}/>}
+            />
+            </button>
+            </div>
 
               ) : null}
         </div>

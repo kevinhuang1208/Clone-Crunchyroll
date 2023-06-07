@@ -15,15 +15,21 @@ const removeUser = () => ({
 export const addUserFavorite = (favorite) => {
 	return {
 		type: ADD_FAVORITE,
-		payload: favorite
+		favorite
 	}
 }
 
 export const editSingleUser = (user) => {
-    return {
-        type: EDIT_USER,
-        payload: user
-    }
+	return {
+		type: EDIT_USER,
+		payload: user
+	}
+}
+
+export const addUserFavoriteThunk = (animeId) => async (dispatch) => {
+	console.log('anime id inside the session thunk!!!!',animeId)
+	dispatch(addUserFavorite(animeId))
+
 }
 
 const initialState = { user: null };
@@ -40,7 +46,7 @@ export const authenticate = () => async (dispatch) => {
 			return;
 		}
 		let normalFavorites = {}
-		data.favorites.forEach((favorite) =>{
+		data.favorites.forEach((favorite) => {
 			normalFavorites[favorite] = favorite
 		})
 		data.favorites = normalFavorites
@@ -63,7 +69,7 @@ export const login = (email, password) => async (dispatch) => {
 	if (response.ok) {
 		const data = await response.json();
 		let normalFavorites = {}
-		data.favorites.forEach((favorite) =>{
+		data.favorites.forEach((favorite) => {
 			normalFavorites[favorite] = favorite
 		})
 		data.favorites = normalFavorites
@@ -107,7 +113,7 @@ export const signUp = (username, email, password) => async (dispatch) => {
 	if (response.ok) {
 		const data = await response.json();
 		let normalFavorites = {}
-		data.favorites.forEach((favorite) =>{
+		data.favorites.forEach((favorite) => {
 			normalFavorites[favorite] = favorite
 		})
 		data.favorites = normalFavorites
@@ -129,14 +135,14 @@ export default function reducer(state = initialState, action) {
 			return { user: action.payload };
 		case REMOVE_USER:
 			return { user: null };
-		case EDIT_USER:{
+		case EDIT_USER: {
 			let newState = {}
-			newState = {...action.payload}
+			newState = { ...action.payload }
 			return newState
 		}
-		case ADD_FAVORITE:{
-			let newState = {...state}
-			newState.favorites[action.payload.animeId] = action.payload.id
+		case ADD_FAVORITE: {
+			let newState = { ...state }
+			newState.user.favorites[action.favorite] = action.favorite
 		}
 		default:
 			return state;
