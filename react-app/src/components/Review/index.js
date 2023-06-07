@@ -1,14 +1,15 @@
 import { useSelector, useDispatch } from "react-redux";
 
 
-const Review = ({review})=> {
+const Review = ({review,user})=> {
 
     console.log('what is a single review do ---------', review)
-
+    
     return (
         <div> 
             <h2>{review.user.username}</h2>
             <p>{review.review}</p>
+            
         </div>
     )
 }

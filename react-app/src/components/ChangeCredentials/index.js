@@ -34,16 +34,16 @@ const ChangeCredentialModal = ({user}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const newCredentials = {
-          username,
-          email,
-          password
+        const formData = new FormData()
+        formData.append("username", username)
+        formData.append("email", email)
+        formData.append("password", password)
 
-        }
-
-        await dispatch(editSingleUserThunk(user, user.id))
-        await dispatch(editSingleUser(user))
-          .then(closeModal)
+        let res = await dispatch(editSingleUserThunk(formData, user.id))
+        dispatch(editSingleUser(res))
+        if (res) {
+          history.push(`/anime/${res.id}`)
+      }
 
 
       }
@@ -73,10 +73,8 @@ const ChangeCredentialModal = ({user}) => {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="confirm new password"
             />
+            <button>Confirm Change</button>
           </form>
-          <div className="delete-two-buttons">
-            <button type="submit">Confirm Change</button>
-          </div>
         </>
       );
 }

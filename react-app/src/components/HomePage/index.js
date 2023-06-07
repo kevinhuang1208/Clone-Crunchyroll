@@ -14,6 +14,7 @@ function HomePage() {
   let animeIds = []
   if(user){
     animeIds = user.favorites
+    animeIds = Object.values(animeIds)
   }
   // console.log('anime --->',animes)
 
@@ -25,11 +26,15 @@ function HomePage() {
       dispatch(getSingleUserThunk(user.id))
     }
   }, [dispatch])
+  console.log(user)
+  console.log(animeIds)
+  console.log(animeIds.length)
   const animesArr = Object.values(animes)
     return (
       <div>
         {
-          user && animeIds && animeIds.length && (<FavoritesBar animes={animes} user={user} animeIds={animeIds}/>)
+          // user && animeIds && animeIds.length && (<FavoritesBar animes={animes} user={user} animeIds={animeIds}/>)
+          (user && animeIds && animeIds.length) ? <FavoritesBar animes={animes} user={user} animeIds={animeIds}/> : null
         }
         {
           animesArr.map(anime => (

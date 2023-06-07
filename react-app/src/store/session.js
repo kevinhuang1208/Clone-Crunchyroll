@@ -2,7 +2,7 @@
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
 const EDIT_USER = "session/EDIT_USER";
-
+const ADD_FAVORITE = "session/addUserFavorite"
 const setUser = (user) => ({
 	type: SET_USER,
 	payload: user,
@@ -11,6 +11,13 @@ const setUser = (user) => ({
 const removeUser = () => ({
 	type: REMOVE_USER,
 });
+
+export const addUserFavorite = (favorite) => {
+	return {
+		type: ADD_FAVORITE,
+		payload: favorite
+	}
+}
 
 export const editSingleUser = (user) => {
     return {
@@ -32,7 +39,11 @@ export const authenticate = () => async (dispatch) => {
 		if (data.errors) {
 			return;
 		}
-
+		let normalFavorites = {}
+		data.favorites.forEach((favorite) =>{
+			normalFavorites[favorite] = favorite
+		})
+		data.favorites = normalFavorites
 		dispatch(setUser(data));
 	}
 };
@@ -51,6 +62,11 @@ export const login = (email, password) => async (dispatch) => {
 
 	if (response.ok) {
 		const data = await response.json();
+		let normalFavorites = {}
+		data.favorites.forEach((favorite) =>{
+			normalFavorites[favorite] = favorite
+		})
+		data.favorites = normalFavorites
 		dispatch(setUser(data));
 		return null;
 	} else if (response.status < 500) {
@@ -90,6 +106,11 @@ export const signUp = (username, email, password) => async (dispatch) => {
 
 	if (response.ok) {
 		const data = await response.json();
+		let normalFavorites = {}
+		data.favorites.forEach((favorite) =>{
+			normalFavorites[favorite] = favorite
+		})
+		data.favorites = normalFavorites
 		dispatch(setUser(data));
 		return null;
 	} else if (response.status < 500) {
@@ -112,6 +133,10 @@ export default function reducer(state = initialState, action) {
 			let newState = {}
 			newState = {...action.payload}
 			return newState
+		}
+		case ADD_FAVORITE:{
+			let newState = {...state}
+			newState.favorites[action.payload.animeId] = action.payload.id
 		}
 		default:
 			return state;
