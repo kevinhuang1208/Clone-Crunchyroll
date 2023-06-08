@@ -24,7 +24,7 @@ function AnimeDetail() {
   const anime = Object.values(animeObj)
   console.log("anime", anime);
   // const [stateTest, setStateTest] = useState()
-  
+
   const user = useSelector((state) => state.session.user);
   console.log('THIS IS THE USER ---->>>', user)
   let userFavorites = 'user.favorites'
@@ -32,11 +32,11 @@ function AnimeDetail() {
     userFavorites = user.favorites
   }
   const [isFavorite, setIsFavorite] = useState(userFavorites[animeId] || '')
- 
+
   const episodesOfAnimeObj = useSelector((state) => state.episodes);
   const [episodesArr, setEpisodesArr] = useState([...Object.values(episodesOfAnimeObj)])
   const episodesOfAnime = Object.values(episodesOfAnimeObj)
-  
+
   const singleAnime = anime[animeId - 1]
   // console.log('this is the anime ~~~~~~~>', singleAnime)
   ///singleAnime.authorId == user.id
@@ -146,7 +146,7 @@ function AnimeDetail() {
             {/* <button>
               <OpenModalMenuItem
               itemText="Delete Anime"
-              modalComponent={<DeleteAnimeModal animeId={animeId}/>} 
+              modalComponent={<DeleteAnimeModal animeId={animeId}/>}
               />
             </button> */}
           </div>

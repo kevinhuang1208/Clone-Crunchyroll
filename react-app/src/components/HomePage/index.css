@@ -1,14 +1,22 @@
 .tileCoverPhotoHomePage{
-   max-width: 100px;
-   max-height: 200px;
 
+   max-width:250px
 }
 .allAnimeContainer{
+   border-top:5px #F47521 solid;
+   margin-top:0px;
+   padding-top:0px;
    display:flex;
    flex-wrap:wrap;
    justify-content: space-between;
+   border-bottom:5px #F47521 solid;
 }
 
 .animeTileHomePage{
-   width: 23%;
+   width: 300px;
+   flex-wrap:wrap
+}
+
+.animeShowName>h2{
+margin-top: 14px;
 }

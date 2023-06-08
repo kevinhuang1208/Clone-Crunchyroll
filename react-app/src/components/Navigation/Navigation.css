@@ -16,8 +16,8 @@ ul > li {
 .nav-ul{
   background-color: rgb(37, 37, 37);
   /* background-color: rgb(5, 0, 39); */
-  margin: -10px;
-  padding: 5px;
+  margin:0;
+  padding: 0px;
 }
 
 /* ul {

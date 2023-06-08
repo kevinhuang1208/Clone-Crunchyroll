@@ -1,7 +1,7 @@
 /* TODO Add site wide styles */
 /* :root {
     --gradient: linear-gradient(130deg, #000000, rgb(5, 0, 39), #3d0101);
-  
+
   }
 
 body{
@@ -25,13 +25,12 @@ body{
   } */
   :root {
     --gradient: linear-gradient(130deg, #060606, rgb(4, 0, 28), #200101);
-  
+
   }
 
   body{
     font-family: basic-sans, sans-serif;
     color:white;
-    background-image: var(--gradient)
+    background-image: var(--gradient);
+    margin:0;
   }
-
- 

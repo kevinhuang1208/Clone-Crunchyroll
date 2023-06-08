@@ -4,6 +4,19 @@
     height: 100px;
 }
 
-.episodeDescription{
-    background-image: linear-gradient(to var(--cr-start-direction),#fab818,#ef4323);
+.listOfEpisodesDiv{
+    margin-top: 15px;
+    border-top:3px #F47521 solid;
+    display:flex;
+    justify-content: space-evenly;
+    border-bottom:3px #F47521 solid;
+}
+
+
+.singleEpisodeDiv{
+width:400px
+}
+.reviewsMapDiv{
+display:flex;
+flex-direction: column;
 }

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { getAnimeEpisodesThunk } from "../../store/animeDetail";
 import { getAnimeReviewsThunk } from "../../store/reviews";
+import './index.css'
 
 function EpisodeComponent(){
 
@@ -30,16 +31,16 @@ function EpisodeComponent(){
 
       else
       return(
-        <div>
+        <div className = 'episodeComponentDiv'>
                 <h2>{currentEpisode.title}</h2>
 
-                <div>
+                <div className = 'videoplayerandDescription'>
                   <video width='700px' height = '400px' controls>
                       <source src = {currentEpisode.videoLink} type= 'video/mp4'>
                       </source>
                   </video>
 
-                  <p>
+                  <p className = 'descriptionDivEpisode'>
                   {currentEpisode.desc}
                   </p>
 

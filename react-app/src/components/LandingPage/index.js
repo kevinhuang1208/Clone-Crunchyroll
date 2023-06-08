@@ -28,27 +28,26 @@ function LandingPage() {
   return (
     <div className='landingPageContainer'>
       <img className="landingPageLogo" src="https://cdn.discordapp.com/attachments/1113213089702228038/1115025363232378891/phillyroll-low-resolution-logo-color-on-transparent-background.png"/>
+      <div className='imgs-with-form'>
+      <img id='boondock-left' src ='https://cdn.discordapp.com/attachments/1113213089702228038/1116401833615826964/595-5959626_huey-boondocks-huey-freeman-clothes-hd-png-download-removebg-preview.png'></img>
       <div className='wholeFormContainer'>
       <div className='landingPageSignUpContainer'>
         <SignupFormPage />
       </div>
 	  <div className='landingPageLoginContainer'>
+      Already Have An Account?
 		<OpenModalButton
       className='button'
-			buttonText="Already have an account? Log In."
+			buttonText="LOG IN"
 			modalComponent={<LoginFormModal/>}
 		/>
 	  </div>
-    <div>
-        <p>
-          Continue without logging in:
-        </p>
-        <p>
-          <button onClick={(e) => handleClick(e)}> Guest View</button>
-        </p>
-      </div>
-    <img src ='https://cdn.discordapp.com/attachments/1113213089702228038/1116401833615826964/595-5959626_huey-boondocks-huey-freeman-clothes-hd-png-download-removebg-preview.png'></img>
-    <img src = ''></img>
+    <div className='guest-button'>
+    Continue without logging in:
+    <button className='button' onClick={(e) => handleClick(e)}>GUEST VIEW</button>
+    </div>
+    </div>
+    <img id='boondock-right' src ='https://cdn.discordapp.com/attachments/1113213089702228038/1116426351604400299/sunglasses-drawing-riley-freeman-huey-freeman-cartoon-uncle-ruckus-comics-boondocks-simpsons-png-clipart-removebg-preview.png'></img>
     </div>
     </div>
 

@@ -73,7 +73,7 @@ function SignupFormPage() {
             required
           />
         </label>
-        <button type="submit" className="button">Create Account</button>
+        <button type="submit" className="button">CREATE ACCOUNT</button>
       </form>
     </>
   );
