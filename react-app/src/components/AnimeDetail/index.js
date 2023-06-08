@@ -13,7 +13,7 @@ import "./animeDetail.css"
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import { addUserFavorite, addUserSessionFavoriteThunk, removeUserFavorite } from "../../store/session";
 import { deleteUserFavoriteThunk, getSingleUserThunk, postUserFavoriteThunk } from "../../store/user";
-
+import { deleteEpisodeThunk } from "../../store/animeDetail";
 function AnimeDetail() {
 
   const dispatch = useDispatch();
@@ -74,10 +74,8 @@ function AnimeDetail() {
     // dispatch(getSingleUserThunk(user.id))
     // return alert("Added to Favorites!")
   };
-  const handleClickDeleteFavorite =  (e) => {
+  const handleClickDeleteEpisode =  (e) => {
     e.preventDefault();
-    dispatch(deleteUserFavoriteThunk(animeId))
-    dispatch(removeUserFavorite(animeId))
     // return alert("Removed from Favorites!")
   };
 

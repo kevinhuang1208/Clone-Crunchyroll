@@ -16,11 +16,6 @@ function LandingPage() {
   //   }
   const history = useHistory()
 
-  const handleClick = (e) => {
-    e.preventDefault()
-    history.push('/anime')
-
-  }
 
   return (
     <div className='landingPageContainer'>
@@ -34,16 +29,9 @@ function LandingPage() {
           modalComponent={<LoginFormModal />}
         />
       </div>
-      <div>
-        <p>
-          Continue without logging in:
-        </p>
-        <p>
-          <button onClick={(e) => handleClick(e)}> Guest View</button>
-        </p>
-      </div>
-      <img></img>
-      <img></img>
+      
+      <img src ='https://cdn.discordapp.com/attachments/1113213089702228038/1116401833615826964/595-5959626_huey-boondocks-huey-freeman-clothes-hd-png-download-removebg-preview.png'></img>
+      <img src = ''></img>
     </div>
 
 
