@@ -1,0 +1,54 @@
+.linkedinLogo,
+.githubLogo {
+    width: 15px;
+    margin: 5px;
+    padding-top: 9px;
+}
+
+.allColumns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footerColumn3 {
+    display: flex;
+    flex-direction: column;
+}
+
+.danishKevin,
+.taylorSteven {
+    display: flex;
+}
+
+.contributers {
+    margin: 0;
+}
+
+.footerNameBlock {
+    display: flex;
+}
+
+.allFooterContainer {
+    /* position: relative; */
+    background-color: rgb(37, 37, 37);
+    bottom: 0;
+    margin: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.5fr 1.5fr 1fr;
+   
+}
+.footerTechContainer {
+    display: flex;
+    flex-direction: column;
+}
+.tech-column-container {
+    display: flex;
+    gap:30px
+    
+    /* justify-content: space-around; */
+}
+.footer-image {
+    width: 60px;
+    text-align: center;
+}

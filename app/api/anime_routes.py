@@ -32,7 +32,7 @@ def get_all_anime():
 
     return {"anime": res}
 
-@anime_routes.route("/<int:episode_id>/delete", methods=['POST'])
+@anime_routes.route("/<int:episode_id>/delete", methods=['DELETE'])
 @login_required
 def delete_episode(episode_id):
     episode_to_delete = Episodes.query.get(episode_id)
