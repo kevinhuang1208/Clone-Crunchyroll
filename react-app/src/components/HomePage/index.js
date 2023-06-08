@@ -16,9 +16,6 @@ function HomePage() {
     animeIds = user.favorites
     animeIds = Object.values(animeIds)
   }
-  // console.log('anime --->',animes)
-
-  console.log('this one ------->',animeIds)
 
   useEffect(() => {
     dispatch(getAllAnimeThunk())

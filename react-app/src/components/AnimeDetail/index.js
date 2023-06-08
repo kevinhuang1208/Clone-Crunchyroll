@@ -14,6 +14,7 @@ import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import { addUserFavorite, addUserSessionFavoriteThunk, removeUserFavorite } from "../../store/session";
 import { deleteUserFavoriteThunk, getSingleUserThunk, postUserFavoriteThunk } from "../../store/user";
 import { deleteEpisodeThunk } from "../../store/animeDetail";
+import DeleteEpisodeModal from "../DeleteEpisode";
 function AnimeDetail() {
 
   const dispatch = useDispatch();
@@ -37,22 +38,10 @@ function AnimeDetail() {
   const [episodesArr, setEpisodesArr] = useState([...Object.values(episodesOfAnimeObj)])
   const episodesOfAnime = Object.values(episodesOfAnimeObj)
   
-  const singleAnime = anime[animeId - 1]
-  // console.log('this is the anime ~~~~~~~>', singleAnime)
-  ///singleAnime.authorId == user.id
-
-  // console.log("this is the id of the url", animeId)
-  // console.log('anime id ~~~~~~>',animeId)
+  const singleAnime = animeObj[animeId]
 
   const reviewsObj = useSelector((state) => state.reviews)
-  console.log('what is the reviewsObj---------', reviewsObj) // what is this?
-
   const reviewsArr = Object.values(reviewsObj)
-  // console.log('Reviews array is this -------',reviewsArr)
-
-
-  // console.log('USER ID ------>',user.id)
-  // console.log('anime author id ------>', singleAnime.authorId)
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -68,11 +57,6 @@ function AnimeDetail() {
       setIsFavorite(true)
       return alert("Added to Favorites!")
     }
-
-    // dispatch(postUserFavoriteThunk(animeId))
-    // dispatch(addUserSessionFavoriteThunk(animeId))///this htunk is not adding anything to the db. It's only altering the store!
-    // dispatch(getSingleUserThunk(user.id))
-    // return alert("Added to Favorites!")
   };
   const handleClickDeleteEpisode =  (e) => {
     e.preventDefault();
@@ -88,29 +72,17 @@ function AnimeDetail() {
     }
     return true
   }
-  // console.log(renderCreateReview(reviewsArr,user))-------------------
-  // testing the createReviewhelper
-
-  // ORIGINAL BUTTON LOGIC:
-  // !userFavorites[animeId])
-//   <div>
-//   <button onClick={(e) => handleClick(e)}>Add Anime to Favorites</button>
-//   </div> : <div><button onClick={(e) => handleClickDeleteFavorite(e)}>Remove Anime from Favorite</button></div>
-
 
   console.log('EPISODES OF ANIME ---------', episodesOfAnime)
 
-  // useEffect(()=> {
-
-  // }, [reviewsObj])
 
   useEffect(() => {
     dispatch(getAllAnimeThunk());
-    // console.log('<<<<<<inside first use effect>>>>>>')
     dispatch(getAnimeReviewsThunk(animeId));
     dispatch(getAnimeEpisodesThunk(animeId));
-    //there will? be a thunk to add the anime to the user's favorites
-  }, [dispatch]);
+    setEpisodesArr([...Object.values(episodesOfAnimeObj)])
+    
+  }, [dispatch, Object.values(episodesOfAnimeObj).length]);
 
   if (!singleAnime) return null
 
@@ -132,6 +104,7 @@ function AnimeDetail() {
 
         <div className='DescriptionAnimeDetail'>
           {singleAnime.desc}
+          
         </div>
         {user &&
         (<div>
@@ -139,17 +112,18 @@ function AnimeDetail() {
         </div>)
         }
         {(user && user.id === singleAnime.authorId) && (
+          <>
           <div className="anime-page-edit-button">
             <button onClick={() => history.push(`/anime/${animeId}/edit`)}>
               Edit your anime
             </button>
-            {/* <button>
-              <OpenModalMenuItem
-              itemText="Delete Anime"
-              modalComponent={<DeleteAnimeModal animeId={animeId}/>} 
-              />
-            </button> */}
           </div>
+          <div className="anime-page-episode-post-button">
+            <button onClick={() => history.push(`/anime/${animeId}/episodes/new`)}>
+              Add an Episode
+            </button>
+          </div>
+          </>
         )}
 
         <div className='listOfEpisodesDiv'>
@@ -163,15 +137,19 @@ function AnimeDetail() {
                 <NavLink exact to={`/anime/${singleAnime.id}/episodes/${episode.id}`}>
                   <img src={episode.episodeCoverImage} />
                 </NavLink>
-
+              {user && user.id == animeObj[animeId].authorId && (
+                <OpenModalMenuItem
+                className="delete-button"
+                itemText="Delete this episode"
+                modalComponent={<DeleteEpisodeModal episode={episode} key={`${episode.id}-episode`} />}
+              />
+              )
+              }
               </div>
-
               <p className = 'episodeDescription'>{episode.desc}</p>
             </div>
           ))}
         </div>
-
-
         {(!user) ? null : (singleAnime.authorId === user.id) ? (
           <button>
             <OpenModalMenuItem
@@ -181,6 +159,8 @@ function AnimeDetail() {
             />
           </button>
         )
+
+
 
           : (renderCreateReview(reviewsArr, user)) ? (
             <button className='CreateReviewModal'>

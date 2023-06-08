@@ -31,7 +31,15 @@ body{
   body{
     font-family: basic-sans, sans-serif;
     color:white;
-    background-image: var(--gradient)
+    background-image: var(--gradient);
   }
 
- 
+
+
+
+
+
+  :root{
+    height: 100%;
+  }
+
