@@ -27,25 +27,16 @@ function AnimeDetail() {
   
   const user = useSelector((state) => state.session.user);
   console.log('THIS IS THE USER ---->>>', user)
-  const userFavorites = user.favorites
-  const [isFavorite, setIsFavorite] = useState(userFavorites[animeId])
-  useEffect(() => {
-    console.log('test USE EFFECT!!!??!?!?!?!?')
-    dispatch(getSingleUserThunk(user.id))
-
-  }, [Object.values(userFavorites).length, dispatch])
-
-  // useEffect(() => {
-
-  // }, [Object.values(userFavorites).length])
-  // const userStore = useSelector((state) => state.user)
-  // console.log("user~~~~~>", user);
-
+  let userFavorites = 'user.favorites'
+  if (user) {
+    userFavorites = user.favorites
+  }
+  const [isFavorite, setIsFavorite] = useState(userFavorites[animeId] || '')
+ 
   const episodesOfAnimeObj = useSelector((state) => state.episodes);
+  const [episodesArr, setEpisodesArr] = useState([...Object.values(episodesOfAnimeObj)])
   const episodesOfAnime = Object.values(episodesOfAnimeObj)
-  // console.log('Episodes for this specific anime --------', episodesOfAnime)
-
-  // array starts at 0, but the first animeId is 1
+  
   const singleAnime = anime[animeId - 1]
   // console.log('this is the anime ~~~~~~~>', singleAnime)
   ///singleAnime.authorId == user.id
@@ -130,7 +121,7 @@ function AnimeDetail() {
       <div className="">
 
         <div className="TitleAnimeDetail">
-          <h2>{singleAnime.showname}</h2>
+          <h2 className = 'showNameHeader'>{singleAnime.showname}</h2>
         </div>
 
         <div className="AverageRatingAnimeDetail">
@@ -177,7 +168,7 @@ function AnimeDetail() {
 
               </div>
 
-              <p>{episode.desc}</p>
+              <p className = 'episodeDescription'>{episode.desc}</p>
             </div>
           ))}
         </div>

@@ -36,9 +36,12 @@ const EpisodeForm = () => {
     // // console.log('anime ---->>>>', animeId)
     // console.log('anime from state', anime)
     // // if anime.authorId == userId.id
-    if (userId.user === null || userId.id !== anime.authorId) {
+    // if(!userId) {
+    //     history.push('/anime')
+    // }
+    if (userId === null || userId.id !== anime.authorId) {
         // alert('You are not authorized to post an episode for this anime')
-        history.push('/')
+        history.push('/anime')
     }
 
 

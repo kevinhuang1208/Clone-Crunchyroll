@@ -43,6 +43,9 @@ const AnimeForm = ({ anime, formType }) => {
     }
     const userId = useSelector(state => state.session.user)
     // console.log(userId)
+    if(!userId) {
+        history.push('/anime')
+    }
     if (userId) {
         if (!userId.studio) {
 

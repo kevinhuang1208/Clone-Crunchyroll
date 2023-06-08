@@ -10,9 +10,8 @@ const deleteEpisode = (episodeId) => {
 }
 
 export const deleteEpisodeThunk = (episodeId) => async(dispatch) => {
-    const response = await fetch(`---`,{
-        method: 'delete',
-        body: episodeId
+    const response = await fetch(`/api/anime/${episodeId}/delete`,{
+        method: 'delete'
     })
     const data = await response.json()
     if(response.ok){
