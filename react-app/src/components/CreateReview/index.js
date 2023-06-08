@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import {postAnimeReviewThunk,getAnimeReviewsThunk} from '../../store/reviews'
 import { getAllAnimeThunk } from "../../store/anime";
+import './index.css'
 
 const CreateReview = ({anime,user}) =>{
 
@@ -17,7 +18,7 @@ const CreateReview = ({anime,user}) =>{
 
 
     const handleClick =  async(e) =>{
-        
+
         e.preventDefault();
         const formData = new FormData()
         formData.append('review',writeReview)
@@ -28,16 +29,16 @@ const CreateReview = ({anime,user}) =>{
         return closeModal();
     }
 
-    
+
 
     return(
     <div>
-        <h1>Create a Review!</h1>
+        <h1 className = 'createReviewHeader'>Create a Review!</h1>
 
         <form onSubmit={handleClick}>
             <label>
                 What are your thoughts?
-                <textarea 
+                <textarea
                     placeholder = 'Write a Review (100 characters)'
                     type = 'text'
                     value = {writeReview}
@@ -59,9 +60,9 @@ const CreateReview = ({anime,user}) =>{
                 </div>)
             })}
             </div>
-        
+
             <span>Stars</span>
-            
+
             <div className= 'submitButtonReviewDiv'>
                 <button className = "submitButtonReview " disabled={writeReview.length<100}>Submit your review</button>
             </div>

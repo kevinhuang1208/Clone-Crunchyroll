@@ -31,18 +31,18 @@ function HomePage() {
   console.log(animeIds.length)
   const animesArr = Object.values(animes)
     return (
-      <div>
+      <div className = 'homePageDiv'>
         {
           // user && animeIds && animeIds.length && (<FavoritesBar animes={animes} user={user} animeIds={animeIds}/>)
           (user && animeIds && animeIds.length) ? <FavoritesBar animes={animes} user={user} animeIds={animeIds}/> : null
         }
         <div className = 'allAnimeContainer'>
         {
-          
+
           animesArr.map(anime => (
             <AnimeTile anime={anime} />
           ))
-         
+
         }
         </div>
       </div>

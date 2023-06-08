@@ -16,7 +16,18 @@
 .singleEpisodeDiv{
 width:400px
 }
+
 .reviewsMapDiv{
 display:flex;
 flex-direction: column;
+
+}
+
+.reviewsMapDiv>div{
+width:65%;
+margin-left:10px;
+border:solid 5px grey
+}
+.reviewsMapDiv>div>p{
+    width:50%
 }

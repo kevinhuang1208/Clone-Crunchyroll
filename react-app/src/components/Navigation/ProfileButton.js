@@ -7,6 +7,7 @@ import SignupFormModal from "../SignupFormModal";
 import { useHistory } from "react-router-dom";
 import ProfilePage from "../ProfilePage"
 import { NavLink } from "react-router-dom";
+import './Navigation.css';
 
 
 function ProfileButton({ user }) {

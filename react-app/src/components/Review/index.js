@@ -5,6 +5,7 @@ import EditReview from '../EditReview'
 import DeleteReview from "../DeleteReview";
 import { useSelector, useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
+import './index.css'
 
 const Review = ({review,user})=> {
 
@@ -13,21 +14,21 @@ const Review = ({review,user})=> {
 
     console.log('what is a single review do ---------', review)
     // if user.id == review.userId render the button if not do null if no user, do null
-   
+
     if(!review.user) return null
-   
-    else 
+
+    else
     return (
-        <div> 
+        <div>
             <NavLink exact to={`/user/${review.user.id}`}>
                   <h2>{review.user.username}</h2>
             </NavLink>
             <h3>Rating: {review.rating}</h3>
             <p>{review.review}</p>
             {(!user) ? null :
-            (user.id == review.userId) ? 
+            (user.id == review.userId) ?
 
-            (<div> 
+            (<div>
               <button>
                 <OpenModalMenuItem
               className = 'editReview'
