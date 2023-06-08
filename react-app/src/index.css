@@ -24,7 +24,7 @@ body{
     100% {background-position: left}
   } */
   :root {
-    --gradient: linear-gradient(100deg, #000000, rgb(5, 0, 39), #360101);
+    --gradient: linear-gradient(130deg, #060606, rgb(4, 0, 28), #200101);
   
   }
 
@@ -33,3 +33,5 @@ body{
     color:white;
     background-image: var(--gradient)
   }
+
+ 

@@ -11,7 +11,7 @@ import OpenModalButton from "../OpenModalButton";
 import { useHistory } from "react-router-dom";
 import "./animeDetail.css"
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
-import { addUserFavorite, addUserFavoriteThunk, removeUserFavorite } from "../../store/session";
+import { addUserFavorite, addUserSessionFavoriteThunk, removeUserFavorite } from "../../store/session";
 import { deleteUserFavoriteThunk, getSingleUserThunk, postUserFavoriteThunk } from "../../store/user";
 
 function AnimeDetail() {
@@ -29,6 +29,11 @@ function AnimeDetail() {
   const user = useSelector((state) => state.session.user);
   console.log('THIS IS THE USER ---->>>', user)
   const userFavorites = user.favorites
+  useEffect(() => {
+    console.log('test USE EFFECT!!!??!?!?!?!?')
+    dispatch(getSingleUserThunk(user.id))
+
+  }, [Object.values(userFavorites).length, dispatch])
 
   // useEffect(() => {
 
@@ -61,14 +66,14 @@ function AnimeDetail() {
   const handleClick = (e) => {
     e.preventDefault();
     dispatch(postUserFavoriteThunk(animeId))
-    dispatch(addUserFavoriteThunk(animeId))///this htunk is not adding anything to the db. It's only altering the store!
+    dispatch(addUserSessionFavoriteThunk(animeId))///this htunk is not adding anything to the db. It's only altering the store!
     dispatch(getSingleUserThunk(user.id))
     return alert("Added to Favorites!")
   };
   const handleClickDeleteFavorite =  (e) => {
     e.preventDefault();
-    // dispatch(deleteUserFavoriteThunk(animeId))
-    // dispatch(removeUserFavorite(animeId))
+    dispatch(deleteUserFavoriteThunk(animeId))
+    dispatch(removeUserFavorite(animeId))
     return alert("Removed from Favorites!")
   };
 

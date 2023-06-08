@@ -25,8 +25,8 @@ const DeleteReview = ({review}) =>{
 
         <form on>
         <div className = 'yesNobuttonDiv'>
-          <button className = 'yesDeleteReview' onClick={yesDelete}> Yes(Delete Review)</button>
-          <button className = 'noDonotDelete'> No(Keep Review) </button>
+          <button className = 'yesDeleteReview' onClick={yesDelete}> Yes</button>
+          <button className = 'yesDeleteReview'> No</button>
         </div>
         </form>
     

@@ -34,6 +34,12 @@ function LoginFormModal() {
       .then(closeModal)
   };
 
+  const handleDemoSubmitStudio = async (e) => {
+    e.preventDefault();
+    return dispatch(sessionActions.login("marnie@aa.io", "password"))
+      .then(closeModal)
+  };
+
   return (
     <>
       <h1>Log In</h1>
@@ -66,6 +72,10 @@ function LoginFormModal() {
       <div className="demo-button">
       <button type="submit"
          onClick={handleDemoSubmit}>Demo User Login</button>
+      </div>
+      <div className="demo-button">
+      <button type="submit"
+         onClick={handleDemoSubmitStudio}>Demo Studio User Login</button>
       </div>
     </>
   );
