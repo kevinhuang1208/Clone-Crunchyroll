@@ -1,32 +1,62 @@
+// import { editSingleSessionUser } from "./session"
+// import { removeUser } from "./session"
+
 const GET_SINGLE_USER = "user/getSingleUser"
 const DELETE_USER_FAVORITE = "user/deleteFavorite"
 const POST_USER_FAVORITE = "user/postFavorite"
 const EDIT_SINGLE_USER = "user/editSingleUser"
+const DELETE_SINGLE_USER = "user/deleteSingleUser"
+
+//code below is to be editted
+const deleteSingleUser = () => {
+    return {
+        type: DELETE_SINGLE_USER,
+    }
+}
+
+export const deleteSingleUserThunk = (userId) => async (dispatch) => {
+    const response = await fetch(`/api/users/delete/${userId}`, {
+        method: 'DELETE'
+    })
+    if(response.ok) {
+        console.log("BGFEIWUBGFIWEBGIWEBIGBIWEG")
+        dispatch(deleteSingleUser())
+        // dispatch(removeUser())
+        return
+    }
+}
+
+// code above is to be editted
 
 const postUserFavorite = (favorite) => {
     return {
         type: POST_USER_FAVORITE,
-        payload: favorite
+        favorite
     }
 }
 
-export const postUserFavoriteThunk = (favorite) => async (dispatch)=>{
+export const postUserFavoriteThunk = (favorite) => async (dispatch) => {
     const response = await fetch(`/api/users/favorites/new`, {
-        method: "post",
-        body: favorite
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            animeId: favorite
+        }),
     })
     const data = await response.json()
-    if(response.ok){
-        console.log("------------////////////")
-        console.log("POST USERFAVORITE DATA: ", data)
-        console.log("///////////-------------")
-        dispatch(postUserFavorite(data))
+    if (response.ok) {
+        // console.log("------------////////////")
+        // console.log("POST USERFAVORITE DATA: ", data)
+        // console.log("///////////-------------")
+        dispatch(postUserFavorite(favorite))
         return data
     }
-    console.log("favorite POST response NOT ok")
-    console.log("response: ",response)
-    console.log("---------------")
-    console.log("data: ",data)
+    // console.log("favorite POST response NOT ok")
+    // console.log("response: ", response)
+    // console.log("---------------")
+    // console.log("data: ", data)
     return null
 
 }
@@ -40,35 +70,45 @@ const editSingleUser = (user) => {
 }
 
 export const editSingleUserThunk = (user, userId) => async (dispatch) => {
+    console.log("user: ", user)
+    console.log("userId: ", userId)
     const response = await fetch(`/api/users/${userId}/edit`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(user)
     })
+    console.log("this is response before json", response)
+    const data = await response.json();
+    console.log("this is data", data)
     if (response.ok) {
-        const data = await response.json();
         dispatch(editSingleUser(data));
+        // dispatch(editSingleSessionUser(data))
         return data;
       }
+    return data
+    // console.log("user PUT response NOT ok")
+    // console.log("response: ",response)
+    // console.log("---------------")
+    // console.log("data: ",data)
 }
 
 // code above is to be editted
 
-const deleteFavorite = (favoriteId) => {
+const deleteFavorite = (animeId) => {
     return {
         type: DELETE_USER_FAVORITE,
-        payload: favoriteId
+        animeId
     }
 }
 
-export const deleteUserFavoriteThunk = (favoriteId) => async (dispatch) => {
-    const response = await fetch(``,{
-        method: 'delete',
-        body: favoriteId
+export const deleteUserFavoriteThunk = (animeId) => async (dispatch) => {
+    const response = await fetch(`/api/users/favorites/${animeId}/delete`, {
+        method: 'DELETE',
     })
     const data = await response.json()
-    if(response.ok){
-
+    if (response.ok) {
+        dispatch(deleteFavorite(animeId))
+        return data
     }
 
 
@@ -122,13 +162,30 @@ const userReducer = (state = initialState, action) => {
             return newState
         }
         case POST_USER_FAVORITE: {
+            let newState = { ...state }
+            newState.favorites[action.favorite] = action.favorite
+            return newState
+        }
+        case DELETE_USER_FAVORITE: {
             let newState = {...state}
-            newState.favorites[action.payload.animeId] = action.payload.animeId
+            console.log('REDUCER FAV ID --->',action.animeId)
+            delete newState.favorites[action.animeId]
+            return newState
         }
         //case below is to be editted
-        case EDIT_SINGLE_USER:{
+        case EDIT_SINGLE_USER: {
             let newState = {}
-            newState = {...action.payload}
+            let favoritesObj = {}
+            newState = { ...action.payload.editedUser }
+            console.log("THIS IS NEW STATE BEFORE FOREACH", newState)
+            newState.favorites.forEach((favorite) => {
+                favoritesObj[favorite.animeId] = favorite.animeId
+            })
+            newState.favorites = favoritesObj
+            return newState
+        }
+        case DELETE_SINGLE_USER: {
+            let newState = {}
             return newState
         }
         default:

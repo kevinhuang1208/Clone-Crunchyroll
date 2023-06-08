@@ -16,9 +16,6 @@ function HomePage() {
     animeIds = user.favorites
     animeIds = Object.values(animeIds)
   }
-  // console.log('anime --->',animes)
-
-  console.log('this one ------->',animeIds)
 
   useEffect(() => {
     dispatch(getAllAnimeThunk())
@@ -31,16 +28,20 @@ function HomePage() {
   console.log(animeIds.length)
   const animesArr = Object.values(animes)
     return (
-      <div>
+      <div className = 'homePageDiv'>
         {
           // user && animeIds && animeIds.length && (<FavoritesBar animes={animes} user={user} animeIds={animeIds}/>)
           (user && animeIds && animeIds.length) ? <FavoritesBar animes={animes} user={user} animeIds={animeIds}/> : null
         }
+        <div className = 'allAnimeContainer'>
         {
+
           animesArr.map(anime => (
             <AnimeTile anime={anime} />
           ))
+
         }
+        </div>
       </div>
     )
 }

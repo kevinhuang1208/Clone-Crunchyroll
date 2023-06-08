@@ -29,11 +29,14 @@ function SignupFormPage() {
 
   return (
     <>
-      <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
+      <h1>Create Account</h1>
+        { errors.length ?
         <ul>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
+        : null
+        }
         <label>
           Email
           <input
@@ -70,7 +73,7 @@ function SignupFormPage() {
             required
           />
         </label>
-        <button type="submit">Sign Up</button>
+        <button type="submit" className="button">CREATE ACCOUNT</button>
       </form>
     </>
   );

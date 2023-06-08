@@ -1,0 +1,46 @@
+.landingPageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    /* background-color: rgb(36, 35, 35); */
+    /* border-radius: 10px; */
+    padding: 20px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 500px;
+    height: 500px;
+}
+
+/* form > h1 {
+    padding-bottom: -40px;
+} */
+
+
+form > button {
+    width: 170px;
+    height: 40px;
+    background-color: #f47521;
+    color: black;
+    border: none;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+input {
+    background-color: #141519;
+    border:#141519 solid 2px;
+    border-bottom: gray solid 2px;
+    height: 40px;
+    width: 300px;
+    color: white;
+}

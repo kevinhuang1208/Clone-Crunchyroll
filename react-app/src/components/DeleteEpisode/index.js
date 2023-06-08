@@ -5,26 +5,30 @@ import { useHistory } from "react-router-dom"
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 // import { deleteAnimeThunk } from "../../store/anime"; this will be the thunk/action to be imported
-import "./DeleteAnime.css"
-import { deleteAnimeThunk, getAllAnimeThunk } from "../../store/anime";
-
-
-const DeleteAnimeModal = ({ anime }) => {
+// import "./DeleteAnime.css"
+import { deleteAnimeThunk } from "../../store/anime";
+import { deleteEpisodeThunk } from "../../store/animeDetail"
+import { getAnimeEpisodesThunk } from "../../store/animeDetail";
+const DeleteEpisodeModal = ({ episode}) => {
   const dispatch = useDispatch()
   const { closeModal } = useModal();
   const history = useHistory()
   // const animeId = singleAnime.id
-  console.log(anime)
+  console.log("EP IN MODAL---->",episode)
+  const episodeId = episode.id
+  const animeId = episode.animeId
+  console.log(episodeId)
 
 
   const handleClick = async (e) => {
     e.preventDefault();
-    await dispatch(deleteAnimeThunk(anime.id))
-    await dispatch(getAllAnimeThunk())
+    console.log(episode)
+    await dispatch(deleteEpisodeThunk(episodeId))
+    await dispatch(getAnimeEpisodesThunk(animeId))
     closeModal()
     // dispatch(deleteAnimeThunk(anime.id))
     //   .then(closeModal)
-    history.push("/anime")
+    // history.push("/anime")
   };
 
   //   useEffect(() => {
@@ -34,13 +38,13 @@ const DeleteAnimeModal = ({ anime }) => {
   return (
     <>
       <h1>Confirm Delete</h1>
-      <div className="random-text">Are you sure you want to remove this Anime?</div>
+      <div className="random-text">Are you sure you want to remove this Episode?</div>
       <div className="delete-two-buttons">
-        <button onClick={(e) => handleClick(e)}>Yes (Delete Anime)</button>
-        <button onClick={(e) => closeModal()}>No (Keep Anime)</button>
+        <button onClick={(e) => handleClick(e)}>Yes (Delete Episode)</button>
+        <button onClick={(e) => closeModal()}>No (Keep Episode)</button>
       </div>
     </>
   );
 }
 
-export default DeleteAnimeModal;
+export default DeleteEpisodeModal;

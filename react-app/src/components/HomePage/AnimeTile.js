@@ -16,16 +16,15 @@ function AnimeTile({anime}){
 
       else
     return(
-        <div id = {anime.id} className = 'animeTileHomePage'>
+        <div key ={anime.id} id = {anime.id} className = 'animeTileHomePage' onClick = {handleClick}>
 
+            <div className = 'tileCoverPhotoHomePageDiv'>
+                <img className = 'tileCoverPhotoHomePage' src = {anime.coverPicture}/>
+            </div>
+            <div className="hover-div">
             <div className = 'animeShowName'>
                 <h2>{anime.showname}</h2>
             </div>
-
-            <div className = 'tileCoverPhotoHomePageDiv'>
-                <img onClick = {handleClick} className = 'tileCoverPhotoHomePage' src = {anime.coverPicture}/>
-            </div>
-
             <div className ='reviewTotalsTile'>
                 <p>Total Reviews: {anime.reviewCount}</p>
                 <p>Average Rating: {anime.avgRating}</p>
@@ -38,7 +37,11 @@ function AnimeTile({anime}){
             <div  className = 'animeDescription'>
                 <p>{anime.desc}</p>
             </div>
+            </div>
 
+            {/* <div className = 'animeShowName'>
+                <h2>{anime.showname}</h2>
+            </div> */}
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, NavLink } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getAnimeEpisodesThunk } from "../../store/animeDetail";
 import { getAnimeReviewsThunk } from "../../store/reviews";
 import DeleteAnimeModal from "../DeleteAnime";
@@ -11,49 +11,78 @@ import OpenModalButton from "../OpenModalButton";
 import { useHistory } from "react-router-dom";
 import "./animeDetail.css"
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
-
+import { addUserFavorite, addUserSessionFavoriteThunk, removeUserFavorite } from "../../store/session";
+import { deleteUserFavoriteThunk, getSingleUserThunk, postUserFavoriteThunk } from "../../store/user";
+import { deleteEpisodeThunk } from "../../store/animeDetail";
+import DeleteEpisodeModal from "../DeleteEpisode";
 function AnimeDetail() {
 
   const dispatch = useDispatch();
-  const {animeId} = useParams();
+  const { animeId } = useParams();
   const history = useHistory();
   // array of episodes and we have a link to each one infividually to a video player with the AWS url
   const animeObj = useSelector((state) => state.anime);
   const anime = Object.values(animeObj)
   console.log("anime", anime);
-
+  // const [stateTest, setStateTest] = useState()
 
   const user = useSelector((state) => state.session.user);
-  console.log("user", user);
+  console.log('THIS IS THE USER ---->>>', user)
+  let userFavorites = 'user.favorites'
+  if (user) {
+    userFavorites = user.favorites
+  }
+  const [isFavorite, setIsFavorite] = useState(userFavorites[animeId] || '')
 
   const episodesOfAnimeObj = useSelector((state) => state.episodes);
+  const [episodesArr, setEpisodesArr] = useState([...Object.values(episodesOfAnimeObj)])
   const episodesOfAnime = Object.values(episodesOfAnimeObj)
-  console.log('Episodes for this specific anime --------', episodesOfAnime)
-
-  // array starts at 0, but the first animeId is 1
-  const singleAnime = anime[animeId - 1]
-  console.log('this is the anime', singleAnime)
-
-  // console.log("this is the id of the url", animeId)
-  console.log(animeId)
+  
+  const singleAnime = animeObj[animeId]
 
   const reviewsObj = useSelector((state) => state.reviews)
-  console.log('what is the reviewsObj---------',reviewsObj) // what is this?
-  
   const reviewsArr = Object.values(reviewsObj)
-  console.log('Reviews array is this -------',reviewsArr)
- 
+
   const handleClick = (e) => {
     e.preventDefault();
-    return alert("Added to Favorites!")
+    if(isFavorite){
+      dispatch(deleteUserFavoriteThunk(animeId))
+      dispatch(removeUserFavorite(animeId))
+      setIsFavorite(false)
+      return alert("Removed from Favorites!")
+    }else{
+      dispatch(postUserFavoriteThunk(animeId))
+      dispatch(addUserSessionFavoriteThunk(animeId))///this htunk is not adding anything to the db. It's only altering the store!
+      dispatch(getSingleUserThunk(user.id))
+      setIsFavorite(true)
+      return alert("Added to Favorites!")
+    }
   };
+  const handleClickDeleteEpisode =  (e) => {
+    e.preventDefault();
+    // return alert("Removed from Favorites!")
+  };
+
+  // render the createReview button helper function -------------
+  const renderCreateReview = (reviewsArr, user) => {
+    for (let review of reviewsArr) {
+      // console.log('iterating the index? or the arr[0]',i)
+      if (review.userId === user.id)
+        return false
+    }
+    return true
+  }
+
+  console.log('EPISODES OF ANIME ---------', episodesOfAnime)
+
 
   useEffect(() => {
     dispatch(getAllAnimeThunk());
     dispatch(getAnimeReviewsThunk(animeId));
     dispatch(getAnimeEpisodesThunk(animeId));
-    //there will? be a thunk to add the anime to the user's favorites
-  }, [dispatch]);
+    setEpisodesArr([...Object.values(episodesOfAnimeObj)])
+    
+  }, [dispatch, Object.values(episodesOfAnimeObj).length]);
 
   if (!singleAnime) return null
 
@@ -62,11 +91,11 @@ function AnimeDetail() {
       <div className="">
 
         <div className="TitleAnimeDetail">
-          <h2>{singleAnime.showname}</h2>
+          <h2 className = 'showNameHeader'>{singleAnime.showname}</h2>
         </div>
 
         <div className="AverageRatingAnimeDetail">
-          {singleAnime.avgRating}
+          Average Rating: {singleAnime.avgRating}
         </div>
 
         <div className="ReviewCountAnimeDetail">
@@ -75,54 +104,81 @@ function AnimeDetail() {
 
         <div className='DescriptionAnimeDetail'>
           {singleAnime.desc}
+          
         </div>
-
-        <div>
-          <button onClick={handleClick}>Add Anime to Favorites</button>
-        </div>
+        {user &&
+        (<div>
+          <button onClick={(e) => handleClick(e)}>{isFavorite ? "Remove from Favorites!" : "Add to Favorites!"}</button>
+        </div>)
+        }
+        {(user && user.id === singleAnime.authorId) && (
+          <>
+          <div className="anime-page-edit-button">
+            <button onClick={() => history.push(`/anime/${animeId}/edit`)}>
+              Edit your anime
+            </button>
+          </div>
+          <div className="anime-page-episode-post-button">
+            <button onClick={() => history.push(`/anime/${animeId}/episodes/new`)}>
+              Add an Episode
+            </button>
+          </div>
+          </>
+        )}
 
         <div className='listOfEpisodesDiv'>
           {episodesOfAnime.map((episode) => (
             <div className="singleEpisodeDiv" key={episode.id}>
-              <h2>{singleAnime.showname}</h2>
+              <h2>{singleAnime.showname} </h2>
 
               <div className='episodeWatchNow'>
-                <p>Episode {episode.episodeNumber}</p>
-                <NavLink exact to={`/anime/${singleAnime.id}/episodes/${episode.id}`}>
-                  Watch Now!
-                </NavLink>
-              </div>
+                <h3>Episode: {episode.episodeNumber}, {episode.title}</h3>
 
-              <p>{episode.desc}</p>
+                <NavLink exact to={`/anime/${singleAnime.id}/episodes/${episode.id}`}>
+                  <img src={episode.episodeCoverImage} />
+                </NavLink>
+              {user && user.id == animeObj[animeId].authorId && (
+                <OpenModalMenuItem
+                className="delete-button"
+                itemText="Delete this episode"
+                modalComponent={<DeleteEpisodeModal episode={episode} key={`${episode.id}-episode`} />}
+              />
+              )
+              }
+              </div>
+              <p className = 'episodeDescription'>{episode.desc}</p>
             </div>
           ))}
         </div>
-
-        
         {(!user) ? null : (singleAnime.authorId === user.id) ? (
-          <OpenModalMenuItem
-            className="delete-button"
-            itemText="Delete this Anime"
-            modalComponent={<DeleteAnimeModal anime={singleAnime} key={singleAnime.id} />}
-          />
+          <button>
+            <OpenModalMenuItem
+              className="delete-button"
+              itemText="Delete this Anime"
+              modalComponent={<DeleteAnimeModal anime={singleAnime} key={singleAnime.id} />}
+            />
+          </button>
         )
 
-          : (
-            <div className='CreateReviewModal'>
+
+
+          : (renderCreateReview(reviewsArr, user)) ? (
+            <button className='CreateReviewModal'>
               <OpenModalMenuItem
                 className='createReview'
-                button='Create a Review!'
-                modalComponent={<CreateReview anime = {singleAnime} key={singleAnime.id} user = {user}/>} 
+                itemText='Create a Review!'
+                modalComponent={<CreateReview anime={singleAnime} key={singleAnime.id} user={user} />}
               />
-            </div>)
+            </button>) : null
         }
 
-        <div className = 'reviewsMapDiv'>
-          { reviewsArr.map((review) => (
-            <Review review = {review} user = {user} key = {review.id}/>
-        ))}
+        <h1>Reviews:</h1>
+        <div className='reviewsMapDiv'>
+          {reviewsArr.map((review) => (
+            <Review review={review} user={user} key={review.id} />
+          ))}
         </div>
-       
+
 
       </div>
     )

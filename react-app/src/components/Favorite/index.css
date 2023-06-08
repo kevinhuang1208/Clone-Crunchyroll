@@ -1,0 +1,19 @@
+.favoritesMapDiv{
+display:flex;
+justify-content: center;
+
+}
+
+.favoritesDiv{
+    border-top: 5px #F47521 solid;
+    margin-top:4px;
+    width:95%;
+    align-self: center;
+}
+.favoritesDiv>h1{
+margin-left:50px;
+}
+.animeTileHomePage{
+
+margin:8px;
+}

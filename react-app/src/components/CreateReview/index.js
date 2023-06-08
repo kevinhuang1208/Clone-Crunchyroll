@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom"
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import {postAnimeReviewThunk} from '../../store/reviews'
+import {postAnimeReviewThunk,getAnimeReviewsThunk} from '../../store/reviews'
+import { getAllAnimeThunk } from "../../store/anime";
+import './index.css'
 
-const CreateReview = ({anime,user,formType}) =>{
+const CreateReview = ({anime,user}) =>{
 
     const dispatch = useDispatch()
     const {closeModal} = useModal();
@@ -16,24 +18,28 @@ const CreateReview = ({anime,user,formType}) =>{
 
 
     const handleClick =  async(e) =>{
-        
+
         e.preventDefault();
         const formData = new FormData()
         formData.append('review',writeReview)
         formData.append('rating',stars)
         const res = await dispatch(postAnimeReviewThunk(formData,anime.id))
+        await dispatch(getAnimeReviewsThunk(anime.id))
+        await dispatch(getAllAnimeThunk())
         return closeModal();
     }
 
+
+
     return(
     <div>
-        <h1>Create a Review!</h1>
+        <h1 className = 'createReviewHeader'>Create a Review!</h1>
 
         <form onSubmit={handleClick}>
             <label>
                 What are your thoughts?
-                <textarea 
-                    placeholder = 'Write a Review'
+                <textarea
+                    placeholder = 'Write a Review (100 characters)'
                     type = 'text'
                     value = {writeReview}
                     rows={8}
@@ -54,9 +60,9 @@ const CreateReview = ({anime,user,formType}) =>{
                 </div>)
             })}
             </div>
-        
+
             <span>Stars</span>
-            
+
             <div className= 'submitButtonReviewDiv'>
                 <button className = "submitButtonReview " disabled={writeReview.length<100}>Submit your review</button>
             </div>

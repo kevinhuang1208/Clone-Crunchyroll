@@ -2,3 +2,63 @@
     display:flex;
     flex-direction: column;
 }
+
+.landingPageSignUpContainer {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.wholeFormContainer {
+    background-color: #141519;
+    border-radius: 10px;
+    width: 600px;
+    height: 700px;
+
+}
+
+.landingPageLoginContainer {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.landingPageLoginContainer > button {
+    width: 170px;
+    height: 40px;
+    background-color: #f47521;
+    color: black;
+    border: none;
+    margin-left: 20px;
+}
+
+.guest-button {
+    text-align: center;
+    padding: 25px 0px;
+}
+
+.guest-button > button {
+    height: 40px;
+    background-color: #f47521;
+    color: black;
+    border: none;
+    margin-left: 20px;
+}
+
+
+.imgs-with-form {
+    display: flex;
+    flex-direction: row;
+}
+
+.imgs-with-form > #boondock-right {
+    position: relative;
+    right: 80px;
+}
+
+
+.imgs-with-form > #boondock-left {
+    position: relative;
+    left: 150px;
+}

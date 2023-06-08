@@ -3,27 +3,40 @@ const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
 const EDIT_USER = "session/EDIT_USER";
 const ADD_FAVORITE = "session/addUserFavorite"
+const REMOVE_FAVORITE = "session/removeUserFavorite"
 const setUser = (user) => ({
 	type: SET_USER,
 	payload: user,
 });
 
-const removeUser = () => ({
+export const removeUser = () => ({
 	type: REMOVE_USER,
 });
 
-export const addUserFavorite = (favorite) => {
+export const addUserFavorite = (animeId) => {
 	return {
 		type: ADD_FAVORITE,
-		payload: favorite
+		animeId
+	}
+}
+export const removeUserFavorite = (favorite) => {
+	return {
+		type: REMOVE_FAVORITE,
+		favorite
 	}
 }
 
-export const editSingleUser = (user) => {
+export const editSingleSessionUser = (user) => {
     return {
         type: EDIT_USER,
         payload: user
     }
+}
+
+export const addUserSessionFavoriteThunk = (animeId) => async (dispatch) => {
+	console.log('*****anime id inside the session thunk!!!!****',animeId)
+	dispatch(addUserFavorite(animeId))
+
 }
 
 const initialState = { user: null };
@@ -39,11 +52,17 @@ export const authenticate = () => async (dispatch) => {
 		if (data.errors) {
 			return;
 		}
-		let normalFavorites = {}
-		data.favorites.forEach((favorite) =>{
-			normalFavorites[favorite] = favorite
-		})
-		data.favorites = normalFavorites
+		const normalFavorites = {}
+        const normalReviews = {}
+        data.favorites.forEach((favorite) => {
+            normalFavorites[favorite] = favorite
+        })
+        data.favorites = normalFavorites
+
+        data.reviews.forEach((review) => {
+            normalReviews[review.id] = review
+        })
+        data.reviews = normalReviews
 		dispatch(setUser(data));
 	}
 };
@@ -62,11 +81,17 @@ export const login = (email, password) => async (dispatch) => {
 
 	if (response.ok) {
 		const data = await response.json();
-		let normalFavorites = {}
-		data.favorites.forEach((favorite) =>{
-			normalFavorites[favorite] = favorite
-		})
-		data.favorites = normalFavorites
+		const normalFavorites = {}
+        const normalReviews = {}
+        data.favorites.forEach((favorite) => {
+            normalFavorites[favorite] = favorite
+        })
+        data.favorites = normalFavorites
+
+        data.reviews.forEach((review) => {
+            normalReviews[review.id] = review
+        })
+        data.reviews = normalReviews
 		dispatch(setUser(data));
 		return null;
 	} else if (response.status < 500) {
@@ -106,11 +131,17 @@ export const signUp = (username, email, password) => async (dispatch) => {
 
 	if (response.ok) {
 		const data = await response.json();
-		let normalFavorites = {}
-		data.favorites.forEach((favorite) =>{
-			normalFavorites[favorite] = favorite
-		})
-		data.favorites = normalFavorites
+		const normalFavorites = {}
+        const normalReviews = {}
+        data.favorites.forEach((favorite) => {
+            normalFavorites[favorite] = favorite
+        })
+        data.favorites = normalFavorites
+
+        data.reviews.forEach((review) => {
+            normalReviews[review.id] = review
+        })
+        data.reviews = normalReviews
 		dispatch(setUser(data));
 		return null;
 	} else if (response.status < 500) {
@@ -129,14 +160,19 @@ export default function reducer(state = initialState, action) {
 			return { user: action.payload };
 		case REMOVE_USER:
 			return { user: null };
-		case EDIT_USER:{
+		case EDIT_USER: {
 			let newState = {}
-			newState = {...action.payload}
+			newState = { ...action.payload }
 			return newState
 		}
-		case ADD_FAVORITE:{
+		case ADD_FAVORITE: {
+			let newState = { ...state }
+			newState.user.favorites[action.animeId] = action.animeId
+		}
+		case REMOVE_FAVORITE: {
 			let newState = {...state}
-			newState.favorites[action.payload.animeId] = action.payload.id
+			delete newState.user.favorites[action.favorite]
+			return newState
 		}
 		default:
 			return state;

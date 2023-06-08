@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 import { useEffect } from "react";
 import { getAnimeEpisodesThunk } from "../../store/animeDetail";
 import { getAnimeReviewsThunk } from "../../store/reviews";
@@ -9,6 +9,8 @@ import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import ChangeCredentialModal from "../ChangeCredentials";
 import { getSingleUserThunk } from "../../store/user"
 import FavoritesBar from '../Favorite';
+import DeleteUser from "../DeleteUser";
+import "./ProfilePage.css";
 
 function ProfilePage() {
     const dispatch = useDispatch();
@@ -25,15 +27,16 @@ function ProfilePage() {
     // console.log("this is userId params", userId)
 
     let animeIds = []
-    console.log("animeIds got changed",animeIds)
+    // console.log("animeIds got changed",animeIds)
     if(Object.values(paramUser).length){ ///
       animeIds = Object.values(paramUser.favorites) ///
-      console.log("animeIds got changed INSIDE IF",animeIds)
+      // console.log("animeIds got changed INSIDE IF",animeIds)
     }
-    console.log('anime ids for the profile page ---->',animeIds)
+    // console.log('anime ids for the profile page ---->',animeIds)
 
     useEffect(() => {
       dispatch(getSingleUserThunk(userId));
+      // console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
       dispatch(getAllAnimeThunk())
     }, [dispatch]);
 
@@ -43,18 +46,28 @@ function ProfilePage() {
 
 
     return (
-        <>
+        <div className="overall-info">
             { user.id == userId ?
-            <>
+            <div className="ternary-info">
             <h2>Hello, {user.username}</h2>
-            {user.studio ? <>Studio Member</> : null}
+            {user.studio ? <div className="studio-member">Studio Member
+            <NavLink exact to={"/anime/new"} className='nav-to-make-anime'>
+              ADD AN ANIME
+              </NavLink>
+            </div> : null}
             <h3></h3>
             <OpenModalMenuItem
               className="delete-button"
               itemText="Change My Credentials"
               modalComponent={<ChangeCredentialModal user={user} key={user.id}/>}
             />
-            </>
+            <OpenModalMenuItem
+              className="delete-button"
+              itemText="Delete My Account (PERMANENT)"
+              modalComponent={<DeleteUser user={user} key={user.id}/>}
+            />
+            </div>
+
             :
             <>
             <h2>This is {paramUser.username}'s Profile Page</h2>
@@ -64,7 +77,7 @@ function ProfilePage() {
             {
             (user && animeIds && animeIds.length) ? <FavoritesBar animes={animes} user={user} animeIds={animeIds}/> : null
             }
-        </>
+        </div>
     )
 }
 

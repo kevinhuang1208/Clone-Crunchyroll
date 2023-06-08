@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, make_response, redirect
 from flask_login import login_required, current_user
 from app.models import User
 from app.models.favorites import Favorites
@@ -7,7 +7,23 @@ from app.models.db import db
 from app.forms.post_favorite_form import FavoriteForm
 from datetime import date
 
+
 user_routes = Blueprint('users', __name__)
+
+@user_routes.route('/favorites/<int:anime_id>/delete', methods=["DELETE"])
+@login_required
+def deleteFavorite(anime_id):
+    """Remove a favorite from a users favorite table"""
+    try:
+        favorite_to_delete = Favorites.query.filter(Favorites.user_id == current_user.id, Favorites.anime_id == anime_id).one()
+        print(favorite_to_delete)
+        db.session.delete(favorite_to_delete)
+        db.session.commit()
+        return {"messsage": "favorite deleted"}
+    except:
+        return {"message": "favorite not found"}
+
+        
 
 
 @user_routes.route('/favorites/new', methods=["POST"])
@@ -20,7 +36,7 @@ def addFavorite():
     if form.validate_on_submit():
         anime_id = form.data['animeId']
         date_added = date.today()
-        
+
         new_favorite = Favorites(
             anime_id = anime_id,
             user_id = int(user_id),
@@ -34,7 +50,7 @@ def addFavorite():
 
 
 
-    
+
 
 
 @user_routes.route('/')
@@ -61,16 +77,52 @@ def user(id):
 def edit_credential(id):
     """Route to edit a user's credentials"""
     user = User.query.get(id)
-    form = EditCredentialForm() 
+
+    form = EditCredentialForm()
 
     form["csrf_token"].data = request.cookies["csrf_token"]
 
+    errors = {}
+
+
+    # errors["queryInfo"] = [User.query.filter(User.username == form.data["username"])[0].to_dict(), User.query.filter(User.email == form.data["email"])[0].to_dict()]
     if form.validate_on_submit():
-        user.username = form.data["username"]
-        user.email = form.data["email"]
-        user.password = form.data["password"]
-        db.session.commit()
-        edited_user = user.to_dict()
-        return {'editedUser': edited_user}
+        print("INSIDE VALIDEATE ON SUBMIT", form.data)
+        # or form.data["username"] == user.username
+        if len(form.data["username"]) > 0:
+            if User.query.filter(User.username == form.data["username"]).first() == -1:
+                user.username = form.data["username"]
+            else:
+                errors["username"] = "Username is already taken!"
+
+        if len(form.data["email"]) > 0:
+            if User.query.filter(User.email == form.data["email"]).first() == -1:
+                user.email = form.data["email"]
+            else:
+                errors["email"] = "Email is already in use!"
+
+        if len(form.data["password"]) > 0:
+            user.password = form.data["password"]
+
+        if len(errors.keys()) < 1:
+            db.session.commit()
+            edited_user = user.to_dict()
+            return {'editedUser': edited_user}
+        else:
+            customError = make_response(errors)
+            customError.status_code = 400
+            return customError
     else:
-        return {'error': form.errors}
+        print(form.errors)
+        return {"errors": form.errors}
+
+
+
+@user_routes.route("/delete/<int:id>", methods=["DELETE"])
+@login_required
+def delete(id):
+    user_to_delete = User.query.get(id)
+    print("THIS IS USER TO DELETE", user_to_delete)
+    db.session.delete(user_to_delete)
+    db.session.commit()
+    return "user deleted brah"

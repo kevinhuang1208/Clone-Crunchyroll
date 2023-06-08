@@ -22,18 +22,18 @@ class Anime(db.Model):
     )
 
     episodes = db.relationship(
-        "Episodes", back_populates = 'animeid'
+        "Episodes", cascade="all,delete-orphan", back_populates = 'animeid'
     )
     anime_genre = db.relationship(
-        "Genre", back_populates = 'anime_id_genre'
+        "Genre", cascade="all,delete-orphan", back_populates = 'anime_id_genre'
     )
 
     review_name = db.relationship(
-        "Reviews", back_populates = 'review_anime_id'
+        "Reviews", cascade="all,delete-orphan",back_populates = 'review_anime_id'
     )
 
     animefavorites = db.relationship(
-        'Favorites', back_populates = 'anime_id_favorites'
+        'Favorites', cascade="all,delete-orphan", back_populates = 'anime_id_favorites'
     )
 
 

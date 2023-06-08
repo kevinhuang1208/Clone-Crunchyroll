@@ -1,1 +1,44 @@
 /* TODO Add site wide styles */
+/* :root {
+    --gradient: linear-gradient(130deg, #000000, rgb(5, 0, 39), #3d0101);
+
+  }
+
+body{
+    font-family: basic-sans, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.125em;
+    line-height: 1.6;
+    color: #fafafa;
+    background: #ddd;
+    background-image: var(--gradient);
+    animation: bg-animation 25s infinite;
+  }
+
+  @keyframes bg-animation {
+    0% {background-position: left}
+    50% {background-position: right}
+    100% {background-position: left}
+  } */
+  :root {
+    --gradient: linear-gradient(130deg, #060606, rgb(4, 0, 28), #200101);
+
+  }
+
+  body{
+    font-family: basic-sans, sans-serif;
+    color:white;
+    background-image: var(--gradient);
+    margin:0;
+  }
+
+  /* html, body {
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+} */
