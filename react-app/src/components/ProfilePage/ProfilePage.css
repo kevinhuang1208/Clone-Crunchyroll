@@ -1,0 +1,14 @@
+.studio-member > .nav-to-make-anime {
+    border: white 2px solid;
+    background-color: #f47521;
+    color: black;
+    border: none;
+    text-decoration: none;
+    margin-left: 30px;
+    padding: 10px;
+
+}
+
+.overall-info {
+    padding: 30px;
+}

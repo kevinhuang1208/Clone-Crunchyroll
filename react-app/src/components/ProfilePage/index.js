@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 import { useEffect } from "react";
 import { getAnimeEpisodesThunk } from "../../store/animeDetail";
 import { getAnimeReviewsThunk } from "../../store/reviews";
@@ -10,6 +10,7 @@ import ChangeCredentialModal from "../ChangeCredentials";
 import { getSingleUserThunk } from "../../store/user"
 import FavoritesBar from '../Favorite';
 import DeleteUser from "../DeleteUser";
+import "./ProfilePage.css";
 
 function ProfilePage() {
     const dispatch = useDispatch();
@@ -45,11 +46,15 @@ function ProfilePage() {
 
 
     return (
-        <>
+        <div className="overall-info">
             { user.id == userId ?
-            <>
+            <div className="ternary-info">
             <h2>Hello, {user.username}</h2>
-            {user.studio ? <>Studio Member</> : null}
+            {user.studio ? <div className="studio-member">Studio Member
+            <NavLink exact to={"/anime/new"} className='nav-to-make-anime'>
+              ADD AN ANIME
+              </NavLink>
+            </div> : null}
             <h3></h3>
             <OpenModalMenuItem
               className="delete-button"
@@ -61,7 +66,7 @@ function ProfilePage() {
               itemText="Delete My Account (PERMANENT)"
               modalComponent={<DeleteUser user={user} key={user.id}/>}
             />
-            </>
+            </div>
 
             :
             <>
@@ -72,7 +77,7 @@ function ProfilePage() {
             {
             (user && animeIds && animeIds.length) ? <FavoritesBar animes={animes} user={user} animeIds={animeIds}/> : null
             }
-        </>
+        </div>
     )
 }
 

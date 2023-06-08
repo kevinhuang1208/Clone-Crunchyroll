@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 // import { deleteAnimeThunk } from "../../store/anime"; this will be the thunk/action to be imported
 import "./DeleteAnime.css"
-import { deleteAnimeThunk } from "../../store/anime";
+import { deleteAnimeThunk, getAllAnimeThunk } from "../../store/anime";
 
 
 const DeleteAnimeModal = ({ anime }) => {
@@ -19,7 +19,8 @@ const DeleteAnimeModal = ({ anime }) => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    dispatch(deleteAnimeThunk(anime.id))
+    await dispatch(deleteAnimeThunk(anime.id))
+    await dispatch(getAllAnimeThunk())
     closeModal()
     // dispatch(deleteAnimeThunk(anime.id))
     //   .then(closeModal)
