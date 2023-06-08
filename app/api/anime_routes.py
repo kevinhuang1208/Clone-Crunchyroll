@@ -32,6 +32,18 @@ def get_all_anime():
 
     return {"anime": res}
 
+@anime_routes.route("/<int:episode_id>/delete", methods=['POST'])
+@login_required
+def delete_episode(episode_id):
+    episode_to_delete = Episodes.query.get(episode_id)
+
+    if episode_to_delete is None:
+        return {'message': 'episode cannot be found'}
+    db.session.delete(episode_to_delete)
+    db.session.commit()
+
+    return {'message': 'episode deleted'}
+
 @anime_routes.route("/new", methods=['POST'])
 @login_required
 def post_anime():

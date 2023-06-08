@@ -3,3 +3,7 @@
 
     height: 100px;
 }
+
+.episodeDescription{
+    background-image: linear-gradient(to var(--cr-start-direction),#fab818,#ef4323);
+}

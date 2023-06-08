@@ -11,9 +11,9 @@ import OpenModalButton from "../OpenModalButton";
 import { useHistory } from "react-router-dom";
 import "./animeDetail.css"
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
-import { addUserFavorite, addUserFavoriteThunk, removeUserFavorite } from "../../store/session";
+import { addUserFavorite, addUserSessionFavoriteThunk, removeUserFavorite } from "../../store/session";
 import { deleteUserFavoriteThunk, getSingleUserThunk, postUserFavoriteThunk } from "../../store/user";
-
+import { deleteEpisodeThunk } from "../../store/animeDetail";
 function AnimeDetail() {
 
   const dispatch = useDispatch();
@@ -23,24 +23,20 @@ function AnimeDetail() {
   const animeObj = useSelector((state) => state.anime);
   const anime = Object.values(animeObj)
   console.log("anime", anime);
-  const [stateTest, setStateTest] = useState()
-
-
+  // const [stateTest, setStateTest] = useState()
+  
   const user = useSelector((state) => state.session.user);
   console.log('THIS IS THE USER ---->>>', user)
-  const userFavorites = user.favorites
-
-  // useEffect(() => {
-
-  // }, [Object.values(userFavorites).length])
-  // const userStore = useSelector((state) => state.user)
-  // console.log("user~~~~~>", user);
-
+  let userFavorites = 'user.favorites'
+  if (user) {
+    userFavorites = user.favorites
+  }
+  const [isFavorite, setIsFavorite] = useState(userFavorites[animeId] || '')
+ 
   const episodesOfAnimeObj = useSelector((state) => state.episodes);
+  const [episodesArr, setEpisodesArr] = useState([...Object.values(episodesOfAnimeObj)])
   const episodesOfAnime = Object.values(episodesOfAnimeObj)
-  // console.log('Episodes for this specific anime --------', episodesOfAnime)
-
-  // array starts at 0, but the first animeId is 1
+  
   const singleAnime = anime[animeId - 1]
   // console.log('this is the anime ~~~~~~~>', singleAnime)
   ///singleAnime.authorId == user.id
@@ -60,16 +56,27 @@ function AnimeDetail() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    dispatch(postUserFavoriteThunk(animeId))
-    dispatch(addUserFavoriteThunk(animeId))///this htunk is not adding anything to the db. It's only altering the store!
-    dispatch(getSingleUserThunk(user.id))
-    return alert("Added to Favorites!")
+    if(isFavorite){
+      dispatch(deleteUserFavoriteThunk(animeId))
+      dispatch(removeUserFavorite(animeId))
+      setIsFavorite(false)
+      return alert("Removed from Favorites!")
+    }else{
+      dispatch(postUserFavoriteThunk(animeId))
+      dispatch(addUserSessionFavoriteThunk(animeId))///this htunk is not adding anything to the db. It's only altering the store!
+      dispatch(getSingleUserThunk(user.id))
+      setIsFavorite(true)
+      return alert("Added to Favorites!")
+    }
+
+    // dispatch(postUserFavoriteThunk(animeId))
+    // dispatch(addUserSessionFavoriteThunk(animeId))///this htunk is not adding anything to the db. It's only altering the store!
+    // dispatch(getSingleUserThunk(user.id))
+    // return alert("Added to Favorites!")
   };
-  const handleClickDeleteFavorite =  (e) => {
+  const handleClickDeleteEpisode =  (e) => {
     e.preventDefault();
-    // dispatch(deleteUserFavoriteThunk(animeId))
-    // dispatch(removeUserFavorite(animeId))
-    return alert("Removed from Favorites!")
+    // return alert("Removed from Favorites!")
   };
 
   // render the createReview button helper function -------------
@@ -83,6 +90,13 @@ function AnimeDetail() {
   }
   // console.log(renderCreateReview(reviewsArr,user))-------------------
   // testing the createReviewhelper
+
+  // ORIGINAL BUTTON LOGIC:
+  // !userFavorites[animeId])
+//   <div>
+//   <button onClick={(e) => handleClick(e)}>Add Anime to Favorites</button>
+//   </div> : <div><button onClick={(e) => handleClickDeleteFavorite(e)}>Remove Anime from Favorite</button></div>
+
 
   console.log('EPISODES OF ANIME ---------', episodesOfAnime)
 
@@ -105,7 +119,7 @@ function AnimeDetail() {
       <div className="">
 
         <div className="TitleAnimeDetail">
-          <h2>{singleAnime.showname}</h2>
+          <h2 className = 'showNameHeader'>{singleAnime.showname}</h2>
         </div>
 
         <div className="AverageRatingAnimeDetail">
@@ -119,10 +133,10 @@ function AnimeDetail() {
         <div className='DescriptionAnimeDetail'>
           {singleAnime.desc}
         </div>
-        {(user && !userFavorites[animeId]) ?
-        <div>
-          <button onClick={(e) => handleClick(e)}>Add Anime to Favorites</button>
-        </div> : <div><button onClick={(e) => handleClickDeleteFavorite(e)}>Remove Anime from Favorite</button></div>
+        {user &&
+        (<div>
+          <button onClick={(e) => handleClick(e)}>{isFavorite ? "Remove from Favorites!" : "Add to Favorites!"}</button>
+        </div>)
         }
         {(user && user.id === singleAnime.authorId) && (
           <div className="anime-page-edit-button">
@@ -152,7 +166,7 @@ function AnimeDetail() {
 
               </div>
 
-              <p>{episode.desc}</p>
+              <p className = 'episodeDescription'>{episode.desc}</p>
             </div>
           ))}
         </div>

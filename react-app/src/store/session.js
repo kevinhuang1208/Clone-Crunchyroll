@@ -13,10 +13,10 @@ export const removeUser = () => ({
 	type: REMOVE_USER,
 });
 
-export const addUserFavorite = (favorite) => {
+export const addUserFavorite = (animeId) => {
 	return {
 		type: ADD_FAVORITE,
-		favorite
+		animeId
 	}
 }
 export const removeUserFavorite = (favorite) => {
@@ -33,8 +33,8 @@ export const editSingleSessionUser = (user) => {
     }
 }
 
-export const addUserFavoriteThunk = (animeId) => async (dispatch) => {
-	console.log('anime id inside the session thunk!!!!',animeId)
+export const addUserSessionFavoriteThunk = (animeId) => async (dispatch) => {
+	console.log('*****anime id inside the session thunk!!!!****',animeId)
 	dispatch(addUserFavorite(animeId))
 
 }
@@ -167,7 +167,7 @@ export default function reducer(state = initialState, action) {
 		}
 		case ADD_FAVORITE: {
 			let newState = { ...state }
-			newState.user.favorites[action.favorite] = action.favorite
+			newState.user.favorites[action.animeId] = action.animeId
 		}
 		case REMOVE_FAVORITE: {
 			let newState = {...state}

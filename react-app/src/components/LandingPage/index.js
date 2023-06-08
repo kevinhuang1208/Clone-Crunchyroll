@@ -8,10 +8,14 @@ import './Landingpage.css';
 import { useHistory } from 'react-router-dom';
 
 
+
 function LandingPage() {
   // const sessionUser = useSelector(state => state.session.user);
 
-//   openLoginModal = () =>{
+  //   openLoginModal = () =>{
+
+  //   }
+  const history = useHistory()
 
 //   }
   const history = useHistory()
@@ -44,8 +48,10 @@ function LandingPage() {
           <button onClick={(e) => handleClick(e)}> Guest View</button>
         </p>
       </div>
+    <img src ='https://cdn.discordapp.com/attachments/1113213089702228038/1116401833615826964/595-5959626_huey-boondocks-huey-freeman-clothes-hd-png-download-removebg-preview.png'></img>
+    <img src = ''></img>
     </div>
-    </div>
+   
 
 
   );
