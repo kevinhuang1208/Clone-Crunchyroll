@@ -9,12 +9,13 @@ import CreateReview from '../CreateReview'
 import { getAllAnimeThunk } from "../../store/anime";
 import OpenModalButton from "../OpenModalButton";
 import { useHistory } from "react-router-dom";
-import "./animeDetail.css"
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import { addUserFavorite, addUserSessionFavoriteThunk, removeUserFavorite } from "../../store/session";
 import { deleteUserFavoriteThunk, getSingleUserThunk, postUserFavoriteThunk } from "../../store/user";
 import { deleteEpisodeThunk } from "../../store/animeDetail";
 import DeleteEpisodeModal from "../DeleteEpisode";
+import "./animeDetail.css";
+
 function AnimeDetail() {
 
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ function AnimeDetail() {
   const episodesOfAnimeObj = useSelector((state) => state.episodes);
   const [episodesArr, setEpisodesArr] = useState([...Object.values(episodesOfAnimeObj)])
   const episodesOfAnime = Object.values(episodesOfAnimeObj)
-  
+
   const singleAnime = animeObj[animeId]
 
   const reviewsObj = useSelector((state) => state.reviews)
@@ -45,12 +46,12 @@ function AnimeDetail() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    if(isFavorite){
+    if (isFavorite) {
       dispatch(deleteUserFavoriteThunk(animeId))
       dispatch(removeUserFavorite(animeId))
       setIsFavorite(false)
       return alert("Removed from Favorites!")
-    }else{
+    } else {
       dispatch(postUserFavoriteThunk(animeId))
       dispatch(addUserSessionFavoriteThunk(animeId))///this htunk is not adding anything to the db. It's only altering the store!
       dispatch(getSingleUserThunk(user.id))
@@ -58,7 +59,7 @@ function AnimeDetail() {
       return alert("Added to Favorites!")
     }
   };
-  const handleClickDeleteEpisode =  (e) => {
+  const handleClickDeleteEpisode = (e) => {
     e.preventDefault();
     // return alert("Removed from Favorites!")
   };
@@ -81,38 +82,35 @@ function AnimeDetail() {
     dispatch(getAnimeReviewsThunk(animeId));
     dispatch(getAnimeEpisodesThunk(animeId));
     setEpisodesArr([...Object.values(episodesOfAnimeObj)])
-    
+
   }, [dispatch, Object.values(episodesOfAnimeObj).length]);
 
   if (!singleAnime) return null
 
-  else
-    return (
-      <div className="wholeContainer">
-
-        <div className="TitleAnimeDetail">
-          <h2 className = 'showNameHeader'>{singleAnime.showname}</h2>
-        </div>
-
-        <div className="AverageRatingAnimeDetail">
-          Average Rating: {singleAnime.avgRating}
-        </div>
-
-        <div className="ReviewCountAnimeDetail">
-          {singleAnime.reviewCount} Reviews
-        </div>
-
-        <div className='DescriptionAnimeDetail'>
-          {singleAnime.desc}
-          
-        </div>
-        {user &&
-        (<div>
-          <button onClick={(e) => handleClick(e)}>{isFavorite ? "Remove from Favorites!" : "Add to Favorites!"}</button>
+  return (
+    <div className="wholeContainer">
+      <div className="desc-and-photo-split">
+        <div className="desc-container">
+            <div className="TitleAnimeDetail">
+              <h2 className='showNameHeader'>{singleAnime.showname}</h2>
+            </div>
+            <div className="review-div">
+              <div className="AverageRatingAnimeDetail">
+              Average Rating: {singleAnime.avgRating}
+              </div>
+              <> | </>
+              <div className="ReviewCountAnimeDetail">
+                 {singleAnime.reviewCount} Review(s)
+              </div>
+            </div>
+      <div className="the-buttons-in-desc">
+      {user &&
+        (<div className="remove-favorite-tern">
+          <button className="remove-fav" onClick={(e) => handleClick(e)}>{isFavorite ? "Remove from Favorites!" : "Add to Favorites!"}</button>
         </div>)
-        }
-        {(user && user.id === singleAnime.authorId) && (
-          <>
+      }
+      {(user && user.id === singleAnime.authorId) && (
+        <>
           <div className="anime-page-edit-button">
             <button onClick={() => history.push(`/anime/${animeId}/edit`)}>
               Edit your anime
@@ -123,65 +121,75 @@ function AnimeDetail() {
               Add an Episode
             </button>
           </div>
-          </>
-        )}
+        </>
+      )}
+      </div>
+          <div className='DescriptionAnimeDetail'>
+            {singleAnime.desc}
+          </div>
+          </div>
+        <div className="desc-photo">
+          <img src="https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png"/>
+        </div>
+      </div>
 
-        <div className='listOfEpisodesDiv'>
-          {episodesOfAnime.map((episode) => (
-            <div className="singleEpisodeDiv" key={episode.id}>
-              <h2>{singleAnime.showname} </h2>
 
-              <div className='episodeWatchNow'>
-                <h3>Episode: {episode.episodeNumber}, {episode.title}</h3>
+      <div className='listOfEpisodesDiv'>
+        {episodesOfAnime.map((episode) => (
+          <div className="singleEpisodeDiv" key={episode.id}>
+            <h2>{singleAnime.showname} </h2>
 
-                <NavLink exact to={`/anime/${singleAnime.id}/episodes/${episode.id}`}>
-                  <img src={episode.episodeCoverImage} />
-                </NavLink>
+            <div className='episodeWatchNow'>
+              <h3>Episode: {episode.episodeNumber}, {episode.title}</h3>
+
+              <NavLink exact to={`/anime/${singleAnime.id}/episodes/${episode.id}`}>
+                <img src={episode.episodeCoverImage} />
+              </NavLink>
               {user && user.id == animeObj[animeId].authorId && (
                 <OpenModalMenuItem
-                className="delete-button"
-                itemText="Delete this episode"
-                modalComponent={<DeleteEpisodeModal episode={episode} key={`${episode.id}-episode`} />}
-              />
+                  className="delete-button"
+                  itemText="Delete this episode"
+                  modalComponent={<DeleteEpisodeModal episode={episode} key={`${episode.id}-episode`} />}
+                />
               )
               }
-              </div>
-              <p className = 'episodeDescription'>{episode.desc}</p>
             </div>
-          ))}
-        </div>
-        {(!user) ? null : (singleAnime.authorId === user.id) ? (
-          <button>
-            <OpenModalMenuItem
-              className="delete-button"
-              itemText="Delete this Anime"
-              modalComponent={<DeleteAnimeModal anime={singleAnime} key={singleAnime.id} />}
-            />
-          </button>
-        )
-
-
-
-          : (renderCreateReview(reviewsArr, user)) ? (
-            <button className='CreateReviewModal'>
-              <OpenModalMenuItem
-                className='createReview'
-                itemText='Create a Review!'
-                modalComponent={<CreateReview anime={singleAnime} key={singleAnime.id} user={user} />}
-              />
-            </button>) : null
-        }
-
-        <h1>Reviews:</h1>
-        <div className='reviewsMapDiv'>
-          {reviewsArr.map((review) => (
-            <Review review={review} user={user} key={review.id} />
-          ))}
-        </div>
-
-
+            <p className='episodeDescription'>{episode.desc}</p>
+          </div>
+        ))}
       </div>
-    )
+      {(!user) ? null : (singleAnime.authorId === user.id) ? (
+        <button>
+          <OpenModalMenuItem
+            className="delete-button"
+            itemText="Delete this Anime"
+            modalComponent={<DeleteAnimeModal anime={singleAnime} key={singleAnime.id} />}
+          />
+        </button>
+      )
+
+
+
+        : (renderCreateReview(reviewsArr, user)) ? (
+          <button className='CreateReviewModal'>
+            <OpenModalMenuItem
+              className='createReview'
+              itemText='Create a Review!'
+              modalComponent={<CreateReview anime={singleAnime} key={singleAnime.id} user={user} />}
+            />
+          </button>) : null
+      }
+
+      <h1>Reviews:</h1>
+      <div className='reviewsMapDiv'>
+        {reviewsArr.map((review) => (
+          <Review review={review} user={user} key={review.id} />
+        ))}
+      </div>
+
+
+    </div>
+  )
 
 
 }

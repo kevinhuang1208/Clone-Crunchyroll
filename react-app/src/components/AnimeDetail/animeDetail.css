@@ -1,37 +1,81 @@
-.coverphotoTile{
+.coverphotoTile {
     width: 100px;
 
     height: 100px;
 }
 
-.listOfEpisodesDiv{
+.listOfEpisodesDiv {
     margin-top: 15px;
- 
+    border-top: 3px #F47521 solid;
+    display: flex;
+    justify-content: space-evenly;
+    border-bottom: 3px #F47521 solid;
+}
 
 .wholeContainer {
-    padding: 50px;
-}   border-top:3px #F47521 solid;
-    display:flex;
-    justify-content: space-evenly;
-    border-bottom:3px #F47521 solid;
+    padding: 20px;
+    margin: 0px 100px;
 }
 
-
-.singleEpisodeDiv{
-width:400px
+.singleEpisodeDiv {
+    width: 400px
 }
 
-.reviewsMapDiv{
-display:flex;
-flex-direction: column;
+.reviewsMapDiv {
+    display: flex;
+    flex-direction: column;
 
 }
 
-.reviewsMapDiv>div{
-width:65%;
-margin-left:10px;
-border:solid 5px grey
+.reviewsMapDiv>div {
+    width: 65%;
+    margin-left: 10px;
+    border: solid 5px grey
 }
-.reviewsMapDiv>div>p{
-    width:50%
+
+.reviewsMapDiv>div>p {
+    width: 50%
+}
+
+.remove-favorite-tern>button,
+.anime-page-edit-button>button,
+.anime-page-episode-post-button>button {
+    background-color: #f47521;
+    height: 50px;
+    color: black;
+    font-size: 20px;
+    border: none;
+    margin: 10px;
+}
+
+
+.review-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 250px;
+}
+
+.desc-and-photo-split {
+    display: flex;
+    flex-direction: row;
+}
+
+.desc-photo>img {
+    width: 330px;
+    height: 330px;
+    border: 2px solid white;
+}
+
+.desc-container>div {
+    margin-bottom: 30px;
+}
+
+.the-buttons-in-desc {
+    display: flex;
+    flex-direction: row;
+}
+
+.remove-favorite-tern {
+    margin-left: -10px;
 }

@@ -27,7 +27,8 @@ const AnimeForm = ({ anime, formType }) => {
     const [description, setDescription] = useState(anime?.desc || '')
     const [releaseDate, setReleaseDate] = useState(editDate || '')
     const [coverPicture, setCoverPicture] = useState(undefined)
-    const [errors, setErrors] = useState({})
+    const [errors, setErrors] = useState([])
+    //Do we need to do the fe validations in an array??!?!?!?!?
 
     // if (formType === 'edit') {
     //     setShowname(anime.showname)
