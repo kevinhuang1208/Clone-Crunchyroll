@@ -14,6 +14,11 @@ const DeleteReview = ({review}) =>{
         await dispatch(deleteAnimeReviewThunk(review.id))
         closeModal()
     }
+
+    const noDelete = async(e) => {
+        e.preventDefault()
+        closeModal()
+    }
     // delete review thunk u feel me
     // const deletedReview = await dispatch(deleteReview)
 
@@ -26,7 +31,7 @@ const DeleteReview = ({review}) =>{
         <form on>
         <div className = 'yesNobuttonDiv'>
           <button className = 'yesDeleteReview' onClick={yesDelete}> Yes</button>
-          <button className = 'yesDeleteReview'> No</button>
+          <button className = 'yesDeleteReview' onClick = {noDelete}> No</button>
         </div>
         </form>
     

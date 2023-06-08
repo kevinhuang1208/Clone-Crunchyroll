@@ -23,12 +23,12 @@ function AnimeDetail() {
   const animeObj = useSelector((state) => state.anime);
   const anime = Object.values(animeObj)
   console.log("anime", anime);
-  const [stateTest, setStateTest] = useState()
-
-
+  // const [stateTest, setStateTest] = useState()
+  
   const user = useSelector((state) => state.session.user);
   console.log('THIS IS THE USER ---->>>', user)
   const userFavorites = user.favorites
+  const [isFavorite, setIsFavorite] = useState(userFavorites[animeId])
   useEffect(() => {
     console.log('test USE EFFECT!!!??!?!?!?!?')
     dispatch(getSingleUserThunk(user.id))
@@ -65,16 +65,29 @@ function AnimeDetail() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    dispatch(postUserFavoriteThunk(animeId))
-    dispatch(addUserSessionFavoriteThunk(animeId))///this htunk is not adding anything to the db. It's only altering the store!
-    dispatch(getSingleUserThunk(user.id))
-    return alert("Added to Favorites!")
+    if(isFavorite){
+      dispatch(deleteUserFavoriteThunk(animeId))
+      dispatch(removeUserFavorite(animeId))
+      setIsFavorite(false)
+      return alert("Removed from Favorites!")
+    }else{
+      dispatch(postUserFavoriteThunk(animeId))
+      dispatch(addUserSessionFavoriteThunk(animeId))///this htunk is not adding anything to the db. It's only altering the store!
+      dispatch(getSingleUserThunk(user.id))
+      setIsFavorite(true)
+      return alert("Added to Favorites!")
+    }
+
+    // dispatch(postUserFavoriteThunk(animeId))
+    // dispatch(addUserSessionFavoriteThunk(animeId))///this htunk is not adding anything to the db. It's only altering the store!
+    // dispatch(getSingleUserThunk(user.id))
+    // return alert("Added to Favorites!")
   };
   const handleClickDeleteFavorite =  (e) => {
     e.preventDefault();
     dispatch(deleteUserFavoriteThunk(animeId))
     dispatch(removeUserFavorite(animeId))
-    return alert("Removed from Favorites!")
+    // return alert("Removed from Favorites!")
   };
 
   // render the createReview button helper function -------------
@@ -88,6 +101,13 @@ function AnimeDetail() {
   }
   // console.log(renderCreateReview(reviewsArr,user))-------------------
   // testing the createReviewhelper
+
+  // ORIGINAL BUTTON LOGIC:
+  // !userFavorites[animeId])
+//   <div>
+//   <button onClick={(e) => handleClick(e)}>Add Anime to Favorites</button>
+//   </div> : <div><button onClick={(e) => handleClickDeleteFavorite(e)}>Remove Anime from Favorite</button></div>
+
 
   console.log('EPISODES OF ANIME ---------', episodesOfAnime)
 
@@ -124,10 +144,10 @@ function AnimeDetail() {
         <div className='DescriptionAnimeDetail'>
           {singleAnime.desc}
         </div>
-        {(user && !userFavorites[animeId]) ?
-        <div>
-          <button onClick={(e) => handleClick(e)}>Add Anime to Favorites</button>
-        </div> : <div><button onClick={(e) => handleClickDeleteFavorite(e)}>Remove Anime from Favorite</button></div>
+        {user &&
+        (<div>
+          <button onClick={(e) => handleClick(e)}>{isFavorite ? "Remove from Favorites!" : "Add to Favorites!"}</button>
+        </div>)
         }
         {(user && user.id === singleAnime.authorId) && (
           <div className="anime-page-edit-button">
