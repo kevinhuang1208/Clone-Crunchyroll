@@ -1,0 +1,22 @@
+.image-in-edit > img {
+height: 500px;
+width: 300px;
+}
+
+.createAnimeFormContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form {
+    height: fit-content;
+}
+
+.image-in-edit {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

@@ -88,7 +88,7 @@ function AnimeDetail() {
 
   else
     return (
-      <div className="">
+      <div className="wholeContainer">
 
         <div className="TitleAnimeDetail">
           <h2 className = 'showNameHeader'>{singleAnime.showname}</h2>

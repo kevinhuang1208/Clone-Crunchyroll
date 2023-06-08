@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { editAnimeThunk, postAnimeThunk } from "../../store/anime"
 import { useHistory } from 'react-router-dom'
+import "./animeForm.css"
 
 const dateHelper = (dateParam) => {
     // "01/12/1997"
@@ -26,7 +27,7 @@ const AnimeForm = ({ anime, formType }) => {
     const [description, setDescription] = useState(anime?.desc || '')
     const [releaseDate, setReleaseDate] = useState(editDate || '')
     const [coverPicture, setCoverPicture] = useState(undefined)
-    const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState({})
 
     // if (formType === 'edit') {
     //     setShowname(anime.showname)
@@ -54,8 +55,9 @@ const AnimeForm = ({ anime, formType }) => {
     } else if (!userId) {
         history.push('/anime')
     }
-
+    
     const formValidate = () => {
+        console.log("FORM IS VALIDATING...")
         const newFormErrors = {}
         if (!showname || showname.length > 255) {
             newFormErrors.showname = "Your show MUST have a showname and it must be less than 255 characters long."
@@ -69,10 +71,20 @@ const AnimeForm = ({ anime, formType }) => {
         if (!coverPicture && formType !== 'edit') {
             newFormErrors.coverPicture = "Your show MUST have a cover picture."
         }
+        console.log("NEWFORMERRORS:     :", newFormErrors)
         if (Object.values(newFormErrors).length > 0) {
             setErrors(newFormErrors)
+            console.log('NEW FORM ERRORS INSIDE THE IF COND',newFormErrors)
+            return newFormErrors
         }
+        return false
+
     }
+    useEffect(() => {
+        
+        console.log(errors)
+    }, [showname, description, releaseDate, coverPicture])
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         // console.log("coverpic : ", Object.keys(coverPicture))
@@ -98,8 +110,10 @@ const AnimeForm = ({ anime, formType }) => {
         //     "release_date": releaseDate,
         //     "cover_picture": coverPicture
         // }
+        console.log('ERRORS OBJECT IN POST ANIME ---->>>>',errors)
 
         if (!Object.values(errors).length) {
+            console.log('THIS WAS NOT HIT!!!!!!!!!')
             console.log("anime:", formData)
             const res = await dispatch(postAnimeThunk(formData))
             if (res.id) {
@@ -149,7 +163,7 @@ const AnimeForm = ({ anime, formType }) => {
                     <p className="formError">{errors}</p>
                 </label>
                 {formType === 'edit' &&
-                    <div>
+                    <div className='image-in-edit'>
                         <p>
                             Current cover image below. Please upload another file if you would like to overwrite this image.
                         </p>
@@ -167,7 +181,10 @@ const AnimeForm = ({ anime, formType }) => {
                     />
                     <p className="formError">{errors}</p>
                 </label>
-                <button>Submit Anime</button>
+                <button
+                disabled={Object.values(errors).length}
+                >Submit Anime
+                </button>
 
             </form>
 

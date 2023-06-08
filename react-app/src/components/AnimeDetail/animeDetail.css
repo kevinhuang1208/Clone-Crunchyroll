@@ -6,7 +6,11 @@
 
 .listOfEpisodesDiv{
     margin-top: 15px;
-    border-top:3px #F47521 solid;
+ 
+
+.wholeContainer {
+    padding: 50px;
+}   border-top:3px #F47521 solid;
     display:flex;
     justify-content: space-evenly;
     border-bottom:3px #F47521 solid;
