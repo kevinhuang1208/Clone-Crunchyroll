@@ -15,17 +15,17 @@ export const postAnimeReviewThunk = (review, animeId) => async (dispatch) =>{
         body: review
     })
     const data = await response.json()
-    console.log("-----------")
-    console.log(data)
-    console.log("-----------")
+    // console.log("-----------")
+    // console.log(data)
+    // console.log("-----------")
     if(response.ok){
         dispatch(postAnimeReview(data))
         return data
     }
-    console.log("episode POST response NOT ok")
-    console.log("response: ",response)
-    console.log("---------------")
-    console.log("data: ",data)
+    // console.log("episode POST response NOT ok")
+    // console.log("response: ",response)
+    // console.log("---------------")
+    // console.log("data: ",data)
     return null
 }
 
@@ -35,9 +35,9 @@ export const editAnimeReviewThunk = (review,animeId,reviewId) => async (dispatch
         body: review
     })
     const data = await response.json()
-    console.log("-----------")
-    console.log(data)
-    console.log("-----------")
+    // console.log("-----------")
+    // console.log(data)
+    // console.log("-----------")
     if(response.ok){
 
     }
@@ -54,9 +54,9 @@ export const getAnimeReviewsThunk = (animeId) => async (dispatch) =>{
     // console.log('is this even working---------------------')
     const response = await fetch(`/api/anime/${animeId}/reviews`)
     const data = await response.json()
-    console.log("-----------")
+    // console.log("-----------")
     // console.log('what is data',data)
-    console.log("-----------")
+    // console.log("-----------")
     if(response.ok){
         const normalReviews = {}
         // console.log(typeof data.reviews)
@@ -67,10 +67,10 @@ export const getAnimeReviewsThunk = (animeId) => async (dispatch) =>{
         dispatch(getSingleAnimeReviews(normalReviews))
         return normalReviews
     }
-    console.log("reviews response NOT ok")
-    console.log("response: ",response)
-    console.log("---------------")
-    console.log("data: ",data)
+    // console.log("reviews response NOT ok")
+    // console.log("response: ",response)
+    // console.log("---------------")
+    // console.log("data: ",data)
     return null
 }
 

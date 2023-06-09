@@ -27,7 +27,7 @@ ul>li {
   position: absolute;
   background-color: #141517;
   z-index: 1;
-  right: 50px;
+  right: 185px;
   padding-right: 50px;
   padding-top: 20px;
   width: 400px;
@@ -106,4 +106,20 @@ ul>li {
   padding: 20px 0px;
   cursor: pointer;
   background-color: rgb(92, 92, 92);
+}
+
+.nonuser-dropdown {
+  display: flex;
+  justify-content: space-around;
+}
+
+.nonuser-dropdown > button {
+  background-color: #f47521;
+  height: 30px;
+  color: black;
+  font-size: 20px;
+  border: none;
+  margin: 10px;
+  cursor: pointer;
+  
 }

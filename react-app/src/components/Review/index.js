@@ -34,20 +34,19 @@ const Review = ({review,user})=> {
             (user.id == review.userId) ?
 
             (<div className='review-buttons-div'>
-              <button>
+              
                 <OpenModalMenuItem
               className = 'editReview'
               itemText = 'Edit Review!'
               modalComponent={<EditReview review = {review} user = {user} key = {review.id}/>}
               />
-            </button>
-            <button>
+           
             <OpenModalMenuItem
             className = 'editReview'
             itemText = 'Delete Review!'
             modalComponent={<DeleteReview review = {review} user = {user} key = {review.id}/>}
             />
-            </button>
+            
             </div>
 
               ) : null}

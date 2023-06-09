@@ -15,7 +15,7 @@ function LoginFormPage() {
   const [errors, setErrors] = useState([]);
 
   if (sessionUser){
-    console.log("redirecting to /anime")
+    // console.log("redirecting to /anime")
     return <Redirect to="/anime" />;
   } 
 

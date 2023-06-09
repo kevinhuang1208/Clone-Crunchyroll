@@ -16,15 +16,15 @@ const DeleteEpisodeModal = ({ episode}) => {
   const { closeModal } = useModal();
   const history = useHistory()
   // const animeId = singleAnime.id
-  console.log("EP IN MODAL---->",episode)
+  // console.log("EP IN MODAL---->",episode)
   const episodeId = episode.id
   const animeId = episode.animeId
-  console.log(episodeId)
+  // console.log(episodeId)
 
 
   const handleClick = async (e) => {
     e.preventDefault();
-    console.log(episode)
+    // console.log(episode)
     await dispatch(deleteEpisodeThunk(episodeId))
     await dispatch(getAnimeEpisodesThunk(animeId))
     closeModal()

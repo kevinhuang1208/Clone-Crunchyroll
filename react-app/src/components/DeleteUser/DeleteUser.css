@@ -1,0 +1,11 @@
+.deleteForm {
+    height: 200px;
+    width: 500px;
+}
+
+.yesNobuttonDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 500px;
+}

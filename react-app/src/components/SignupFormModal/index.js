@@ -74,7 +74,7 @@ function SignupFormModal() {
 						required
 					/>
 				</label>
-				<button type="submit">Sign Up</button>
+				<button type="submit" disabled={password.length<1 || email.length <1 || confirmPassword.length<1 || username.length <1}>Sign Up</button>
 			</form>
 		</>
 	);

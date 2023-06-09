@@ -34,7 +34,7 @@ export const editSingleSessionUser = (user) => {
 }
 
 export const addUserSessionFavoriteThunk = (animeId) => async (dispatch) => {
-	console.log('*****anime id inside the session thunk!!!!****',animeId)
+	// console.log('*****anime id inside the session thunk!!!!****',animeId)
 	dispatch(addUserFavorite(animeId))
 
 }

@@ -39,7 +39,7 @@ const CreateReview = ({ anime, user }) => {
 
             <form onSubmit={handleClick}>
                 <label>
-                    What are your thoughts?
+                    What are your thoughts? (min. 100 characters)
                     <textarea
                         placeholder='Write a Review (100 characters)'
                         type='text'

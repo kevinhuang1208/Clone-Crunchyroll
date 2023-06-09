@@ -22,6 +22,20 @@ form {
     text-align: center;
 }
 
-input[accept='image/*'] {
-    
+
+
+.cover-upload {
+    margin: 10px;
+    padding: 5px;
+    color: white;
+}
+
+input::file-selector-button {
+    background-color: #f47521;
+    height: 25px;
+    color: black;
+    font-size: 20px;
+    border: none;
+    margin: 10px;
+    cursor: pointer;
 }

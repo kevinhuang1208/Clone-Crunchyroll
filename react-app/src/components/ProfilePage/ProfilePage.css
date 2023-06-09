@@ -12,3 +12,22 @@
 .overall-info {
     padding: 30px;
 }
+
+h2 {
+    border-bottom: rgb(65, 65, 65) solid 3px;
+}
+
+.studio-member {
+    height: 30px;
+}
+
+.ternary-info > button {
+    border: white 2px solid;
+    background-color: #f47521;
+    color: black;
+    border: none;
+    text-decoration: none;
+    margin-left: 30px;
+    padding: 10px;
+    cursor: pointer;
+}

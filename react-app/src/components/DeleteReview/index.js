@@ -6,7 +6,7 @@ import './index.css'
 const DeleteReview = ({review}) =>{
     const {closeModal} = useModal();
     const dispatch = useDispatch();
-    console.log('inside of delete review ' , review.id , review.animeId)
+    // console.log('inside of delete review ' , review.id , review.animeId)
 
     const yesDelete = async(e) =>{
         e.preventDefault()
@@ -28,7 +28,7 @@ const DeleteReview = ({review}) =>{
 
         <h3>Are you sure you want to delete this review? </h3>
 
-        <form on>
+        <form>
         <div className = 'yesNobuttonDiv'>
           <button className = 'yesDeleteReview' onClick={yesDelete}> Yes</button>
           <button className = 'yesDeleteReview' onClick = {noDelete}> No</button>

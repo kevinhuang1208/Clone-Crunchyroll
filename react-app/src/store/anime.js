@@ -86,13 +86,13 @@ export const getAllAnimeThunk = () => async (dispatch) => {
             normalAnime[show.id] = show
         })
         dispatch(getAllAnime(normalAnime))
-        console.log("normalAnime: ", normalAnime)
+        // console.log("normalAnime: ", normalAnime)
         return normalAnime
     }
-    console.log("anime response NOT ok")
-    console.log("response: ", response)
-    console.log("---------------")
-    console.log("data: ", data)
+    // console.log("anime response NOT ok")
+    // console.log("response: ", response)
+    // console.log("---------------")
+    // console.log("data: ", data)
     return null
 }
 

@@ -39,7 +39,7 @@ function ProfileButton({ user }) {
     e.preventDefault();
     await dispatch(logout());
     history.push('/')
-    console.log("logout handled")
+    // console.log("logout handled")
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
@@ -70,19 +70,22 @@ function ProfileButton({ user }) {
             </li>
           </>
         ) : (
-          <>
+          <div className='nonuser-dropdown'>
             <OpenModalButton
+              className='nonuser-buttons'
               buttonText="Log In"
               onItemClick={closeMenu}
               modalComponent={<LoginFormModal />}
             />
-
+            
             <OpenModalButton
+              className='nonuser-buttons'
               buttonText="Sign Up"
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
             />
-          </>
+            
+          </div>
         )}
       </ul>
     </>

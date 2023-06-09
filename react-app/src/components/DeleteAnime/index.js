@@ -14,7 +14,7 @@ const DeleteAnimeModal = ({ anime }) => {
   const { closeModal } = useModal();
   const history = useHistory()
   // const animeId = singleAnime.id
-  console.log(anime)
+  // console.log(anime)
 
 
   const handleClick = async (e) => {

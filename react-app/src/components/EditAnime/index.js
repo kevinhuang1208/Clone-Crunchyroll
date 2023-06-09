@@ -24,12 +24,12 @@ const EditAnime = () => {
       )
     }
   const anime = animeObj[animeId]
-  console.log('user ---->',user)
+  // console.log('user ---->',user)
   if (anime.authorId !== user.id) {
     history.push('/anime')
   }
 
-  console.log('ANIME ~~~~~~~>',anime)
+  // console.log('ANIME ~~~~~~~>',anime)
 
   return (
     <AnimeForm anime={anime} formType={'edit'}/>

@@ -66,7 +66,7 @@ def seed_episodes():
     southpark1 = Episodes(
         episode_number = 1,
         anime_id = 4,
-        title="Cartman Gets an Anal Probe",
+        title="Cartman Gets a Probe",
         desc = "Cartman tells his friends Stan, Kyle, and Kenny he had a dream about being abducted by aliens. The boys realize that this did actually happen when Kyle's baby brother, Ike is abducted also. They manage to rescue Ike while the aliens conclude that cows are the most intelligent species on the planet.",
         release_date = date(1997, 8, 13),
         video_link = "https://crunchyclone.s3.us-east-2.amazonaws.com/South.Park.S01E01.720p.BluRay.x264.100MB-Pahe.in.mp4",
@@ -81,6 +81,151 @@ def seed_episodes():
         video_link = "https://crunchyclone.s3.us-east-2.amazonaws.com/South.Park.S01E02.720p.BluRay.x264.100MB-Pahe.in.mp4",
         episode_cover_image ='https://cdn.discordapp.com/attachments/1116044689452322926/1116046070070399138/p2026448_e_v10_ad.jpg'
     )
+    popeye1 = Episodes(
+    episode_number=1,
+    title="Popeye The Sailor",
+    anime_id=5,
+    desc="Popeye sets sail on a wild adventure, encountering various challenges and foes along the way.",
+    release_date=date(1933, 7, 14),
+    video_link="https://phillyrollv2.s3.us-east-2.amazonaws.com/popeye/Episode+1+-+Popeye+The+Sailor.mp4",
+    episode_cover_image='https://cdn.discordapp.com/attachments/1113213089702228038/1116835494345580667/p13085838_b_v8_aa.jpg'
+)
+    popeye2 = Episodes(
+        episode_number=2,
+        title="I Yam What I Yam",
+        anime_id=5,
+        desc="Popeye embraces his unique identity and confronts a formidable enemy with his spinach-fueled strength.",
+        release_date=date(1933, 9, 29),
+        video_link="https://phillyrollv2.s3.us-east-2.amazonaws.com/popeye/Episode+2+-+I+Yam+What+I+Yam.mp4",
+        episode_cover_image='https://cdn.discordapp.com/attachments/1113213089702228038/1116835494345580667/p13085838_b_v8_aa.jpg'
+    )
+    popeye3 = Episodes(
+        episode_number=3,
+        title="Blow Me Down",
+        anime_id=5,
+        desc="Popeye faces a turbulent storm and shows his resilience in the face of adversity.",
+        release_date=date(1933, 10, 27),
+        video_link="https://phillyrollv2.s3.us-east-2.amazonaws.com/popeye/Episode+3+-+Blow+Me+Down.mp4",
+        episode_cover_image='https://cdn.discordapp.com/attachments/1113213089702228038/1116835494345580667/p13085838_b_v8_aa.jpg'
+    )
+    popeye4 = Episodes(
+        episode_number=4,
+        title="I Eats My Spinach",
+        anime_id=5,
+        desc="Popeye demonstrates the incredible strength and vitality he gains from consuming spinach.",
+        release_date=date(1933, 11, 17),
+        video_link="https://phillyrollv2.s3.us-east-2.amazonaws.com/popeye/Episode+4+-+I+Eats+My+Spinach.mp4",
+        episode_cover_image='https://cdn.discordapp.com/attachments/1113213089702228038/1116835494345580667/p13085838_b_v8_aa.jpg'
+    )
+    popeye5 = Episodes(
+        episode_number=5,
+        title="Seasin's Greetinks!",
+        anime_id=5,
+        desc="Popeye celebrates the holiday season with his signature charm and humor.",
+        release_date=date(1933, 12, 17),
+        video_link="https://phillyrollv2.s3.us-east-2.amazonaws.com/popeye/Episode+5+-+Seasin's+Greetinks!.mp4",
+        episode_cover_image='https://cdn.discordapp.com/attachments/1113213089702228038/1116835494345580667/p13085838_b_v8_aa.jpg'
+    )
+    popeye6 = Episodes(
+        episode_number=6,
+        title="Wild Elephinks",
+        anime_id=5,
+        desc="Popeye encounters a mischievous elephant and engages in a thrilling escapade.",
+        release_date=date(1933, 12, 29),
+        video_link="https://phillyrollv2.s3.us-east-2.amazonaws.com/popeye/Episode+6+-+Wild+Elephinks.mp4",
+        episode_cover_image='https://cdn.discordapp.com/attachments/1113213089702228038/1116835494345580667/p13085838_b_v8_aa.jpg'
+    )
+    popeye7 = Episodes(
+        episode_number=7,
+        title="Sock-A-Bye, Baby",
+        anime_id=5,
+        desc="Popeye finds himself taking care of an adorable baby and hilarity ensues.",
+        release_date=date(1934, 1, 19),
+        video_link="https://phillyrollv2.s3.us-east-2.amazonaws.com/popeye/Episode+7+-+Sock-A-Bye%2C+Baby.mp4",
+        episode_cover_image='https://cdn.discordapp.com/attachments/1113213089702228038/1116835494345580667/p13085838_b_v8_aa.jpg'
+    )
+    popeye8 = Episodes(
+        episode_number = 8,
+        title="Let's You And Him Fight",
+        anime_id = 5,
+        desc = "The Fight of the Century is announced between Bluto, the champ, and the challenger, Popeye the Sailor.",
+        release_date = date(1934, 2, 16),
+        video_link = "https://phillyrollv2.s3.us-east-2.amazonaws.com/popeye/Episode+8+-+Let's+You+And+Him+Fight.mp4",
+        episode_cover_image ='https://cdn.discordapp.com/attachments/1113213089702228038/1116835494345580667/p13085838_b_v8_aa.jpg'
+        )
+    popeye9 = Episodes(
+        episode_number = 9,
+        title="The Man On The Flying Trapeze",
+        anime_id = 5,
+        desc = "The cartoon is a musical. Popeye sings (his theme tune) as he sails his ship",
+        release_date = date(1934, 3, 16),
+        video_link = "https://phillyrollv2.s3.us-east-2.amazonaws.com/popeye/Episode+9+-+The+Man+On+The+Flying+Trapeze.mp4",
+        episode_cover_image ='https://cdn.discordapp.com/attachments/1113213089702228038/1116835494345580667/p13085838_b_v8_aa.jpg'
+    )
+    popeye10 = Episodes(
+        episode_number = 10,
+        title="Can You Take It",
+        anime_id = 5,
+        desc = "Popeye accompanies Nurse Olive to her job at the Bruiser Boys Club's hospital ward.",
+        release_date = date(1934, 4, 27),
+        video_link = "https://phillyrollv2.s3.us-east-2.amazonaws.com/popeye/Episode+10+-+Can+You+Take+It.mp4",
+        episode_cover_image ='https://cdn.discordapp.com/attachments/1113213089702228038/1116835494345580667/p13085838_b_v8_aa.jpg'
+    )
+    popeye11 = Episodes(
+        episode_number = 11,
+        title="Shoein' Hosses",
+        anime_id = 5,
+        desc = 'Olives blacksmith business is not helped by her assistant J. Wellington Wimpys incompetence so she fires him and places a "Blacksmith Wanted" sign.',
+        release_date = date(1934, 6, 1),
+        video_link = "https://phillyrollv2.s3.us-east-2.amazonaws.com/popeye/Episode+11+-+Shoein'+Hosses.mp4",
+        episode_cover_image ='https://cdn.discordapp.com/attachments/1113213089702228038/1116835494345580667/p13085838_b_v8_aa.jpg'
+    )
+    popeye12 = Episodes(
+        episode_number = 12,
+        title="Strong To The Finich",
+        anime_id = 5,
+        desc = "At Olive Oyl's Health Farm for Children, six boys are waiting for the meal Olive is making for them, with their utensils prepared.",
+        release_date = date(1934, 6, 29),
+        video_link = "https://phillyrollv2.s3.us-east-2.amazonaws.com/popeye/Episode+12+-+Strong+To+The+Finich.mp4",
+        episode_cover_image ='https://cdn.discordapp.com/attachments/1113213089702228038/1116835494345580667/p13085838_b_v8_aa.jpg'
+    )
+    popeye13 = Episodes(
+        episode_number = 13,
+        title="Shiver Me Timbers",
+        anime_id = 5,
+        desc = 'Popeye, Olive Oyl and Wimpy come across a seaside derelict ship whose hull displays an animate "Ghost ship - beware" sign.',
+        release_date = date(1934, 7, 27),
+        video_link = "https://phillyrollv2.s3.us-east-2.amazonaws.com/popeye/Episode+13+-+Shiver+Me+Timbers!.mp4",
+        episode_cover_image ='https://cdn.discordapp.com/attachments/1113213089702228038/1116835494345580667/p13085838_b_v8_aa.jpg'
+    )
+
+    superman1 = Episodes(
+        episode_number = 1,
+        title="Superman the Mechanical Monsters",
+        anime_id = 6,
+        desc = "A robot flies into a scientist's secret lair and unloads a pile of cash into a vault.",
+        release_date = date(1941, 11, 28),
+        video_link = "https://phillyrollv2.s3.us-east-2.amazonaws.com/superman/superman_the_mechanical_monsters_512kb.mp4",
+        episode_cover_image ='https://cdn.discordapp.com/attachments/1113213089702228038/1116840082905768076/MV5BNzdkNTc3Y2ItNjAwNy00NWZmLTg1MTgtNDFlYzNhYjhhZDIyXkEyXkFqcGdeQXVyNTkzNjY2NTc.png'
+    )
+    superman2 = Episodes(
+        episode_number = 1,
+        title="Billion Dollar Limited",
+        anime_id = 6,
+        desc = 'The Daily Planet reports the shipment of a billion dollars of gold to the US mint',
+        release_date = date(1942, 1, 9),
+        video_link = "https://phillyrollv2.s3.us-east-2.amazonaws.com/superman/Superman-03-Billion_Dollar_Limited_512kb.mp4",
+        episode_cover_image ='https://cdn.discordapp.com/attachments/1113213089702228038/1116840486603329546/MV5BNzhjYmM5OWEtM2RhNC00MzYyLTg0N2EtOTA3Zjk1ZTJiZWRlXkEyXkFqcGdeQXVyNTkzNjY2NTc.png'
+    )
+    superman3 = Episodes(
+        episode_number = 1,
+        title="Destruction Inc",
+        anime_id = 6,
+        desc = 'One night in Metropolis, the elderly night watchman from the Metropolis Munitions Works is found dead in a swamp.',
+        release_date = date(1942, 12, 25),
+        video_link = "https://phillyrollv2.s3.us-east-2.amazonaws.com/superman/destruction_inc_512kb.mp4",
+        episode_cover_image ='https://cdn.discordapp.com/attachments/1113213089702228038/1116840177277620274/MV5BODk2Y2QzMWQtY2IzZC00OTMyLWI0NGQtNzY0NGFhYmNhNjQyXkEyXkFqcGdeQXVyMTA5NjE3Nzk5.png'
+    )
 
     db.session.add(rick1)
     db.session.add(rick2)
@@ -93,6 +238,24 @@ def seed_episodes():
 
     db.session.add(southpark1)
     db.session.add(southpark2)
+
+    db.session.add(popeye1)
+    db.session.add(popeye2)
+    db.session.add(popeye3)
+    db.session.add(popeye4)
+    db.session.add(popeye5)
+    db.session.add(popeye6)
+    db.session.add(popeye7)
+    db.session.add(popeye8)
+    db.session.add(popeye9)
+    db.session.add(popeye10)
+    db.session.add(popeye11)
+    db.session.add(popeye12)
+    db.session.add(popeye13)
+
+    db.session.add(superman1)
+    db.session.add(superman2)
+    db.session.add(superman3)
 
     db.session.commit()
 

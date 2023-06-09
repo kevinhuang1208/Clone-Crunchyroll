@@ -19,8 +19,8 @@ function EpisodeComponent(){
         if(ep.id == episodeId)
         currentEpisode = ep
     })
-    console.log('-------------------',episodesOfAnimeObj)
-    console.log('this is the current episode------',currentEpisode)
+    // console.log('-------------------',episodesOfAnimeObj)
+    // console.log('this is the current episode------',currentEpisode)
 
     useEffect(() => {
         dispatch(getAnimeReviewsThunk(animeId));
@@ -29,18 +29,20 @@ function EpisodeComponent(){
       }, [dispatch]);
       if(!currentEpisode) return null
 
+
       else
       return(
         <div className = 'episodeComponentDiv'>
                 
 
                 <div className = 'videoplayerandDescription'>
-                  <video width='700px' height = '400px' controls>
+                  <video width='700px' height = '400px' controls controlsList="nodownload" poster="https://cdn.discordapp.com/attachments/1113213089702228038/1116837444759859220/Untitled.png">
                       <source src = {currentEpisode.videoLink} type= 'video/mp4'>
                       </source>
                   </video>
                   <div className = 'headerandDescription'>
                   <h2>{currentEpisode.title}</h2>
+                  <h3> {currentEpisode.releaseDate}</h3>
                   <p className = 'descriptionDivEpisode'>
                   {currentEpisode.desc}
                   </p>
