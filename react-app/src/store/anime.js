@@ -27,31 +27,26 @@ export const editAnimeThunk = (animeId, anime) => async (dispatch) => {
     if (res.ok) {
         dispatch(editAnime(edited_data))
         return edited_data
+        //this return will return the to_dict for the anime
     } else {
-        return null
+        return edited_data
+        //this return will return errors key with [] value
     }
 
 }
 
 export const postAnimeThunk = (anime) => async (dispatch) => {
-    console.log("anime in thunk: ", anime)
+    // console.log("anime in thunk: ", anime)
     const response = await fetch("/api/anime/new", {
-        method: "post",
+        method: "POST",
         body: anime
     })
     const data = await response.json()
     if (response.ok) {
-        console.log("------------////////////")
-        console.log("POST ANIME DATA: ", data)
-        console.log("///////////-------------")
         dispatch(postAnime(data))
-        return data
+        return data 
     }
-    console.log("anime POST response NOT ok")
-    console.log("response: ", response)
-    console.log("---------------")
-    console.log("data: ", data)
-    return null
+    return data
 }
 
 const deleteAnime = (animeId) => {

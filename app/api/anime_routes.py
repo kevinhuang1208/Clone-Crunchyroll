@@ -16,6 +16,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from app.forms.post_anime_form import AnimeForm
 from app.forms.edit_anime_form import EditAnimeForm
 from datetime import date
+from app.api.auth_routes import validation_errors_to_error_messages
 
 
 
@@ -44,6 +45,45 @@ def delete_episode(episode_id):
 
     return {'message': 'episode deleted'}
 
+# @anime_routes.route("/new", methods=['POST'])
+# @login_required
+# def post_anime():
+#     """Display and post an anime"""
+
+#     form = AnimeForm()
+#     # print('INSIDE THE POST ANIME ROUTE!!!')
+#     user_id = current_user.id
+#     # print ('THIS IS THE USER ID ~~~~~~~~~~>', user_id)
+
+#     form["csrf_token"].data = request.cookies["csrf_token"]
+
+#     if form.validate_on_submit():
+#         # print('form data~~~~~>', form.data)
+#         # print('video data~~~~~>', form.data['cover_picture'])
+#         ##need to add aws stuff here
+#         picture = form.data['cover_picture']
+#         picture.filename = get_unique_filename(picture.filename)
+#         uploaded_pic = upload_file_to_s3(picture)
+#         aws_link = uploaded_pic['url']
+#         # print('this is the aws_link ~~~~~>',aws_link)
+#         release_date_string = form.data["release_date"]
+#         [year, month, day] = release_date_string.split("-")
+
+#         new_anime = Anime(
+#             user_id=int(user_id),
+#             showname=form.data["showname"],
+#             desc=form.data["description"],
+#             release_date = date(int(year), int(month), int(day)),
+#             cover_picture = aws_link
+#             # cover_picture = form.data["cover_picture"]
+#         )
+#         db.session.add(new_anime)
+#         db.session.commit()
+#         return new_anime.to_dict()
+#     else:
+#         return jsonify({'error': form.errors})
+    
+
 @anime_routes.route("/new", methods=['POST'])
 @login_required
 def post_anime():
@@ -57,14 +97,10 @@ def post_anime():
     form["csrf_token"].data = request.cookies["csrf_token"]
 
     if form.validate_on_submit():
-        # print('form data~~~~~>', form.data)
-        # print('video data~~~~~>', form.data['cover_picture'])
-        ##need to add aws stuff here
         picture = form.data['cover_picture']
         picture.filename = get_unique_filename(picture.filename)
         uploaded_pic = upload_file_to_s3(picture)
         aws_link = uploaded_pic['url']
-        # print('this is the aws_link ~~~~~>',aws_link)
         release_date_string = form.data["release_date"]
         [year, month, day] = release_date_string.split("-")
 
@@ -74,13 +110,12 @@ def post_anime():
             desc=form.data["description"],
             release_date = date(int(year), int(month), int(day)),
             cover_picture = aws_link
-            # cover_picture = form.data["cover_picture"]
         )
         db.session.add(new_anime)
         db.session.commit()
         return new_anime.to_dict()
     else:
-        return jsonify({'error': form.errors})
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 @anime_routes.route("/<int:id>")
 def get_one_anime(id):
@@ -150,7 +185,7 @@ def post_anime_episode(anime_id):
         db.session.commit()
         return new_episode.to_dict()
     else:
-        return jsonify({'error': form.errors})
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 
@@ -195,7 +230,7 @@ def edit_anime(id):
         edited_anime = anime.to_dict()
         return edited_anime
     else:
-        return {'error': form.errors}
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 
@@ -220,6 +255,7 @@ def get_anime_reviews(id):
 
 @anime_routes.route("/<int:id>/reviews/new", methods=["POST"])
 def post_anime_review(id):
+    """Route to post an anime"""
     user_id = current_user.id
     anime_id=id
     form = ReviewForm()
@@ -236,6 +272,9 @@ def post_anime_review(id):
         return new_review.to_dict()
     else:
         return jsonify({'error': form.errors})
+
+
+
 
 @anime_routes.route("/<int:anime_id>/reviews/<int:review_id>", methods=["PUT"])
 def edit_review_route(anime_id, review_id):

@@ -38,8 +38,9 @@ label {
 
 input {
     background-color: #141519;
-    border:#141519 solid 2px;
+    border:white solid 2px;
     border-bottom: gray solid 2px;
+    border-radius: 10px;
     height: 40px;
     width: 300px;
     color: white;

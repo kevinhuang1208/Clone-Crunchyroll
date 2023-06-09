@@ -12,23 +12,28 @@ const Review = ({review,user})=> {
     const dispatch = useDispatch()
     const {closeModal} = useModal();
 
-    console.log('what is a single review do ---------', review)
+    // console.log('what is a single review do ---------', review)
     // if user.id == review.userId render the button if not do null if no user, do null
 
     if(!review.user) return null
 
     else
     return (
-        <div>
-            <NavLink exact to={`/user/${review.user.id}`}>
-                  <h2>{review.user.username}</h2>
+        <div className = 'entireSingleReviewDiv'>
+            <div className='navLinkDivforReview'> 
+            <NavLink className = 'userNavLink'exact to={`/user/${review.user.id}`}>
+                 {review.user.username}
             </NavLink>
+            </div>
+
             <h3>Rating: {review.rating}</h3>
-            <p>{review.review}</p>
+
+            <p className = 'reviewDescriptionPtag'>{review.review}</p>
+
             {(!user) ? null :
             (user.id == review.userId) ?
 
-            (<div>
+            (<div className='review-buttons-div'>
               <button>
                 <OpenModalMenuItem
               className = 'editReview'

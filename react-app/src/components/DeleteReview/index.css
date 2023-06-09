@@ -12,7 +12,18 @@
     --h: 1.8em; /* the height */
   }
   
-  .yesNobuttonDiv button {
+
+.yesNobuttonDiv > button {
+    background-color: #f47521;
+    height: 50px;
+    width: 150px;
+    color: black;
+    font-size: 20px;
+    border: none;
+    margin: 10px;
+    cursor: pointer;
+}
+  /* .yesNobuttonDiv button {
     --_c: #88C100;
     flex: calc(1.25 + var(--_s,0));
     min-width: 0;
@@ -68,6 +79,6 @@
   button:active {
     box-shadow: inset 0 0 0 100vmax var(--_c);
     color: #fff;
-  }
+  } */
   
   

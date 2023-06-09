@@ -7,13 +7,19 @@ flex-direction: column;
    width:100%;
    max-height: 300px;
 }
+
+.tileCoverPhotoHomePageDiv > img {
+   height: 300px;
+   border-radius: 6px;
+}
+
 .allAnimeContainer{
    border-top:5px #F47521 solid;
    margin-top:0px;
    padding-top:0px;
    display:flex;
    flex-wrap:wrap;
-   justify-content: space-between;
+   justify-content: center;
    border-bottom:5px #F47521 solid;
    padding:5px;
    width:80%;
@@ -21,10 +27,14 @@ flex-direction: column;
 }
 
 .animeTileHomePage{
+   margin: 20px;
    width: 250px;
-   flex-wrap:wrap;
    margin-top: 10px;
    position: relative;
+   border-radius: 6px;
+   align-self: flex-start;
+   
+   
 }
 
 .animeTileHomePage .hover-div{
@@ -37,11 +47,13 @@ flex-direction: column;
    overflow: hidden;
    bottom: 5px;
    height: 310px;
+   border-radius: 6px;
    }
-
+   
 .animeTileHomePage:hover .hover-div{
    visibility: visible;
    opacity: 0.8;
+   cursor:pointer;
 }
 
 

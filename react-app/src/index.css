@@ -23,22 +23,21 @@ body{
     50% {background-position: right}
     100% {background-position: left}
   } */
-  :root {
-    --gradient: linear-gradient(130deg, #060606, rgb(4, 0, 28), #200101);
+:root {
+  --gradient: linear-gradient(130deg, #060606, , black);
+  margin: 0;
+  /* height: fit-content; */
+}
 
-  }
+body {
+  font-family: basic-sans, sans-serif;
+  color: white;
+  /* background-image: var(--gradient); */
+  background:rgb(23, 23, 23);
+  margin: 0;
+}
 
-  body{
-    font-family: basic-sans, sans-serif;
-    color:white;
-    background-image: var(--gradient);
-    margin:0;
-  }
-
-  /* html, body {
-    position:fixed;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
-} */
+html {
+  /* position: relative; */
+  margin: 0;
+}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { editAnimeThunk, postAnimeThunk } from "../../store/anime"
 import { useHistory } from 'react-router-dom'
+import "./animeForm.css"
 
 const dateHelper = (dateParam) => {
     // "01/12/1997"
@@ -27,23 +28,25 @@ const AnimeForm = ({ anime, formType }) => {
     const [releaseDate, setReleaseDate] = useState(editDate || '')
     const [coverPicture, setCoverPicture] = useState(undefined)
     const [errors, setErrors] = useState([])
+    //Do we need to do the fe validations in an array??!?!?!?!?
 
     // if (formType === 'edit') {
     //     setShowname(anime.showname)
     //     setDescription(anime.desc)
     // }
 
-    const resetFile = (e) => {
-        console.log("this isisi siis is hit")
-        console.log("e.target -> ", e.target)
-        // console.log("e.target -> ",e.tar)
-        // e.target.files[0] = null
-        e.target.value = undefined
-        setCoverPicture(undefined)
-    }
+    // const resetFile = (e) => {
+    //     console.log("this isisi siis is hit")
+    //     console.log("e.target -> ", e.target)
+    //     // console.log("e.target -> ",e.tar)
+    //     // e.target.files[0] = null
+    //     e.target.value = undefined
+    //     setCoverPicture(undefined)
+    // }
+
     const userId = useSelector(state => state.session.user)
     // console.log(userId)
-    if(!userId) {
+    if (!userId) {
         history.push('/anime')
     }
     if (userId) {
@@ -56,6 +59,7 @@ const AnimeForm = ({ anime, formType }) => {
     }
 
     const formValidate = () => {
+        console.log("FORM IS VALIDATING...")
         const newFormErrors = {}
         if (!showname || showname.length > 255) {
             newFormErrors.showname = "Your show MUST have a showname and it must be less than 255 characters long."
@@ -69,14 +73,25 @@ const AnimeForm = ({ anime, formType }) => {
         if (!coverPicture && formType !== 'edit') {
             newFormErrors.coverPicture = "Your show MUST have a cover picture."
         }
+        console.log("NEWFORMERRORS:     :", newFormErrors)
         if (Object.values(newFormErrors).length > 0) {
             setErrors(newFormErrors)
+            console.log('NEW FORM ERRORS INSIDE THE IF COND', newFormErrors)
+            return newFormErrors
         }
+        return false
+
     }
+    // useEffect(() => {
+
+    //     console.log(errors)
+    // }, [showname, description, releaseDate, coverPicture])
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         // console.log("coverpic : ", Object.keys(coverPicture))
-        formValidate()
+        // formValidate()
+        setErrors([])
         const formData = new FormData()
         formData.append("showname", showname)
         formData.append("description", description)
@@ -88,7 +103,12 @@ const AnimeForm = ({ anime, formType }) => {
 
         if (formType === 'edit') {
             const res = await dispatch(editAnimeThunk(anime.id, formData))
-            if (res.id) {
+            if (res.errors) {
+                setErrors([...res.errors])
+                // alert('Please fix the form errors before continuing')
+                return
+            }
+            else {
                 return history.push(`/anime/${anime.id}`)
             }
         }
@@ -98,14 +118,27 @@ const AnimeForm = ({ anime, formType }) => {
         //     "release_date": releaseDate,
         //     "cover_picture": coverPicture
         // }
+        // console.log('ERRORS OBJECT IN POST ANIME ---->>>>',errors)
 
-        if (!Object.values(errors).length) {
-            console.log("anime:", formData)
+        else {
             const res = await dispatch(postAnimeThunk(formData))
-            if (res.id) {
-                history.push(`/anime/${res.id}`)
+            if (res.errors) {
+                setErrors([...res.errors])
+                return
+            }
+            else {
+                return history.push(`/anime/${res.id}`)
             }
         }
+
+        // if (!Object.values(errors).length) {
+        //     console.log('THIS WAS NOT HIT!!!!!!!!!')
+        //     console.log("anime:", formData)
+        //     const res = await dispatch(postAnimeThunk(formData))
+        //     if (res.id) {
+        //         history.push(`/anime/${res.id}`)
+        //     }
+        // }
 
 
     }
@@ -116,7 +149,16 @@ const AnimeForm = ({ anime, formType }) => {
     // }, [showname, description, releaseDate, coverPicture])
     return (
         <div className="createAnimeFormContainer">
-            <h1 className="formHeader">Create an Anime</h1>
+            {
+                (formType === 'edit') ? <h1 className = 'formHeader'>Edit an Anime </h1> :
+                <h1 className="formHeader">Create an Anime</h1>
+            }
+            
+            
+            {errors.length ?
+                <ul>
+                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                </ul> : null}
             <form onSubmit={handleSubmit}>
                 <label>
                     Show Name:
@@ -146,10 +188,10 @@ const AnimeForm = ({ anime, formType }) => {
                         value={releaseDate}
                         onChange={(e) => setReleaseDate(e.target.value)}
                     />
-                    <p className="formError">{errors}</p>
+
                 </label>
                 {formType === 'edit' &&
-                    <div>
+                    <div className='image-in-edit'>
                         <p>
                             Current cover image below. Please upload another file if you would like to overwrite this image.
                         </p>
@@ -157,17 +199,20 @@ const AnimeForm = ({ anime, formType }) => {
                     </div>
                 }
                 <label>
-                    Cover Image
+                    Cover Picture
                     <input
+                        className="file-input"
                         placeholder="insert a file here "
                         type="file"
                         accept='image/*'
                         filename={coverPicture && coverPicture.name}
                         onChange={(e) => setCoverPicture(e.target.files[0])}
                     />
-                    <p className="formError">{errors}</p>
+
                 </label>
-                <button>Submit Anime</button>
+                <button
+                >Submit Anime
+                </button>
 
             </form>
 

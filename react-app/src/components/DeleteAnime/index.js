@@ -32,14 +32,16 @@ const DeleteAnimeModal = ({ anime }) => {
   // }, [dispatch, spot])
 
   return (
-    <>
+    <div className='delete-modal-container'>
+      <div>
       <h1>Confirm Delete</h1>
       <div className="random-text">Are you sure you want to remove this Anime?</div>
-      <div className="delete-two-buttons">
-        <button onClick={(e) => handleClick(e)}>Yes (Delete Anime)</button>
-        <button onClick={(e) => closeModal()}>No (Keep Anime)</button>
       </div>
-    </>
+      <div className="delete-two-buttons">
+        <button className='buttons-in-modal' onClick={(e) => handleClick(e)}>Yes (Delete Anime)</button>
+        <button className='buttons-in-modal' onClick={(e) => closeModal()}>No (Keep Anime)</button>
+      </div>
+    </div>
   );
 }
 

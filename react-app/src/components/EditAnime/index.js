@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 import { getAllAnimeThunk } from "../../store/anime"
 import AnimeForm from "../AnimeForm"
+import "./editAnime.css"
 
 
 const EditAnime = () => {

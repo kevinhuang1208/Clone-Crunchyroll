@@ -1,0 +1,9 @@
+.review-buttons-div > button {
+    background-color: #f47521;
+    height: 50px;
+    color: black;
+    font-size: 20px;
+    border: none;
+    margin: 10px;
+    cursor: pointer;
+}

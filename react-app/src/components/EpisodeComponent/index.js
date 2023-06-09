@@ -32,17 +32,19 @@ function EpisodeComponent(){
       else
       return(
         <div className = 'episodeComponentDiv'>
-                <h2>{currentEpisode.title}</h2>
+                
 
                 <div className = 'videoplayerandDescription'>
                   <video width='700px' height = '400px' controls>
                       <source src = {currentEpisode.videoLink} type= 'video/mp4'>
                       </source>
                   </video>
-
+                  <div className = 'headerandDescription'>
+                  <h2>{currentEpisode.title}</h2>
                   <p className = 'descriptionDivEpisode'>
                   {currentEpisode.desc}
                   </p>
+                  </div>
 
                 </div>
         </div>
