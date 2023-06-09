@@ -31,3 +31,16 @@
     bottom: 0;
     width: 100%;
 }
+
+.allFooterContainer>h2{
+    padding-left:15px;
+}
+.allColumns{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.footerColumn1 > div,.footerColumn2 >div,.footerColumn3>div{
+
+margin: 6px
+}

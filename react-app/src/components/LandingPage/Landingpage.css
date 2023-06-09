@@ -14,6 +14,8 @@
     border-radius: 10px;
     width: 600px;
     height: 700px;
+    border:1px white solid;
+
 
 }
 
@@ -30,7 +32,22 @@
     background-color: #f47521;
     color: black;
     border: none;
+    cursor: pointer;
     margin-left: 20px;
+}
+
+.demo-button > button {
+    width: 170px;
+    height: 40px;
+    background-color: #f47521;
+    color: black;
+    border: none;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.demo-button {
+    text-align: center;
 }
 
 .guest-button {
@@ -61,4 +78,14 @@
 .imgs-with-form > #boondock-left {
     position: relative;
     left: 150px;
+}
+
+.guest-button-a{
+    text-decoration: underline;
+    color: #f47521;
+    cursor:pointer;
+}
+
+.landingPageLogo{
+    margin-top: 5px;
 }

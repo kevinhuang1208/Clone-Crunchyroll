@@ -32,32 +32,19 @@ const EpisodeForm = () => {
         )
     }
 
-    // console.log('user id --->>>>', userId)
-    // // console.log('anime ---->>>>', animeId)
-    // console.log('anime from state', anime)
-    // // if anime.authorId == userId.id
-    // if(!userId) {
-    //     history.push('/anime')
-    // }
     if (userId === null || userId.id !== anime.authorId) {
         // alert('You are not authorized to post an episode for this anime')
         history.push('/anime')
     }
 
-
-
-
-
-
-
-    const resetFile = (e) => {
-        console.log("this isisi siis is hit")
-        console.log("e.target -> ", e.target)
-        // console.log("e.target -> ",e.tar)
-        // e.target.files[0] = null
-        e.preventDefault()
-        setVideoLink(undefined)
-    }
+    // const resetFile = (e) => {
+    //     console.log("this isisi siis is hit")
+    //     console.log("e.target -> ", e.target)
+    //     // console.log("e.target -> ",e.tar)
+    //     // e.target.files[0] = null
+    //     e.preventDefault()
+    //     setVideoLink(undefined)
+    // }
     const formValidate = () => {
         const newFormErrors = {}
         if (!episodeNum) {
@@ -85,7 +72,7 @@ const EpisodeForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         // console.log("coverpic : ", Object.keys(videoLink))
-        formValidate()
+        // formValidate()
         const formData = new FormData()
         formData.append("episode_number", episodeNum)
         formData.append("description", description)
@@ -94,21 +81,17 @@ const EpisodeForm = () => {
         formData.append("title", title)
         formData.append("episode_cover_picture", coverPicture)
 
-        console.log('EPISODE FORM DATA FROM REACT COMPONENT ->', formData)
-        // const newAnime = {
-        //     "episodeNum": episodeNum,
-        //     "description": description,
-        //     "release_date": releaseDate,
-        //     "cover_picture": videoLink
-        // }
-
-        if (!Object.values(errors).length) {
-            console.log("anime:", formData)
-            const res = await dispatch(postEpisodeThunk(animeId, formData))
-            if (res.id) {
-                history.push(`/anime/${animeId}/episodes/${res.id}`)
-            }
+        const res = await dispatch(postEpisodeThunk(animeId, formData))
+        if (res.errors) {
+            console.log('inside if cond',res.errors)
+            setErrors(res.errors)
+            console.log('errors state', errors)
+            return
         }
+        else {
+            history.push(`/anime/${animeId}/episodes/${res.id}`)
+        }
+        // }
 
 
     }
@@ -123,6 +106,10 @@ const EpisodeForm = () => {
     return (
         <div className="createAnimeFormContainer">
             <h1 className="formHeader">Create an Episode for your Anime</h1>
+            {errors.length ?
+                <ul>
+                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                </ul> : null}
             <form onSubmit={handleSubmit}>
                 <label>
                     Episode Title:
@@ -132,7 +119,6 @@ const EpisodeForm = () => {
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                     />
-                    <p className="formError">{errors.title}</p>
                 </label>
                 <label>
                     Description:
@@ -142,7 +128,6 @@ const EpisodeForm = () => {
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                     />
-                    <p className="formError">{errors.description}</p>
                 </label>
                 <label>
                     Release Date:
@@ -152,7 +137,6 @@ const EpisodeForm = () => {
                         value={releaseDate}
                         onChange={(e) => setReleaseDate(e.target.value)}
                     />
-                    <p className="formError">{errors.videoLink}</p>
                 </label>
 
                 <label>
@@ -163,7 +147,6 @@ const EpisodeForm = () => {
                         value={episodeNum}
                         onChange={(e) => setEpisodeNum(e.target.value)}
                     />
-                    <p className="formError">{errors.episodeNum}</p>
                 </label>
                 <label>
                     Episode Cover Image:
@@ -174,7 +157,6 @@ const EpisodeForm = () => {
                         filename={coverPicture && coverPicture.name}
                         onChange={(e) => setCoverPicture(e.target.files[0])}
                     />
-                    <p className="formError">{errors}</p>
                 </label>
                 <label>
                     Video File:
@@ -185,11 +167,7 @@ const EpisodeForm = () => {
                         filename={videoLink && videoLink.name}
                         onChange={(e) => setVideoLink(e.target.files[0])}
                     />
-                    <p className="formError">{errors}</p>
                 </label>
-                    {videoLink && videoLink.name && (
-                        <button onClick={(e) => resetFile(e)}>Remove File</button>
-                    )}
                 <button>Submit Episode</button>
 
             </form>

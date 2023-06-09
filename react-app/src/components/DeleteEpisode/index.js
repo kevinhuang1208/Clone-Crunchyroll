@@ -9,6 +9,8 @@ import { useModal } from "../../context/Modal";
 import { deleteAnimeThunk } from "../../store/anime";
 import { deleteEpisodeThunk } from "../../store/animeDetail"
 import { getAnimeEpisodesThunk } from "../../store/animeDetail";
+import "./DeleteEpisode.css"
+
 const DeleteEpisodeModal = ({ episode}) => {
   const dispatch = useDispatch()
   const { closeModal } = useModal();
@@ -36,14 +38,14 @@ const DeleteEpisodeModal = ({ episode}) => {
   // }, [dispatch, spot])
 
   return (
-    <>
+    <div className='delete-modal-container'>
       <h1>Confirm Delete</h1>
       <div className="random-text">Are you sure you want to remove this Episode?</div>
       <div className="delete-two-buttons">
-        <button onClick={(e) => handleClick(e)}>Yes (Delete Episode)</button>
-        <button onClick={(e) => closeModal()}>No (Keep Episode)</button>
+        <button className='buttons-in-modal' onClick={(e) => handleClick(e)}>Yes (Delete Episode)</button>
+        <button className='buttons-in-modal' onClick={(e) => closeModal()}>No (Keep Episode)</button>
       </div>
-    </>
+    </div>
   );
 }
 

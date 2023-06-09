@@ -55,12 +55,12 @@ function ProfilePage() {
               ADD AN ANIME
               </NavLink>
             </div> : null}
-            <h3></h3>
+            {/* <h3></h3>
             <OpenModalMenuItem
               className="delete-button"
               itemText="Change My Credentials"
               modalComponent={<ChangeCredentialModal user={user} key={user.id}/>}
-            />
+            /> */}
             <OpenModalMenuItem
               className="delete-button"
               itemText="Delete My Account (PERMANENT)"

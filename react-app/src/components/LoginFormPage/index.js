@@ -3,7 +3,10 @@ import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import './LoginForm.css';
-
+// NOT IN USE
+// NOT IN USE
+// NOT IN USE
+// NOT IN USE
 function LoginFormPage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);

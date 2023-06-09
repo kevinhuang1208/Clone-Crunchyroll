@@ -73,7 +73,7 @@ function SignupFormPage() {
             required
           />
         </label>
-        <button type="submit" className="button">CREATE ACCOUNT</button>
+        <button title={password.length<1 || email.length <1 || confirmPassword.length<1 || username.length <1?"Please fill out all fields": "Submit"}type="submit" className="button" disabled={password.length<1 || email.length <1 || confirmPassword.length<1 || username.length <1}>CREATE ACCOUNT</button>
       </form>
     </>
   );

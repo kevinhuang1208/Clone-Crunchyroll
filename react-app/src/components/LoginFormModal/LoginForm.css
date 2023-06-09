@@ -1,3 +1,19 @@
 #modal-content {
     text-align: center;
 }
+button{
+    font-family: sans-serif;
+    font-weight: bold;
+    color: grey;
+    margin-top: 10px;
+}
+
+button:disabled{
+    background-color: lightgrey;
+    color: darkgrey;
+}
+
+button:enabled:hover{
+    background-color: orange;
+    
+}

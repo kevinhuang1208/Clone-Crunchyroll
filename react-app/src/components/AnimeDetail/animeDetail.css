@@ -27,14 +27,40 @@
 
 }
 
-.reviewsMapDiv>div {
+
+.userNavLink{
+    display:inline-block;
+    text-decoration:none;
+    font-size: 18px;
+    
+}
+.userNavLink{
+    display: inline-block;
+    color:white
+}
+.userNavLink:hover{
+    display: inline-block;
+    font-size: 20px;
+    color:#f47521
+    
+}
+.navLinkDivforReview{
+    width:20%;
+}
+.entireSingleReviewDiv{
+    display:inline-flex;
+    flex-direction: column;
+    padding: 8px;
     width: 65%;
     margin-left: 10px;
-    border: solid 5px grey
-}
+    border: solid 3px #f47521;
+    border-radius: 8px;
+    margin: 6px;
 
-.reviewsMapDiv>div>p {
-    width: 50%
+}
+.reviewDescriptionPtag{
+    width: 100%;
+    word-break:break-all;
 }
 
 .remove-favorite-tern>button,
@@ -46,25 +72,41 @@
     font-size: 20px;
     border: none;
     margin: 10px;
+    cursor: pointer;
+}
+
+.wholeContainer > .delete-anime-button {
+    background-color: #f47521;
+    height: 50px;
+    color: black;
+    font-size: 20px;
+    border: none;
+    margin: 10px;
+    cursor: pointer;
 }
 
 
 .review-div {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    width: 250px;
+    justify-content: space-around;
+    width: 300px;
 }
 
 .desc-and-photo-split {
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
-
+.desc-photo{
+    margin-left: 50px;
+}
 .desc-photo>img {
     width: 330px;
     height: 330px;
-    border: 2px solid white;
+    border: 2px solid #F47521;
+    object-fit: fill;
+    border-radius: 5px;
 }
 
 .desc-container>div {
@@ -78,4 +120,30 @@
 
 .remove-favorite-tern {
     margin-left: -10px;
+}
+
+.reviewsHeaderDetail{
+    margin-left:10px;
+}
+
+.CreateReviewModal {
+    background-color: #f47521;
+    height: 50px;
+    color: black;
+    font-size: 20px;
+    border: none;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.delete-episode-button {
+    background-color: #f47521;
+    height: 30px;
+    font-weight: 700;
+    width: 200px;
+    color: black;
+    font-size: 20px;
+    border: none;
+    margin: 10px;
+    cursor: pointer;
 }

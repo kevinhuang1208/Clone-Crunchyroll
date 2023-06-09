@@ -15,9 +15,9 @@ export const deleteEpisodeThunk = (episodeId) => async(dispatch) => {
     })
     const data = await response.json()
     if(response.ok){
-        console.log("------------////////////")
-        console.log("DELETE EPISODE DATA: ", data)
-        console.log("///////////-------------")
+        // console.log("------------////////////")
+        // console.log("DELETE EPISODE DATA: ", data)
+        // console.log("///////////-------------")
         dispatch(deleteEpisode(data))
         return data
     }
@@ -37,17 +37,10 @@ export const postEpisodeThunk = (animeId, episode) => async (dispatch) => {
     })
     const data = await response.json()
     if(response.ok){
-        console.log("------------////////////")
-        console.log("POST EPISODE DATA: ", data)
-        console.log("///////////-------------")
         dispatch(postEpisode(data))
         return data
     }
-    console.log("episode POST response NOT ok")
-    console.log("response: ",response)
-    console.log("---------------")
-    console.log("data: ",data)
-    return null
+    return data
 }
 
 const getSingleAnimeEpisodes = (episodes) => {

@@ -24,7 +24,7 @@ body{
     100% {background-position: left}
   } */
 :root {
-  --gradient: linear-gradient(130deg, #060606, rgb(4, 0, 28), #200101);
+  --gradient: linear-gradient(130deg, #060606, , black);
   margin: 0;
   /* height: fit-content; */
 }
@@ -32,7 +32,8 @@ body{
 body {
   font-family: basic-sans, sans-serif;
   color: white;
-  background-image: var(--gradient);
+  /* background-image: var(--gradient); */
+  background:rgb(23, 23, 23);
   margin: 0;
 }
 

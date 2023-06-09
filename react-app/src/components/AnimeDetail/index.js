@@ -28,7 +28,7 @@ function AnimeDetail() {
   // const [stateTest, setStateTest] = useState()
 
   const user = useSelector((state) => state.session.user);
-  console.log('THIS IS THE USER ---->>>', user)
+  // console.log('THIS IS THE USER ---->>>', user)
   let userFavorites = 'user.favorites'
   if (user) {
     userFavorites = user.favorites
@@ -40,6 +40,7 @@ function AnimeDetail() {
   const episodesOfAnime = Object.values(episodesOfAnimeObj)
 
   const singleAnime = animeObj[animeId]
+  console.log('find this thang -  -- - - - - - - - - - -- - -- -',singleAnime)
 
   const reviewsObj = useSelector((state) => state.reviews)
   const reviewsArr = Object.values(reviewsObj)
@@ -129,37 +130,40 @@ function AnimeDetail() {
           </div>
           </div>
         <div className="desc-photo">
-          <img src="https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png"/>
+          <img src={singleAnime.coverPicture}/>
         </div>
       </div>
 
 
       <div className='listOfEpisodesDiv'>
         {episodesOfAnime.map((episode) => (
+
           <div className="singleEpisodeDiv" key={episode.id}>
             <h2>{singleAnime.showname} </h2>
-
             <div className='episodeWatchNow'>
               <h3>Episode: {episode.episodeNumber}, {episode.title}</h3>
 
               <NavLink exact to={`/anime/${singleAnime.id}/episodes/${episode.id}`}>
                 <img src={episode.episodeCoverImage} />
               </NavLink>
-              {user && user.id == animeObj[animeId].authorId && (
-                <OpenModalMenuItem
-                  className="delete-button"
-                  itemText="Delete this episode"
-                  modalComponent={<DeleteEpisodeModal episode={episode} key={`${episode.id}-episode`} />}
-                />
-              )
-              }
+            {user && user.id == animeObj[animeId].authorId && (
+              <div className='delete-episode-button'>
+              <OpenModalMenuItem
+                className="delete-button"
+                itemText="Delete this episode"
+                modalComponent={<DeleteEpisodeModal episode={episode} key={`${episode.id}-episode`} />}
+              />
+              </div>
+            )
+            }
             </div>
             <p className='episodeDescription'>{episode.desc}</p>
           </div>
+
         ))}
       </div>
       {(!user) ? null : (singleAnime.authorId === user.id) ? (
-        <button>
+        <button className='delete-anime-button'>
           <OpenModalMenuItem
             className="delete-button"
             itemText="Delete this Anime"
@@ -180,7 +184,7 @@ function AnimeDetail() {
           </button>) : null
       }
 
-      <h1>Reviews:</h1>
+      <h1 className = 'reviewsHeaderDetail'>Reviews:</h1>
       <div className='reviewsMapDiv'>
         {reviewsArr.map((review) => (
           <Review review={review} user={user} key={review.id} />

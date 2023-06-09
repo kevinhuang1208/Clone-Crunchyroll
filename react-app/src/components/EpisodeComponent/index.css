@@ -1,3 +1,22 @@
+.videoplayerandDescription{
+    display:flex;
+    width : 100%;
+    justify-content: center;
+}
 .episodeComponentDiv{
+    width:100%;
+    display:inline-flex;
+    flex-direction:column;
+    align-self: center;
+}
 
+.descriptionDivEpisode
+{
+    align-self: center;
+    display:inline-block;
+    width: 40%;
+    margin:50px;
+}
+.headerandDescription{
+    width:40%;
 }
