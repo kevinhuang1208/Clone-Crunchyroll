@@ -70,16 +70,16 @@ const editSingleUser = (user) => {
 }
 
 export const editSingleUserThunk = (user, userId) => async (dispatch) => {
-    console.log("user: ", user)
-    console.log("userId: ", userId)
+    // console.log("user: ", user)
+    // console.log("userId: ", userId)
     const response = await fetch(`/api/users/${userId}/edit`, {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(user)
     })
-    console.log("this is response before json", response)
+    // console.log("this is response before json", response)
     const data = await response.json();
-    console.log("this is data", data)
+    // console.log("this is data", data)
     if (response.ok) {
         dispatch(editSingleUser(data));
         // dispatch(editSingleSessionUser(data))
@@ -124,9 +124,9 @@ const getSingleUser = (user) => {
 export const getSingleUserThunk = (userId) => async (dispatch) => {
     const response = await fetch(`/api/users/${userId}`)
     const data = await response.json()
-    console.log("-----------")
-    console.log(data)
-    console.log("-----------")
+    // console.log("-----------")
+    // console.log(data)
+    // console.log("-----------")
     if (response.ok) {
         // IF WE WANT TO NORMALIZE FAVORITES:
         const normalFavorites = {}
@@ -144,17 +144,17 @@ export const getSingleUserThunk = (userId) => async (dispatch) => {
         dispatch(getSingleUser(data))
         return data
     }
-    console.log("user response NOT ok")
-    console.log("response: ", response)
-    console.log("---------------")
-    console.log("data: ", data)
+    // console.log("user response NOT ok")
+    // console.log("response: ", response)
+    // console.log("---------------")
+    // console.log("data: ", data)
     return null
 }
 
 const initialState = {}
 
 const userReducer = (state = initialState, action) => {
-    console.log(action)
+    // console.log(action)
     switch (action.type) {
         case GET_SINGLE_USER: {
             let newState = {}
@@ -168,7 +168,7 @@ const userReducer = (state = initialState, action) => {
         }
         case DELETE_USER_FAVORITE: {
             let newState = {...state}
-            console.log('REDUCER FAV ID --->',action.animeId)
+            // console.log('REDUCER FAV ID --->',action.animeId)
             delete newState.favorites[action.animeId]
             return newState
         }
@@ -177,7 +177,7 @@ const userReducer = (state = initialState, action) => {
             let newState = {}
             let favoritesObj = {}
             newState = { ...action.payload.editedUser }
-            console.log("THIS IS NEW STATE BEFORE FOREACH", newState)
+            // console.log("THIS IS NEW STATE BEFORE FOREACH", newState)
             newState.favorites.forEach((favorite) => {
                 favoritesObj[favorite.animeId] = favorite.animeId
             })

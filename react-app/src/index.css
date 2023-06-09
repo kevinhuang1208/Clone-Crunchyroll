@@ -25,16 +25,22 @@ body{
   } */
 :root {
   --gradient: linear-gradient(130deg, #060606, , black);
-  margin: 0;
+  /* margin: 10px 200px; */
   /* height: fit-content; */
 }
+.nav-ul {
+  padding: 10px 160px;
+}
+/* body {
+  margin: 10px 200px;
+} */
 
 body {
   font-family: basic-sans, sans-serif;
   color: white;
   /* background-image: var(--gradient); */
   background:rgb(23, 23, 23);
-  margin: 0;
+  margin: 10px 200px;
 }
 
 html {

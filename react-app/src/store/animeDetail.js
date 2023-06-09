@@ -59,13 +59,13 @@ export const getAnimeEpisodesThunk = (animeId) => async (dispatch) => {
             normalEpisodes[episode.id] = episode
         })
         dispatch(getSingleAnimeEpisodes(normalEpisodes))
-        console.log("normalEpisodes: ", normalEpisodes)
+        // console.log("normalEpisodes: ", normalEpisodes)
         return normalEpisodes
     }
-    console.log("episodes response NOT ok")
-    console.log("response: ",response)
-    console.log("---------------")
-    console.log("data: ",data)
+    // console.log("episodes response NOT ok")
+    // console.log("response: ",response)
+    // console.log("---------------")
+    // console.log("data: ",data)
     return null
 }
 

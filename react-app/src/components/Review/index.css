@@ -1,9 +1,17 @@
-.review-buttons-div > button {
+.review-buttons-div > div {
     background-color: #f47521;
-    height: 50px;
+    height: 40px;
+    width: 140px;
     color: black;
     font-size: 20px;
     border: none;
     margin: 10px;
     cursor: pointer;
+    text-align: center;
+    vertical-align: center;
+}
+
+.review-buttons-div {
+    display: flex;
+    flex-direction: row;
 }

@@ -7,7 +7,7 @@
 
 .allColumns {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .footerColumn3 {
@@ -20,7 +20,7 @@
     display: flex;
 }
 .contributers{
- margin: 0;
+ margin-right: 30px;
 }
 .footerNameBlock{
     display:flex;
@@ -43,4 +43,18 @@
 .footerColumn1 > div,.footerColumn2 >div,.footerColumn3>div{
 
 margin: 6px
+}
+
+
+
+.firsttwo-columns {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.titles {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }

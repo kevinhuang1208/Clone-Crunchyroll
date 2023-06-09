@@ -67,7 +67,7 @@ function LoginFormModal() {
             required
           />
         </label>
-        <button type="submit" disabled={password.length<1 && email.length <1}>Log In</button>
+        <button type="submit" disabled={password.length<1 || email.length <1}>Log In</button>
       </form>
       <div className="demo-button">
       <button type="submit"

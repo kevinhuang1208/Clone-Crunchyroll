@@ -3,6 +3,7 @@ import { useModal } from "../../context/Modal"
 import { useHistory } from 'react-router-dom';
 import { useSelector } from "react-redux"
 import { deleteSingleUserThunk } from "../../store/user"
+import "./DeleteUser.css"
 
 const DeleteUser = ({user}) =>{
     const {closeModal} = useModal();

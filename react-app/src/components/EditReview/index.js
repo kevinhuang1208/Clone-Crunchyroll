@@ -18,10 +18,10 @@ const EditReview = ({ review, user }) => {
 
     let starArr = [1, 2, 3, 4, 5]
 
-    console.log('edit review', review)
+    // console.log('edit review', review)
     useEffect(() => {
-        console.log('stars used for the hover ---->', stars)
-        console.log('stars used for rating ---->', actualRating)
+        // console.log('stars used for the hover ---->', stars)
+        // console.log('stars used for rating ---->', actualRating)
         // console.log(`current index: ${index} -- current stars : ${stars} -- boolean current index > stars = ${index}`)
 
     }, [stars, actualRating])
@@ -33,7 +33,7 @@ const EditReview = ({ review, user }) => {
         const formData = new FormData()
         formData.append('review', writeReview)
         formData.append('rating', actualRating)
-        console.log('-------------', review.animeId, review.id)
+        // console.log('-------------', review.animeId, review.id)
         const res = await dispatch(editAnimeReviewThunk(formData, review.animeId, review.id))
         await dispatch(getAnimeReviewsThunk(review.animeId))
         await dispatch(getAllAnimeThunk())

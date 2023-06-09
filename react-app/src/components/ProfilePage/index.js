@@ -15,10 +15,10 @@ import "./ProfilePage.css";
 function ProfilePage() {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user);
-    console.log('this is user', user)
+    // console.log('this is user', user)
 
     const paramUser = useSelector((state) => state.user)
-    console.log("this is state user to extract data for params", paramUser)
+    // console.log("this is state user to extract data for params", paramUser)
 
     const animes = useSelector((state) => state.anime)
 
@@ -50,7 +50,7 @@ function ProfilePage() {
             { user.id == userId ?
             <div className="ternary-info">
             <h2>Hello, {user.username}</h2>
-            {user.studio ? <div className="studio-member">Studio Member
+            {user.studio ? <div className="studio-member">As a Studio Member, you can:
             <NavLink exact to={"/anime/new"} className='nav-to-make-anime'>
               ADD AN ANIME
               </NavLink>
@@ -61,11 +61,13 @@ function ProfilePage() {
               itemText="Change My Credentials"
               modalComponent={<ChangeCredentialModal user={user} key={user.id}/>}
             /> */}
+            {/* <button>
             <OpenModalMenuItem
               className="delete-button"
               itemText="Delete My Account (PERMANENT)"
               modalComponent={<DeleteUser user={user} key={user.id}/>}
             />
+            </button> */}
             </div>
 
             :

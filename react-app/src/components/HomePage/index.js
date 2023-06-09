@@ -23,9 +23,9 @@ function HomePage() {
       dispatch(getSingleUserThunk(user.id))
     }
   }, [dispatch])
-  console.log(user)
-  console.log(animeIds)
-  console.log(animeIds.length)
+  // console.log(user)
+  // console.log(animeIds)
+  // console.log(animeIds.length)
   const animesArr = Object.values(animes)
     return (
       <div className = 'homePageDiv'>
@@ -34,10 +34,13 @@ function HomePage() {
           (user && animeIds && animeIds.length) ? <FavoritesBar animes={animes} user={user} animeIds={animeIds}/> : null
         }
         <div className = 'allAnimeContainer'>
+          {/* <span>
+          <h2>Anime</h2>
+          </span> */}
         {
 
           animesArr.map(anime => (
-            <AnimeTile anime={anime} />
+            <AnimeTile key ={`anime-tile-${anime.id}`} anime={anime} />
           ))
 
         }

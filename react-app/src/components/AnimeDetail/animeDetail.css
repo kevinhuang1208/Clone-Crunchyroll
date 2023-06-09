@@ -8,8 +8,9 @@
     margin-top: 15px;
     border-top: 3px #F47521 solid;
     display: flex;
-    justify-content: space-evenly;
+    justify-content:center;
     border-bottom: 3px #F47521 solid;
+    flex-wrap: wrap;
 }
 
 .wholeContainer {
@@ -18,7 +19,8 @@
 }
 
 .singleEpisodeDiv {
-    width: 400px
+    width: 280px;
+    margin: 15px;
 }
 
 .reviewsMapDiv {
@@ -75,14 +77,16 @@
     cursor: pointer;
 }
 
-.wholeContainer > .delete-anime-button {
+.delete-anime-button > div{
     background-color: #f47521;
-    height: 50px;
+    height: 30px;
+    width: 200px;
     color: black;
     font-size: 20px;
     border: none;
     margin: 10px;
     cursor: pointer;
+    text-align: center;
 }
 
 
@@ -136,7 +140,7 @@
     cursor: pointer;
 }
 
-.delete-episode-button {
+.delete-episode-button > div{
     background-color: #f47521;
     height: 30px;
     font-weight: 700;
@@ -146,4 +150,18 @@
     border: none;
     margin: 10px;
     cursor: pointer;
+    text-align: center;
+}
+
+.episodeCoverImageDiv{
+    width:100%;
+}
+.episodeCoverImage{
+   width:100%;
+   border-radius: 6px;
+   object-fit: cover;
+}
+
+.episodeDescription{
+    font-size:14px;
 }

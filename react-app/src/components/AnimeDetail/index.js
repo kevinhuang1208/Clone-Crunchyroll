@@ -24,7 +24,7 @@ function AnimeDetail() {
   // array of episodes and we have a link to each one infividually to a video player with the AWS url
   const animeObj = useSelector((state) => state.anime);
   const anime = Object.values(animeObj)
-  console.log("anime", anime);
+  // console.log("anime", anime);
   // const [stateTest, setStateTest] = useState()
 
   const user = useSelector((state) => state.session.user);
@@ -40,7 +40,7 @@ function AnimeDetail() {
   const episodesOfAnime = Object.values(episodesOfAnimeObj)
 
   const singleAnime = animeObj[animeId]
-  console.log('find this thang -  -- - - - - - - - - - -- - -- -',singleAnime)
+  // console.log('find this thang -  -- - - - - - - - - - -- - -- -', singleAnime)
 
   const reviewsObj = useSelector((state) => state.reviews)
   const reviewsArr = Object.values(reviewsObj)
@@ -86,51 +86,57 @@ function AnimeDetail() {
 
   }, [dispatch, Object.values(episodesOfAnimeObj).length]);
 
-  if (!singleAnime) return null
+  if (!singleAnime || false) return null
+  console.log(singleAnime)
+  // if (!episodesOfAnime.length) {
+  //   return (
+  //     <h1>Loading</h1>
+  //   )
+  // }
 
   return (
     <div className="wholeContainer">
       <div className="desc-and-photo-split">
         <div className="desc-container">
-            <div className="TitleAnimeDetail">
-              <h2 className='showNameHeader'>{singleAnime.showname}</h2>
-            </div>
-            <div className="review-div">
-              <div className="AverageRatingAnimeDetail">
+          <div className="TitleAnimeDetail">
+            <h2 className='showNameHeader'>{singleAnime.showname}</h2>
+          </div>
+          <div className="review-div">
+            <div className="AverageRatingAnimeDetail">
               Average Rating: {singleAnime.avgRating}
-              </div>
-              <> | </>
-              <div className="ReviewCountAnimeDetail">
-                 {singleAnime.reviewCount} Review(s)
-              </div>
             </div>
-      <div className="the-buttons-in-desc">
-      {user &&
-        (<div className="remove-favorite-tern">
-          <button className="remove-fav" onClick={(e) => handleClick(e)}>{isFavorite ? "Remove from Favorites!" : "Add to Favorites!"}</button>
-        </div>)
-      }
-      {(user && user.id === singleAnime.authorId) && (
-        <>
-          <div className="anime-page-edit-button">
-            <button onClick={() => history.push(`/anime/${animeId}/edit`)}>
-              Edit your anime
-            </button>
+            <> | </>
+            <div className="ReviewCountAnimeDetail">
+              {singleAnime.reviewCount} Review(s)
+            </div>
           </div>
-          <div className="anime-page-episode-post-button">
-            <button onClick={() => history.push(`/anime/${animeId}/episodes/new`)}>
-              Add an Episode
-            </button>
+          <div className="the-buttons-in-desc">
+            {user &&
+              (<div className="remove-favorite-tern">
+                <button className="remove-fav" onClick={(e) => handleClick(e)}>{isFavorite ? "Remove from Favorites!" : "Add to Favorites!"}</button>
+              </div>)
+            }
+            {(user && user.id === singleAnime.authorId) && (
+              <>
+                <div className="anime-page-edit-button">
+                  <button onClick={() => history.push(`/anime/${animeId}/edit`)}>
+                    Edit your anime
+                  </button>
+                </div>
+                <div className="anime-page-episode-post-button">
+                  <button onClick={() => history.push(`/anime/${animeId}/episodes/new`)}>
+                    Add an Episode
+                  </button>
+                </div>
+              </>
+            )}
           </div>
-        </>
-      )}
-      </div>
           <div className='DescriptionAnimeDetail'>
             {singleAnime.desc}
           </div>
-          </div>
+        </div>
         <div className="desc-photo">
-          <img src={singleAnime.coverPicture}/>
+          <img src={singleAnime.coverPicture} />
         </div>
       </div>
 
@@ -139,23 +145,24 @@ function AnimeDetail() {
         {episodesOfAnime.map((episode) => (
 
           <div className="singleEpisodeDiv" key={episode.id}>
-            <h2>{singleAnime.showname} </h2>
             <div className='episodeWatchNow'>
               <h3>Episode: {episode.episodeNumber}, {episode.title}</h3>
 
               <NavLink exact to={`/anime/${singleAnime.id}/episodes/${episode.id}`}>
-                <img src={episode.episodeCoverImage} />
+                <div className='episodeCoverImageDiv'>
+                  <img className='episodeCoverImage' src={episode.episodeCoverImage} />
+                </div>
               </NavLink>
-            {user && user.id == animeObj[animeId].authorId && (
-              <div className='delete-episode-button'>
-              <OpenModalMenuItem
-                className="delete-button"
-                itemText="Delete this episode"
-                modalComponent={<DeleteEpisodeModal episode={episode} key={`${episode.id}-episode`} />}
-              />
-              </div>
-            )
-            }
+              {user && user.id == animeObj[animeId].authorId && (
+                <div className='delete-episode-button'>
+                  <OpenModalMenuItem
+                    className="delete-button"
+                    itemText="Delete this episode"
+                    modalComponent={<DeleteEpisodeModal episode={episode} key={`${episode.id}-episode`} />}
+                  />
+                </div>
+              )
+              }
             </div>
             <p className='episodeDescription'>{episode.desc}</p>
           </div>
@@ -163,13 +170,13 @@ function AnimeDetail() {
         ))}
       </div>
       {(!user) ? null : (singleAnime.authorId === user.id) ? (
-        <button className='delete-anime-button'>
+        <div className='delete-anime-button'>
           <OpenModalMenuItem
             className="delete-button"
             itemText="Delete this Anime"
             modalComponent={<DeleteAnimeModal anime={singleAnime} key={singleAnime.id} />}
           />
-        </button>
+        </div>
       )
 
 
@@ -184,7 +191,7 @@ function AnimeDetail() {
           </button>) : null
       }
 
-      <h1 className = 'reviewsHeaderDetail'>Reviews:</h1>
+      <h1 className='reviewsHeaderDetail'>Reviews:</h1>
       <div className='reviewsMapDiv'>
         {reviewsArr.map((review) => (
           <Review review={review} user={user} key={review.id} />

@@ -16,7 +16,7 @@ def deleteFavorite(anime_id):
     """Remove a favorite from a users favorite table"""
     try:
         favorite_to_delete = Favorites.query.filter(Favorites.user_id == current_user.id, Favorites.anime_id == anime_id).one()
-        print(favorite_to_delete)
+        # print(favorite_to_delete)
         db.session.delete(favorite_to_delete)
         db.session.commit()
         return {"messsage": "favorite deleted"}
@@ -87,7 +87,7 @@ def edit_credential(id):
 
     # errors["queryInfo"] = [User.query.filter(User.username == form.data["username"])[0].to_dict(), User.query.filter(User.email == form.data["email"])[0].to_dict()]
     if form.validate_on_submit():
-        print("INSIDE VALIDEATE ON SUBMIT", form.data)
+        # print("INSIDE VALIDEATE ON SUBMIT", form.data)
         # or form.data["username"] == user.username
         if len(form.data["username"]) > 0:
             if User.query.filter(User.username == form.data["username"]).first() == -1:
@@ -113,7 +113,7 @@ def edit_credential(id):
             customError.status_code = 400
             return customError
     else:
-        print(form.errors)
+        # print(form.errors)
         return {"errors": form.errors}
 
 
@@ -122,7 +122,7 @@ def edit_credential(id):
 @login_required
 def delete(id):
     user_to_delete = User.query.get(id)
-    print("THIS IS USER TO DELETE", user_to_delete)
+    # print("THIS IS USER TO DELETE", user_to_delete)
     db.session.delete(user_to_delete)
     db.session.commit()
     return "user deleted brah"

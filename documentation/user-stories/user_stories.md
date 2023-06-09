@@ -63,10 +63,12 @@
 * When logged into a user without studio permission, the button to create an anime should not be displayed and I should not have access to the create an anime page/modal
 * If I am the creator of the anime page, I should have the ability to edit the information for that anime along with having the option to delete it.
 
+## Episodes(CRD)
+
 ### Posting Episode to the Anime Page
 
 * Only when logged in as a user with producer permissions, I should have the ability to add episodes to my anime's page `/anime/:animeId/new`.
-  * I should also have the ability to edit and delete the episodes only if I am the producer that posted the anime. 
+  * I should also have the ability to edit and delete the episodes on this page only if I am the producer that posted the anime. 
 
 ## Reviews (CRUD)
 

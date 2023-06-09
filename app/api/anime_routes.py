@@ -128,7 +128,7 @@ def get_one_anime(id):
 def delete(anime_id):
     """Route to delete the anime along with children"""
     anime_to_delete = Anime.query.get(anime_id)
-    print('<<<<<<<THIS IS THE ANIME TO DELETE >>>>>>>', anime_to_delete)
+    # print('<<<<<<<THIS IS THE ANIME TO DELETE >>>>>>>', anime_to_delete)
 
     if anime_to_delete is None:
         return {"message": "anime not found"}
@@ -150,7 +150,7 @@ def get_all_episodes(id):
 def post_anime_episode(anime_id):
     """"Route to post an anime episode to an anime"""
     # user_id = current_user.id
-    print('INSIDE THE POST ANIME ROUTE!!!!')
+    # print('INSIDE THE POST ANIME ROUTE!!!!')
     form = EpisodeForm()
 
     form["csrf_token"].data = request.cookies["csrf_token"]
@@ -209,7 +209,7 @@ def edit_anime(id):
     aws_link=''
 
     form = EditAnimeForm()
-    print(form.data)
+    # print(form.data)
     if form.data['cover_picture']:
         picture = form.data['cover_picture']
         picture.filename = get_unique_filename(picture.filename)
@@ -244,8 +244,8 @@ def get_anime_reviews(id):
         res = []
         for review in anime_reviews:
             reviewDict = review.to_dict()
-            print("review---: ", review.review_user_id)
-            print("review---: ", review.review_user_id.to_dict())
+            # print("review---: ", review.review_user_id)
+            # print("review---: ", review.review_user_id.to_dict())
             reviewDict["user"] = review.review_user_id.to_dict()
             res.append(reviewDict)
         # res = [review.to_dict() for review in anime_reviews]
@@ -294,9 +294,9 @@ def edit_review_route(anime_id, review_id):
 
 @anime_routes.route('/reviews/<int:review_id>/delete',methods =['DELETE'])
 def delete_review_route(review_id):
-    print('what is this even working')
+    # print('what is this even working')
     review_to_delete = Reviews.query.get(review_id)
-    print('------review to delete------',review_to_delete)
+    # print('------review to delete------',review_to_delete)
 
     if review_to_delete is None:
         return {'message': 'review cannot be found'}

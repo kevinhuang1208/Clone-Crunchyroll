@@ -7,7 +7,7 @@ from datetime import date
 
 def seed_anime():
     anime1 = Anime(
-      user_id= 2,
+      user_id= 3,
       showname= 'Rick and Morty',
       desc= 'Rick and Morty is the Emmy award-winning half-hour animated hit comedy series on Adult Swim that follows a sociopathic genius scientist who drags his inherently timid grandson on insanely dangerous adventures across the universe.',
       release_date=date(2013, 12, 2),
@@ -28,17 +28,33 @@ def seed_anime():
       cover_picture='https://cdn.discordapp.com/attachments/1113213089702228038/1115034279597068409/p9766190_b_v10_aa.jpg'
         )
     anime4 = Anime(
-      user_id= 2,
+      user_id= 3,
       showname='South Park',
       desc='South Park centers around four boys: Stan Marsh, Kyle Broflovski, Eric Cartman and Kenny McCormick. The boys live in the fictional small town of South Park, located within the real-life South Park basin in the Rocky Mountains of central Colorado, approximately a one-hour drive from Denver.',
       release_date= date(1997, 8, 13),
       cover_picture='https://cdn.discordapp.com/attachments/1113213089702228038/1115034888349962292/p184338_b_v13_aq.jpg'
+        )
+    anime5 = Anime(
+      user_id= 3,
+      showname='Popeye',
+      desc='Popeye, a pugnacious, wisecracking cartoon sailor who possesses superhuman strength after ingesting an always-handy can of spinach.',
+      release_date= date(1933, 7, 14),
+      cover_picture='https://cdn.discordapp.com/attachments/1113213089702228038/1116844335992930364/p13085838_b_v8_aa.png'
+        )
+    anime6 = Anime(
+      user_id= 3,
+      showname='Superman',
+      desc='The Fleischer Superman cartoons are a series of 17 animated short films released in Technicolor by Paramount Pictures and based upon the comic book character Superman, making them his first animated appearance.',
+      release_date= date(1941, 9, 26),
+      cover_picture='https://cdn.discordapp.com/attachments/1113213089702228038/1116844562267250788/MV5BMTg4NDU0NjM1Ml5BMl5BanBnXkFtZTgwMzM0NDQ1MjE.png'
         )
 
     db.session.add(anime1)
     db.session.add(anime2)
     db.session.add(anime3)
     db.session.add(anime4)
+    db.session.add(anime5)
+    db.session.add(anime6)
     db.session.commit()
 
 def undo_anime():

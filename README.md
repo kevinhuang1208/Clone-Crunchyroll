@@ -1,8 +1,21 @@
-# Flask React Project
+# PhillyRoll
 
-This is the starter for the Flask React project.
+This is a full-stack project reflecting what we have learned over the course of the program. PhillyRoll (https://phillyroll.onrender.com/), tasked to clone CrunchyRoll (https://www.crunchyroll.com/), is a project that encorporates the backend (databases, servers, routes) as well as the frontend (user/client side). Various technologies were used to help us achieve the site that it is today (listed below).
 
-## Getting started
+## Technologies
+
+Technologies used were Javascript, REACT, Redux, Amazon Web Services, Python, Flask, SQLAlchemy ,PostgreSQL.
+
+## Note
+Demo User Login and Demo Studio Login serve different purposes
+ * Demo Studio Login provides full access along with posting an anime and posting episodes to your anime
+ * Demo Login does NOT have access to posting videos/anime and has view only permissions. 
+
+## Home Page View
+![readme-example-1](https://cdn.discordapp.com/attachments/1113213089702228038/1116850373982949407/snip-anime-page.PNG)
+
+## Launching the App Locally
+
 1. Clone this repository (only this branch)
 
 2. Install dependencies
@@ -38,111 +51,34 @@ This is the starter for the Flask React project.
    ```bash
    flask run
    ```
+7. Open a new terminal while keeping the terminal running `flask` running.
 
-7. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
+8. In a NEW terminal, `cd` into `react-app` directory and run `npm install` to install all your dependencies before starting up the application. 
+
+9. Run `npm start` and it will open up your browser to http://localhost:3000
+
+10. Test our features!
 
 
-## Deployment through Render.com
+## Live Site
 
-First, refer to your Render.com deployment articles for more detailed
-instructions about getting started with [Render.com], creating a production
-database, and deployment debugging tips.
+We also have a live site for you to test our features at https://phillyroll.onrender.com/
 
-From the [Dashboard], click on the "New +" button in the navigation bar, and
-click on "Web Service" to create the application that will be deployed.
 
-Look for the name of the application you want to deploy, and click the "Connect"
-button to the right of the name.
 
-Now, fill out the form to configure the build and start commands, as well as add
-the environment variables to properly deploy the application.
+## Contributors:
+* Steven (Taylor) Cornwall
+   * Github: https://github.com/taylorcornwall766
+   * LinkedIn: https://www.linkedin.com/in/steven-cornwall-b4551b20b/
 
-### Part A: Configure the Start and Build Commands
+* Taylor Lim
+   * GitHub: https://github.com/tayjlim
+   * Linkdin: https://www.linkedin.com/in/tayjlim0592/
 
-Start by giving your application a name.
+* Danish Prasla
+   * GitHub: https://github.com/danishprasla
+   * Linkdin: https://www.linkedin.com/in/danish-prasla-819a7199/
 
-Leave the root directory field blank. By default, Render will run commands from
-the root directory.
-
-Make sure the Environment field is set set to "Python 3", the Region is set to
-the location closest to you, and the Branch is set to "main".
-
-Next, add your Build command. This is a script that should include everything
-that needs to happen _before_ starting the server.
-
-For your Flask project, enter the following command into the Build field, all in
-one line:
-
-```shell
-# build command - enter all in one line
-npm install --prefix react-app &&
-npm run build --prefix react-app &&
-pip install -r requirements.txt &&
-pip install psycopg2 &&
-flask db upgrade &&
-flask seed all
-```
-
-This script will install dependencies for the frontend, and run the build
-command in the __package.json__ file for the frontend, which builds the React
-application. Then, it will install the dependencies needed for the Python
-backend, and run the migration and seed files.
-
-Now, add your start command in the Start field:
-
-```shell
-# start script
-gunicorn app:app
-```
-
-_If you are using websockets, use the following start command instead for increased performance:_
-
-`gunicorn --worker-class eventlet -w 1 app:app`
-
-### Part B: Add the Environment Variables
-
-Click on the "Advanced" button at the bottom of the form to configure the
-environment variables your application needs to access to run properly. In the
-development environment, you have been securing these variables in the __.env__
-file, which has been removed from source control. In this step, you will need to
-input the keys and values for the environment variables you need for production
-into the Render GUI.
-
-Click on "Add Environment Variable" to start adding all of the variables you
-need for the production environment.
-
-Add the following keys and values in the Render GUI form:
-
-- SECRET_KEY (click "Generate" to generate a secure secret for production)
-- FLASK_ENV production
-- FLASK_APP app
-- SCHEMA (your unique schema name, in snake_case)
-- REACT_APP_BASE_URL (use render.com url, located at top of page, similar to
-  https://this-application-name.onrender.com)
-
-In a new tab, navigate to your dashboard and click on your Postgres database
-instance.
-
-Add the following keys and values:
-
-- DATABASE_URL (copy value from Internal Database URL field)
-
-_Note: Add any other keys and values that may be present in your local __.env__
-file. As you work to further develop your project, you may need to add more
-environment variables to your local __.env__ file. Make sure you add these
-environment variables to the Render GUI as well for the next deployment._
-
-Next, choose "Yes" for the Auto-Deploy field. This will re-deploy your
-application every time you push to main.
-
-Now, you are finally ready to deploy! Click "Create Web Service" to deploy your
-project. The deployment process will likely take about 10-15 minutes if
-everything works as expected. You can monitor the logs to see your build and
-start commands being executed, and see any errors in the build process.
-
-When deployment is complete, open your deployed site and check to see if you
-successfully deployed your Flask application to Render! You can find the URL for
-your site just below the name of the Web Service at the top of the page.
-
-[Render.com]: https://render.com/
-[Dashboard]: https://dashboard.render.com/
+* Kevin Huang
+   * GitHub: https://github.com/kevinhuang1208
+   * Linkdin: https://www.linkedin.com/in/kevin-huang-a53139186/

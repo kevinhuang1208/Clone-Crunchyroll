@@ -27,13 +27,17 @@ function App() {
   // <Route exact path='/'>
   //   <LandingPage />
   // </Route>
+  // <div className="master-container"> 
+  // </div>
   return (
     <>
 
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+       
 
+          
           <Route exact path='/'>
             <LandingPage />
           </Route>
@@ -70,13 +74,10 @@ function App() {
             <SignupFormPage />
           </Route>
 
-          <Route path='/anime/:animeId/episodes/:episodeId'>
+          <Route exact path='/anime/:animeId/episodes/:episodeId'>
             <EpisodeComponent />
           </Route>
-
-
-
-
+    
         </Switch>
       )}
       <Footer />

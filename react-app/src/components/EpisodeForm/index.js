@@ -4,6 +4,7 @@ import { postEpisodeThunk } from "../../store/animeDetail"
 import { useHistory } from 'react-router-dom'
 import { useParams } from "react-router-dom";
 import { getAllAnimeThunk } from '../../store/anime';
+import "./EpisodeForm.css"
 
 
 const EpisodeForm = () => {
@@ -16,6 +17,7 @@ const EpisodeForm = () => {
     const [title, setTitle] = useState('')
     const [coverPicture, setCoverPicture] = useState('')
     const [errors, setErrors] = useState([])
+    const [submitted, setSubmitted] = useState(false)
     const { animeId } = useParams();
 
     const userId = useSelector(state => state.session.user)
@@ -74,6 +76,7 @@ const EpisodeForm = () => {
         // console.log("coverpic : ", Object.keys(videoLink))
         // formValidate()
         const formData = new FormData()
+        setSubmitted(true)
         formData.append("episode_number", episodeNum)
         formData.append("description", description)
         formData.append("release_date", releaseDate)
@@ -83,9 +86,9 @@ const EpisodeForm = () => {
 
         const res = await dispatch(postEpisodeThunk(animeId, formData))
         if (res.errors) {
-            console.log('inside if cond',res.errors)
+            // console.log('inside if cond',res.errors)
             setErrors(res.errors)
-            console.log('errors state', errors)
+            // console.log('errors state', errors)
             return
         }
         else {
@@ -106,6 +109,9 @@ const EpisodeForm = () => {
     return (
         <div className="createAnimeFormContainer">
             <h1 className="formHeader">Create an Episode for your Anime</h1>
+            {submitted ? (
+                <h2 className='episode-form-loading'>Uploading video... please wait</h2>
+            ) : null}
             {errors.length ?
                 <ul>
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}
@@ -144,8 +150,10 @@ const EpisodeForm = () => {
                     <input
                         placeholder=""
                         type="number"
+                        min="1"
+                        max="99"
                         value={episodeNum}
-                        onChange={(e) => setEpisodeNum(e.target.value)}
+                        onChange={(e) => {e.target.value > 0 ? setEpisodeNum(e.target.value): setEpisodeNum(0)}}
                     />
                 </label>
                 <label>
@@ -168,7 +176,7 @@ const EpisodeForm = () => {
                         onChange={(e) => setVideoLink(e.target.files[0])}
                     />
                 </label>
-                <button>Submit Episode</button>
+                <button disabled={submitted}>Submit Episode</button>
 
             </form>
 

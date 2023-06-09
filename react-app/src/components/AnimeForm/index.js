@@ -14,7 +14,7 @@ const dateHelper = (dateParam) => {
 
 const AnimeForm = ({ anime, formType }) => {
 
-    console.log('PARAMS anime ~~~~~~~~>', anime)
+    // console.log('PARAMS anime ~~~~~~~~>', anime)
     // console.log('PARAMS formType ~~~~~~~~>', formType)
 
     let editDate = null
@@ -59,7 +59,7 @@ const AnimeForm = ({ anime, formType }) => {
     }
 
     const formValidate = () => {
-        console.log("FORM IS VALIDATING...")
+        // console.log("FORM IS VALIDATING...")
         const newFormErrors = {}
         if (!showname || showname.length > 255) {
             newFormErrors.showname = "Your show MUST have a showname and it must be less than 255 characters long."
@@ -73,10 +73,10 @@ const AnimeForm = ({ anime, formType }) => {
         if (!coverPicture && formType !== 'edit') {
             newFormErrors.coverPicture = "Your show MUST have a cover picture."
         }
-        console.log("NEWFORMERRORS:     :", newFormErrors)
+        // console.log("NEWFORMERRORS:     :", newFormErrors)
         if (Object.values(newFormErrors).length > 0) {
             setErrors(newFormErrors)
-            console.log('NEW FORM ERRORS INSIDE THE IF COND', newFormErrors)
+            // console.log('NEW FORM ERRORS INSIDE THE IF COND', newFormErrors)
             return newFormErrors
         }
         return false
@@ -198,17 +198,15 @@ const AnimeForm = ({ anime, formType }) => {
                         <img className="animeFormImage" src={anime.coverPicture} />
                     </div>
                 }
-                <label>
-                    Cover Picture
+                <label className='cover-upload' >
+                    Submit your Cover Image Here
                     <input
-                        className="file-input"
                         placeholder="insert a file here "
                         type="file"
                         accept='image/*'
                         filename={coverPicture && coverPicture.name}
                         onChange={(e) => setCoverPicture(e.target.files[0])}
                     />
-
                 </label>
                 <button
                 >Submit Anime

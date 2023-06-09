@@ -17,3 +17,7 @@ button:enabled:hover{
     background-color: orange;
     
 }
+
+.demo-button {
+    margin-right: 17px;
+}
