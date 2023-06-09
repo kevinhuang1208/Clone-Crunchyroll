@@ -43,7 +43,12 @@ const AnimeForm = ({ anime, formType }) => {
     //     e.target.value = undefined
     //     setCoverPicture(undefined)
     // }
-
+    // Date object
+// const date = new Date();
+// const currDay= String(date.getDate()).padStart(2, '0');
+// const currMonth = String(date.getMonth()+1).padStart(2,"0");
+// const currYear = date.getFullYear();
+// const currDate = `${currDay}-${currMonth}-${currYear}`;
     const userId = useSelector(state => state.session.user)
     // console.log(userId)
     if (!userId) {
@@ -208,7 +213,7 @@ const AnimeForm = ({ anime, formType }) => {
                         onChange={(e) => setCoverPicture(e.target.files[0])}
                     />
                 </label>
-                <button
+                <button disabled={!coverPicture || !showname || !releaseDate || !description}
                 >Submit Anime
                 </button>
 
