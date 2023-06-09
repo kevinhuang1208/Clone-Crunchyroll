@@ -192,7 +192,6 @@ const AnimeForm = ({ anime, formType }) => {
                         type="date"
                         value={releaseDate}
                         onChange={(e) => setReleaseDate(e.target.value)}
-                        max={currDate}
                     />
 
                 </label>
