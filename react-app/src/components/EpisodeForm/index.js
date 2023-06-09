@@ -176,7 +176,7 @@ const EpisodeForm = () => {
                         onChange={(e) => setVideoLink(e.target.files[0])}
                     />
                 </label>
-                <button disabled={submitted}>Submit Episode</button>
+                <button disabled={submitted || !coverPicture || !title || !videoLink || !releaseDate || !description || !episodeNum}>Submit Episode</button>
 
             </form>
 
