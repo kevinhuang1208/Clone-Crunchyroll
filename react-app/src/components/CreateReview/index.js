@@ -69,7 +69,7 @@ const CreateReview = ({ anime, user }) => {
                 <span>Stars</span>
 
                 <div className='submitButtonReviewDiv'>
-                    <button className="submitButtonReview " disabled={writeReview.length < 100}>Submit your review</button>
+                    <button className="submitButtonReview " disabled={writeReview.length < 100 || actualRating < 1}>Submit your review</button>
                 </div>
 
             </form>

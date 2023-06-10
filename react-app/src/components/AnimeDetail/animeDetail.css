@@ -34,7 +34,7 @@
     display:inline-block;
     text-decoration:none;
     font-size: 18px;
-    
+
 }
 .userNavLink{
     display: inline-block;
@@ -44,7 +44,7 @@
     display: inline-block;
     font-size: 20px;
     color:#f47521
-    
+
 }
 .navLinkDivforReview{
     width:20%;
@@ -130,12 +130,24 @@
     margin-left:10px;
 }
 
-.CreateReviewModal {
+/* .CreateReviewModal {
     background-color: #f47521;
     height: 50px;
     color: black;
     font-size: 20px;
     border: none;
+    margin: 10px;
+    cursor: pointer;
+} */
+
+.CreateReviewModal > div {
+    background-color: #f47521;
+    height: 30px;
+    width: 170px;
+    color: black;
+    font-size: 20px;
+    border: none;
+    text-align: center;
     margin: 10px;
     cursor: pointer;
 }
