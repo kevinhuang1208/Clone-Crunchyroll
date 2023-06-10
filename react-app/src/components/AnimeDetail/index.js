@@ -182,13 +182,13 @@ function AnimeDetail() {
 
 
         : (renderCreateReview(reviewsArr, user)) ? (
-          <button className='CreateReviewModal'>
+          <div className='CreateReviewModal'>
             <OpenModalMenuItem
               className='createReview'
               itemText='Create a Review!'
               modalComponent={<CreateReview anime={singleAnime} key={singleAnime.id} user={user} />}
             />
-          </button>) : null
+          </div>) : null
       }
 
       <h1 className='reviewsHeaderDetail'>Reviews:</h1>
