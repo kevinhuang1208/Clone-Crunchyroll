@@ -33,14 +33,14 @@ flex-direction: column;
    position: relative;
    border-radius: 6px;
    align-self: flex-start;
-   
-   
+
+
 }
 
 .animeTileHomePage .hover-div{
    visibility: hidden;
    text-align: center;
-   background-color: black;
+   background-color: #23252b;
    position: absolute;
    /* z-index: 1; */
    text-overflow: ellipsis;
@@ -49,10 +49,10 @@ flex-direction: column;
    height: 310px;
    border-radius: 6px;
    }
-   
+
 .animeTileHomePage:hover .hover-div{
    visibility: visible;
-   opacity: 0.8;
+   opacity: 0.9;
    cursor:pointer;
 }
 

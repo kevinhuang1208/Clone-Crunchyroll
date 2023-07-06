@@ -146,13 +146,27 @@ function AnimeDetail() {
 
           <div className="singleEpisodeDiv" key={episode.id}>
             <div className='episodeWatchNow'>
-              <h3>Episode: {episode.episodeNumber}, {episode.title}</h3>
-
               <NavLink exact to={`/anime/${singleAnime.id}/episodes/${episode.id}`}>
+
                 <div className='episodeCoverImageDiv'>
                   <img className='episodeCoverImage' src={episode.episodeCoverImage} />
                 </div>
+                <div className='episodeTileShow'>{singleAnime.showname}</div>
+                <div className="episodeTileTitle">Episode: {episode.episodeNumber}, {episode.title}</div>
               </NavLink>
+              {/* {user && user.id == animeObj[animeId].authorId && (
+                <div className='delete-episode-button'>
+                  <OpenModalMenuItem
+                    className="delete-button"
+                    itemText="Delete this episode"
+                    modalComponent={<DeleteEpisodeModal episode={episode} key={`${episode.id}-episode`} />}
+                  />
+                </div>
+              )
+              } */}
+            </div>
+            <div className='episodePanelHover'>
+              <div className="showTitleHover">{singleAnime.showname}</div>
               {user && user.id == animeObj[animeId].authorId && (
                 <div className='delete-episode-button'>
                   <OpenModalMenuItem
@@ -163,8 +177,11 @@ function AnimeDetail() {
                 </div>
               )
               }
+              <div className="episodeTitleHover">Episode: {episode.episodeNumber}, {episode.title}</div>
+              <div className="episodeDateHover">{episode.releaseDate}</div>
+              <div className="episodeDescriptionHover">{episode.desc}</div>
+
             </div>
-            <p className='episodeDescription'>{episode.desc}</p>
           </div>
 
         ))}
@@ -182,13 +199,13 @@ function AnimeDetail() {
 
 
         : (renderCreateReview(reviewsArr, user)) ? (
-          <button className='CreateReviewModal'>
+          <div className='CreateReviewModal'>
             <OpenModalMenuItem
               className='createReview'
               itemText='Create a Review!'
               modalComponent={<CreateReview anime={singleAnime} key={singleAnime.id} user={user} />}
             />
-          </button>) : null
+          </div>) : null
       }
 
       <h1 className='reviewsHeaderDetail'>Reviews:</h1>
