@@ -95,7 +95,7 @@ function HomePage() {
   additionalTransfrom={0}
   arrows
   autoPlaySpeed={3000}
-  centerMode={false}
+  centerMode={true}
   className=""
   containerClass="container-with-dots"
   dotListClass=""
