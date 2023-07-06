@@ -92,7 +92,7 @@ function HomePage() {
         (user && animeIds && animeIds.length) ? <FavoritesBar animes={animes} user={user} animeIds={animeIds} /> : null
       }
       <div className = 'divofCarro'>
-        <h1> Reccomended for you!</h1>  
+        <h1> Recommended for you!</h1>  
 
 
   <Carousel

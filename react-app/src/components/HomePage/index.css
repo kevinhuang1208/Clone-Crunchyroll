@@ -50,7 +50,7 @@ flex-direction: column;
    height: 310px;
    border-radius: 6px;
    width: 100%;
-   overflow-y: scroll;
+   overflow-y: auto;
    }
 
 .animeTileHomePage:hover .hover-div{
