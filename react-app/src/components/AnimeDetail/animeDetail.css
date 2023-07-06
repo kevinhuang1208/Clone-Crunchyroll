@@ -6,16 +6,25 @@
 
 .listOfEpisodesDiv {
     margin-top: 15px;
-    border-top: 3px #F47521 solid;
     display: flex;
-    justify-content:center;
+    /* justify-content:space-between; */
+    margin: 0 auto;
+    width: 90%;
     border-bottom: 3px #F47521 solid;
     flex-wrap: wrap;
+    
+}
+.episode-list-wrapper {
+    border-top: 3px #F47521 solid;
+    margin: 0 auto;
 }
 
 .wholeContainer {
     padding: 20px;
     margin: 0px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     max-width:1296px;
 }
 
