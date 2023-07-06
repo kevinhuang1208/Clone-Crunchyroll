@@ -48,3 +48,13 @@ html {
   /* position: relative; */
   margin: 0;
 }
+
+.main-body {
+  min-height: 100vh;
+  /* min-width: 100vw; */
+  position: relative;
+}
+.content-body {
+  padding-bottom: 100px;
+}
+

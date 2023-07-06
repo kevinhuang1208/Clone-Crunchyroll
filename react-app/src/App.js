@@ -30,7 +30,8 @@ function App() {
   // <div className="master-container"> 
   // </div>
   return (
-    <>
+    <div className="main-body">
+      <div className="content-body">
 
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
@@ -77,11 +78,11 @@ function App() {
           <Route exact path='/anime/:animeId/episodes/:episodeId'>
             <EpisodeComponent />
           </Route>
-    
         </Switch>
       )}
+      </div>
       <Footer />
-    </>
+    </div>
   );
 }
 

@@ -15,6 +15,7 @@ import { deleteUserFavoriteThunk, getSingleUserThunk, postUserFavoriteThunk } fr
 import { deleteEpisodeThunk } from "../../store/animeDetail";
 import DeleteEpisodeModal from "../DeleteEpisode";
 import "./animeDetail.css";
+import Loading from "../Loading";
 
 function AnimeDetail() {
 
@@ -34,6 +35,7 @@ function AnimeDetail() {
     userFavorites = user.favorites
   }
   const [isFavorite, setIsFavorite] = useState(userFavorites[animeId] || '')
+  const [isLoaded, setIsLoaded] = useState(false)
 
   const episodesOfAnimeObj = useSelector((state) => state.episodes);
   const [episodesArr, setEpisodesArr] = useState([...Object.values(episodesOfAnimeObj)])
@@ -51,13 +53,13 @@ function AnimeDetail() {
       dispatch(deleteUserFavoriteThunk(animeId))
       dispatch(removeUserFavorite(animeId))
       setIsFavorite(false)
-      return alert("Removed from Favorites!")
+      return
     } else {
       dispatch(postUserFavoriteThunk(animeId))
       dispatch(addUserSessionFavoriteThunk(animeId))///this htunk is not adding anything to the db. It's only altering the store!
       dispatch(getSingleUserThunk(user.id))
       setIsFavorite(true)
-      return alert("Added to Favorites!")
+      return
     }
   };
   const handleClickDeleteEpisode = (e) => {
@@ -79,12 +81,20 @@ function AnimeDetail() {
 
 
   useEffect(() => {
-    dispatch(getAllAnimeThunk());
-    dispatch(getAnimeReviewsThunk(animeId));
-    dispatch(getAnimeEpisodesThunk(animeId));
-    setEpisodesArr([...Object.values(episodesOfAnimeObj)])
+    const promiseArr = []
+    promiseArr.push(dispatch(getAllAnimeThunk()))
+    promiseArr.push(dispatch(getAnimeReviewsThunk(animeId)))
+    promiseArr.push(dispatch(getAnimeEpisodesThunk(animeId)))
+    return Promise.all(promiseArr).then(() => setIsLoaded(true)).then(()=> setEpisodesArr([...Object.values(episodesOfAnimeObj)]))
+
+    // dispatch(getAllAnimeThunk());
+    // dispatch(getAnimeReviewsThunk(animeId));
+    // dispatch(getAnimeEpisodesThunk(animeId));
+    // setEpisodesArr([...Object.values(episodesOfAnimeObj)])
+
 
   }, [dispatch, Object.values(episodesOfAnimeObj).length]);
+
 
   if (!singleAnime || false) return null
   console.log(singleAnime)
@@ -93,10 +103,16 @@ function AnimeDetail() {
   //     <h1>Loading</h1>
   //   )
   // }
+  if (!isLoaded) {
+    return (
+      <Loading />
+    )
+  }
 
   return (
     <div className="wholeContainer">
-      <div className="desc-and-photo-split">
+    <div className="desc-and-photo-split">
+
         <div className="desc-container">
           <div className="TitleAnimeDetail">
             <h2 className='showNameHeader'>{singleAnime.showname}</h2>

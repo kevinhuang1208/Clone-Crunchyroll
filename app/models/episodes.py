@@ -6,6 +6,7 @@ class Episodes(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     __tablename__ = 'episodes'
+    
     id = db.Column(db.Integer, primary_key = True)
     episode_number = db.Column(db.Integer, nullable=False)
     anime_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('animes.id')), nullable=False)
