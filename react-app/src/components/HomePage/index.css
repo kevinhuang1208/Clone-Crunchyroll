@@ -9,6 +9,7 @@ flex-direction: column;
 }
 
 .tileCoverPhotoHomePageDiv > img {
+   object-fit: cover;
    height: 300px;
    border-radius: 6px;
 }
@@ -22,7 +23,7 @@ flex-direction: column;
    justify-content: center;
    border-bottom:5px #F47521 solid;
    padding:5px;
-   width:80%;
+   max-width: 1296px;
    align-self: center;
 }
 
@@ -59,4 +60,18 @@ flex-direction: column;
 
 .animeShowName>h2{
 margin-top: 14px;
+}
+
+.reccomendCaro{
+   height:300px;
+   object-position: 50% -20%
+
+
+}
+.divofCarro{
+   display:flex;
+   flex-direction: column;
+   justify-content: Center;
+   margin: 0 auto;
+   max-width: 1296px;
 }

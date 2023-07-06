@@ -40,10 +40,20 @@ body {
   color: white;
   /* background-image: var(--gradient); */
   background:rgb(23, 23, 23);
-  margin: 10px 200px;
+  /* margin: 10px 200px; */
 }
 
 html {
   /* position: relative; */
   margin: 0;
 }
+
+.main-body {
+  min-height: 100vh;
+  /* min-width: 100vw; */
+  position: relative;
+}
+.content-body {
+  padding-bottom: 100px;
+}
+
