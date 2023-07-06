@@ -12,6 +12,7 @@ function Navigation({ isLoaded }){
 		return null
 	}
 	return (
+		<div className="navbar-max-width">
 		<ul className='nav-ul'>
 			<li>
 				<NavLink className='navlink' exact to="/anime"><img src='https://cdn.discordapp.com/attachments/1113213089702228038/1115025363232378891/phillyroll-low-resolution-logo-color-on-transparent-background.png'/></NavLink>
@@ -22,6 +23,7 @@ function Navigation({ isLoaded }){
 				</li>
 			)}
 		</ul>
+		</div>
 	);
 }
 

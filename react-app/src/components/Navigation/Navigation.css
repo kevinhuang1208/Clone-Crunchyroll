@@ -149,3 +149,7 @@ a.navlink{
 .profile-dropdown li{
   padding: 20px;
 }
+
+.navbar-max-width{
+  max-width: 1400px;
+}
