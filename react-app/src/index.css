@@ -28,9 +28,9 @@ body{
   /* margin: 10px 200px; */
   /* height: fit-content; */
 }
-.nav-ul {
+/* .nav-ul {
   padding: 10px 160px;
-}
+} */
 /* body {
   margin: 10px 200px;
 } */
@@ -40,7 +40,8 @@ body {
   color: white;
   /* background-image: var(--gradient); */
   background:rgb(23, 23, 23);
-  margin: 10px 200px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 html {
