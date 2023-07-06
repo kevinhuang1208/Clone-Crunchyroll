@@ -42,10 +42,12 @@ function AnimeDetail() {
   const episodesOfAnime = Object.values(episodesOfAnimeObj)
 
   const singleAnime = animeObj[animeId]
-  // console.log('find this thang -  -- - - - - - - - - - -- - -- -', singleAnime)
+  console.log('find this thang -  -- - - - - - - - - - -- - -- -', singleAnime)
 
   const reviewsObj = useSelector((state) => state.reviews)
   const reviewsArr = Object.values(reviewsObj)
+
+  console.log("THIS IS REVIEWSARR", reviewsArr)
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -224,7 +226,7 @@ function AnimeDetail() {
           </div>) : null
       }
 
-      <h1 className='reviewsHeaderDetail'>Reviews:</h1>
+      <h1 className='reviewsHeaderDetail'>Reviews ({reviewsArr.length}) | {singleAnime.avgRating}⭐</h1>
       <div className='reviewsMapDiv'>
         {reviewsArr.map((review) => (
           <Review review={review} user={user} key={review.id} />
