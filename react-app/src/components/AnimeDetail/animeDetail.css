@@ -8,15 +8,16 @@
     margin-top: 15px;
     display: flex;
     /* justify-content:space-between; */
-    margin: 0 auto;
-    width: 90%;
+    /* margin: 0 auto; */
+    /* width: 90%; */
     border-bottom: 3px #F47521 solid;
     flex-wrap: wrap;
 
 }
 .episode-list-wrapper {
     border-top: 3px #F47521 solid;
-    margin: 0 auto;
+    width: 100%;
+    /* margin: 0 auto; */
 }
 
 .wholeContainer {
