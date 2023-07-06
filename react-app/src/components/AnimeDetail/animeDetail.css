@@ -49,21 +49,6 @@
 .navLinkDivforReview{
     width:20%;
 }
-.entireSingleReviewDiv{
-    display:inline-flex;
-    flex-direction: column;
-    padding: 8px;
-    width: 65%;
-    margin-left: 10px;
-    border: solid 3px #f47521;
-    border-radius: 8px;
-    margin: 6px;
-
-}
-.reviewDescriptionPtag{
-    width: 100%;
-    word-break:break-all;
-}
 
 .remove-favorite-tern>button,
 .anime-page-edit-button>button,
@@ -128,6 +113,7 @@
 
 .reviewsHeaderDetail{
     margin-left:10px;
+    font-size: 20px;
 }
 
 /* .CreateReviewModal {
