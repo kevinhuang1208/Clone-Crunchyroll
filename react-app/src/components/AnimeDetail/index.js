@@ -85,7 +85,7 @@ function AnimeDetail() {
     promiseArr.push(dispatch(getAllAnimeThunk()))
     promiseArr.push(dispatch(getAnimeReviewsThunk(animeId)))
     promiseArr.push(dispatch(getAnimeEpisodesThunk(animeId)))
-    return Promise.all(promiseArr).then(() => setIsLoaded(true)).then(()=> setEpisodesArr([...Object.values(episodesOfAnimeObj)]))
+    return Promise.all(promiseArr).then(() => setIsLoaded(true)).then(() => setEpisodesArr([...Object.values(episodesOfAnimeObj)]))
 
     // dispatch(getAllAnimeThunk());
     // dispatch(getAnimeReviewsThunk(animeId));
@@ -111,7 +111,7 @@ function AnimeDetail() {
 
   return (
     <div className="wholeContainer">
-    <div className="desc-and-photo-split">
+      <div className="desc-and-photo-split">
 
         <div className="desc-container">
           <div className="TitleAnimeDetail">
@@ -155,22 +155,22 @@ function AnimeDetail() {
           <img src={singleAnime.coverPicture} />
         </div>
       </div>
+      <div className="episode-list-wrapper">
 
+        <div className='listOfEpisodesDiv'>
+          {episodesOfAnime.map((episode) => (
 
-      <div className='listOfEpisodesDiv'>
-        {episodesOfAnime.map((episode) => (
+            <div className="singleEpisodeDiv" key={episode.id}>
+              <div className='episodeWatchNow'>
+                <NavLink exact to={`/anime/${singleAnime.id}/episodes/${episode.id}`}>
 
-          <div className="singleEpisodeDiv" key={episode.id}>
-            <div className='episodeWatchNow'>
-              <NavLink exact to={`/anime/${singleAnime.id}/episodes/${episode.id}`}>
-
-                <div className='episodeCoverImageDiv'>
-                  <img className='episodeCoverImage' src={episode.episodeCoverImage} />
-                </div>
-                <div className='episodeTileShow'>{singleAnime.showname}</div>
-                <div className="episodeTileTitle">Episode: {episode.episodeNumber}, {episode.title}</div>
-              </NavLink>
-              {/* {user && user.id == animeObj[animeId].authorId && (
+                  <div className='episodeCoverImageDiv'>
+                    <img className='episodeCoverImage' src={episode.episodeCoverImage} />
+                  </div>
+                  <div className='episodeTileShow'>{singleAnime.showname}</div>
+                  <div className="episodeTileTitle">Episode: {episode.episodeNumber}, {episode.title}</div>
+                </NavLink>
+                {/* {user && user.id == animeObj[animeId].authorId && (
                 <div className='delete-episode-button'>
                   <OpenModalMenuItem
                     className="delete-button"
@@ -180,27 +180,28 @@ function AnimeDetail() {
                 </div>
               )
               } */}
-            </div>
-            <div className='episodePanelHover'>
-              <div className="showTitleHover">{singleAnime.showname}</div>
-              {user && user.id == animeObj[animeId].authorId && (
-                <div className='delete-episode-button'>
-                  <OpenModalMenuItem
-                    className="delete-button"
-                    itemText="Delete this episode"
-                    modalComponent={<DeleteEpisodeModal episode={episode} key={`${episode.id}-episode`} />}
-                  />
-                </div>
-              )
-              }
-              <div className="episodeTitleHover">Episode: {episode.episodeNumber}, {episode.title}</div>
-              <div className="episodeDateHover">{episode.releaseDate}</div>
-              <div className="episodeDescriptionHover">{episode.desc}</div>
+              </div>
+              <div className='episodePanelHover'>
+                <div className="showTitleHover">{singleAnime.showname}</div>
+                {user && user.id == animeObj[animeId].authorId && (
+                  <div className='delete-episode-button'>
+                    <OpenModalMenuItem
+                      className="delete-button"
+                      itemText="Delete this episode"
+                      modalComponent={<DeleteEpisodeModal episode={episode} key={`${episode.id}-episode`} />}
+                    />
+                  </div>
+                )
+                }
+                <div className="episodeTitleHover">Episode: {episode.episodeNumber}, {episode.title}</div>
+                <div className="episodeDateHover">{episode.releaseDate}</div>
+                <div className="episodeDescriptionHover">{episode.desc}</div>
 
+              </div>
             </div>
-          </div>
 
-        ))}
+          ))}
+        </div>
       </div>
       {(!user) ? null : (singleAnime.authorId === user.id) ? (
         <div className='delete-anime-button'>

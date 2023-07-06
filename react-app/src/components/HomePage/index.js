@@ -51,10 +51,14 @@ function HomePage() {
   }
 
   useEffect(() => {
-    dispatch(getAllAnimeThunk()).then(() => setLoaded(true));
+
+    setTimeout( async() => {
+      dispatch(getAllAnimeThunk()).then(() => setLoaded(true));
     if (user) {
       dispatch(getSingleUserThunk(user.id))
     }
+    }, 1500);
+    
   }, [dispatch])
   // console.log(user)
   // console.log(animeIds)
