@@ -12,7 +12,7 @@
     width: 90%;
     border-bottom: 3px #F47521 solid;
     flex-wrap: wrap;
-    
+
 }
 .episode-list-wrapper {
     border-top: 3px #F47521 solid;
@@ -96,7 +96,7 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    
+
 }
 .desc-photo{
     margin-left: 50px;
@@ -225,6 +225,7 @@
 
 .episodeTitleHover {
     font-size: 16px;
+    color: white;
     font-weight: bold;
     margin-bottom: 3px;
 }
@@ -238,6 +239,7 @@
 
 .episodeDescriptionHover {
     font-size: 16px;
+    color: white;
 }
 
 /* .episodeTileShow,
@@ -245,7 +247,7 @@
     text-decoration: none;
 } */
 
-.episodeWatchNow > a {
+.singleEpisodeDiv > a {
     text-decoration: none;
 }
 
