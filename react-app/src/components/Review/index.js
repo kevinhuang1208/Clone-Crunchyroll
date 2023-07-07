@@ -25,7 +25,6 @@ const Review = ({review,user})=> {
             <NavLink className = 'userNavLink'exact to={`/user/${review.user.id}`}>
                  {review.user.username}
             </NavLink>
-              {/* ({Object.keys(user.reviews).length} review(s)) */}
             </div>
 
             <h3>Rating: {review.rating}</h3>

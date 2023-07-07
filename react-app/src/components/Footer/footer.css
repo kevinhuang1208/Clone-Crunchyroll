@@ -24,15 +24,12 @@
 .footer-container {
     text-align: center;
     background-color: #23252b;
-    /* border: 1px solid red; */
     width: 100vw;
-    /* margin: 0px; */
     margin-bottom: -6px;
     margin-left: -5px;
     height: 82px;
     bottom: 0;
     position: absolute;
-    /* padding: 8px; */
     padding-bottom: 8px;
 }
 .footerNameBlock {
