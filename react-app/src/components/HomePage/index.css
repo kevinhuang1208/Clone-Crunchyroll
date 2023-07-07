@@ -20,11 +20,13 @@ flex-direction: column;
    padding-top:0px;
    display:flex;
    flex-wrap:wrap;
-   justify-content: center;
+   /* justify-content: center; */
    border-bottom:5px #F47521 solid;
    padding:5px;
    max-width: 1296px;
    align-self: center;
+   margin: 0 auto;
+   /* width: 90%; */
 }
 
 .animeTileHomePage{
@@ -47,7 +49,7 @@ flex-direction: column;
    text-overflow: ellipsis;
    overflow: hidden;
    bottom: 0;
-   height: 310px;
+   height: 305px;
    border-radius: 6px;
    width: 100%;
    overflow-y: auto;
@@ -76,4 +78,26 @@ margin-top: 14px;
    justify-content: Center;
    margin: 0 auto;
    max-width: 1296px;
+}
+
+.bigBanners{
+   width:882px;
+}
+
+.anime-container-wrapper {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.bigCarroDiv{
+   
+   margin:20px auto;
+   max-width: 882px;
+   
+}
+
+.backGroundGradient{
+   background-color: #2abdbb;
+   background-image: linear-gradient(to var(--cr-end-direction),#f47521,#fab818);
 }
