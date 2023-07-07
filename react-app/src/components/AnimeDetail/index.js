@@ -227,7 +227,7 @@ function AnimeDetail() {
           </div>) : null
       }
 
-      <h1 className='reviewsHeaderDetail'>Reviews ({reviewsArr.length}) | {singleAnime.avgRating}⭐</h1>
+      <h1 className='reviewsHeaderDetail'>Reviews ({reviewsArr ? reviewsArr.length : null}) | {singleAnime.avgRating}⭐</h1>
       <div className='reviewsMapDiv'>
         {reviewsArr.map((review) => (
           <Review review={review} user={user} key={review.id} />
