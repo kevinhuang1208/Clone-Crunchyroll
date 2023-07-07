@@ -111,7 +111,6 @@ function HomePage() {
         </div>
 
       {
-        // user && animeIds && animeIds.length && (<FavoritesBar animes={animes} user={user} animeIds={animeIds}/>)
         (user && animeIds && animeIds.length) ? <FavoritesBar animes={animes} user={user} animeIds={animeIds} /> : null
       }
       <div className='divofCarro'>
@@ -155,10 +154,6 @@ function HomePage() {
       <div className='anime-container-wrapper'>
 
         <div className='allAnimeContainer'>
-          {/* <span>
-          <h2>Anime</h2>
-          </span> */}
-
           {
 
             animesArr.map(anime => (

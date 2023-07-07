@@ -95,21 +95,17 @@ function AnimeDetail() {
     // setEpisodesArr([...Object.values(episodesOfAnimeObj)])
 
 
-  }, [dispatch, Object.values(episodesOfAnimeObj).length]);
+  }, [dispatch, Object.values(episodesOfAnimeObj)?.length]);
 
 
-  if (!singleAnime || false) return null
-  console.log(singleAnime)
-  // if (!episodesOfAnime.length) {
-  //   return (
-  //     <h1>Loading</h1>
-  //   )
-  // }
   if (!isLoaded) {
     return (
       <Loading />
     )
   }
+  if (!singleAnime || false) return null
+  // console.log(singleAnime)
+
 
   return (
     <div className="wholeContainer">
@@ -170,16 +166,7 @@ function AnimeDetail() {
                   </div>
                   <div className='episodeTileShow'>{singleAnime.showname}</div>
                   <div className="episodeTileTitle">Episode: {episode.episodeNumber}, {episode.title}</div>
-                {/* {user && user.id == animeObj[animeId].authorId && (
-                  <div className='delete-episode-button'>
-                  <OpenModalMenuItem
-                  className="delete-button"
-                  itemText="Delete this episode"
-                  modalComponent={<DeleteEpisodeModal episode={episode} key={`${episode.id}-episode`} />}
-                  />
-                  </div>
-                  )
-                } */}
+        
               </div>
                 <NavLink exact to={`/anime/${singleAnime.id}/episodes/${episode.id}`}>
                 <div className='episodePanelHover'>
