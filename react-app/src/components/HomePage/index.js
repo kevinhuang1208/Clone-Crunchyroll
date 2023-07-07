@@ -85,7 +85,7 @@ function HomePage() {
     return randomItems;
   }
   const randomAnimes = selectRandomItems(animesArr)
-  console.log('random Anime Array-----', randomAnimes)
+  // console.log('random Anime Array-----', randomAnimes)
   if (!loaded) {
     return (
       <Loading />
