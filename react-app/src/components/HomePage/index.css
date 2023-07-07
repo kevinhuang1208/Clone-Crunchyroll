@@ -9,6 +9,7 @@ flex-direction: column;
 }
 
 .tileCoverPhotoHomePageDiv > img {
+   object-fit: cover;
    height: 300px;
    border-radius: 6px;
 }
@@ -19,11 +20,13 @@ flex-direction: column;
    padding-top:0px;
    display:flex;
    flex-wrap:wrap;
-   justify-content: center;
+   /* justify-content: center; */
    border-bottom:5px #F47521 solid;
    padding:5px;
-   width:80%;
+   max-width: 1296px;
    align-self: center;
+   margin: 0 auto;
+   /* width: 90%; */
 }
 
 .animeTileHomePage{
@@ -33,30 +36,68 @@ flex-direction: column;
    position: relative;
    border-radius: 6px;
    align-self: flex-start;
-   
-   
+
+
 }
 
 .animeTileHomePage .hover-div{
    visibility: hidden;
    text-align: center;
-   background-color: black;
+   background-color: #23252b;
    position: absolute;
    /* z-index: 1; */
    text-overflow: ellipsis;
    overflow: hidden;
-   bottom: 5px;
-   height: 310px;
+   bottom: 0;
+   height: 305px;
    border-radius: 6px;
+   width: 100%;
+   overflow-y: auto;
    }
-   
+
 .animeTileHomePage:hover .hover-div{
    visibility: visible;
-   opacity: 0.8;
+   opacity: 0.9;
    cursor:pointer;
 }
 
 
 .animeShowName>h2{
 margin-top: 14px;
+}
+
+.reccomendCaro{
+   height:300px;
+   object-position: 50% -20%
+
+
+}
+.divofCarro{
+   display:flex;
+   flex-direction: column;
+   justify-content: Center;
+   margin: 0 auto;
+   max-width: 1296px;
+}
+
+.bigBanners{
+   width:882px;
+}
+
+.anime-container-wrapper {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.bigCarroDiv{
+   
+   margin:20px auto;
+   max-width: 882px;
+   
+}
+
+.backGroundGradient{
+   background-color: #2abdbb;
+   background-image: linear-gradient(to var(--cr-end-direction),#f47521,#fab818);
 }

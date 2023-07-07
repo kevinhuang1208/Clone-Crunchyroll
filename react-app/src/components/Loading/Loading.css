@@ -1,0 +1,10 @@
+.loading-container {
+  /* border: 1px solid red; */
+  /* background-color: #212121; */
+  height: 100%;
+  text-align: center;
+}
+
+.loading-gif {
+  border-radius: 60px;
+}

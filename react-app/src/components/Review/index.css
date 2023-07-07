@@ -15,3 +15,25 @@
     display: flex;
     flex-direction: row;
 }
+
+.reviewsMapDiv {
+
+}
+
+.entireSingleReviewDiv{
+    display:inline-flex;
+    flex-direction: column;
+    padding: 8px;
+    /* width: 65%; */
+    max-height: 290px;
+    margin-left: 10px;
+    border-top: solid 3px rgb(136, 136, 136);
+    /* border-radius: 8px; */
+    margin: 6px;
+
+}
+
+.reviewDescriptionPtag{
+    max-height: 144px;
+    overflow-y: auto;
+}

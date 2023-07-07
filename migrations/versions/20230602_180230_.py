@@ -28,6 +28,7 @@ def upgrade():
     sa.Column('desc', sa.String(length=1000), nullable=False),
     sa.Column('release_date', sa.Date(), nullable=False),
     sa.Column('cover_picture', sa.String(length=500), nullable=False),
+    # sa.Column('carousel_picture', sa.String(length=500), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

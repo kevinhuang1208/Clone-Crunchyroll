@@ -6,16 +6,27 @@
 
 .listOfEpisodesDiv {
     margin-top: 15px;
-    border-top: 3px #F47521 solid;
     display: flex;
-    justify-content:center;
+    /* justify-content:space-between; */
+    /* margin: 0 auto; */
+    /* width: 90%; */
     border-bottom: 3px #F47521 solid;
     flex-wrap: wrap;
+
+}
+.episode-list-wrapper {
+    border-top: 3px #F47521 solid;
+    width: 100%;
+    /* margin: 0 auto; */
 }
 
 .wholeContainer {
     padding: 20px;
-    margin: 0px 100px;
+    margin: 0px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width:1296px;
 }
 
 .singleEpisodeDiv {
@@ -48,21 +59,6 @@
 }
 .navLinkDivforReview{
     width:20%;
-}
-.entireSingleReviewDiv{
-    display:inline-flex;
-    flex-direction: column;
-    padding: 8px;
-    width: 65%;
-    margin-left: 10px;
-    border: solid 3px #f47521;
-    border-radius: 8px;
-    margin: 6px;
-
-}
-.reviewDescriptionPtag{
-    width: 100%;
-    word-break:break-all;
 }
 
 .remove-favorite-tern>button,
@@ -101,6 +97,7 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+
 }
 .desc-photo{
     margin-left: 50px;
@@ -128,6 +125,7 @@
 
 .reviewsHeaderDetail{
     margin-left:10px;
+    font-size: 20px;
 }
 
 /* .CreateReviewModal {
@@ -154,26 +152,116 @@
 
 .delete-episode-button > div{
     background-color: #f47521;
-    height: 30px;
+    height: 25px;
     font-weight: 700;
     width: 200px;
     color: black;
     font-size: 20px;
     border: none;
     margin: 10px;
+    border-radius: 10px;
     cursor: pointer;
     text-align: center;
 }
 
-.episodeCoverImageDiv{
+/* .episodeCoverImageDiv{
     width:100%;
 }
 .episodeCoverImage{
    width:100%;
    border-radius: 6px;
-   object-fit: cover;
+   /* object-fit: cover;
+} */
+
+.singleEpisodeDiv{
+    margin: 20px;
+    width: 250px;
+    height: 240px;
+    margin-top: 10px;
+    position: relative;
+    border-radius: 6px;
+    align-self: flex-start;
+
+
+ }
+
+ .singleEpisodeDiv .episodePanelHover{
+    visibility: hidden;
+    /* text-align: center; */
+    width: 100%;
+    background-color: #23252b;
+    position: absolute;
+    /* z-index: 1; */
+    text-overflow: ellipsis;
+    overflow: hidden;
+    bottom: 0px;
+    height: 240px;
+    padding: 5px;
+    border-radius: 6px;
+    overflow-y: scroll;
+    }
+
+ .singleEpisodeDiv:hover .episodePanelHover{
+    visibility: visible;
+    /* opacity: 0.9; */
+    cursor:pointer;
+ }
+
+ .episodeWatchNow {
+    height: 240px;
+ }
+
+ .episodeCoverImageDiv > img{
+    width:100%;
+    height: 175px;
+    object-fit: cover;
 }
 
-.episodeDescription{
-    font-size:14px;
+.showTitleHover {
+    font-size: 12px;
+    color: lightgray;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.episodeTitleHover {
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.episodeDateHover {
+    font-size: 12px;
+    color: lightgray;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.episodeDescriptionHover {
+    font-size: 16px;
+    color: white;
+}
+
+/* .episodeTileShow,
+.episodeTileTitle {
+    text-decoration: none;
+} */
+
+.singleEpisodeDiv > a {
+    text-decoration: none;
+}
+
+.episodeTileShow {
+    font-size: 12px;
+    color: lightgray;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.episodeTileTitle {
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 3px;
 }

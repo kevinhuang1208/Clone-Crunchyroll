@@ -62,7 +62,7 @@ function LandingPage() {
          onClick={handleDemoSubmit}>Demo User Login</button>
       </div>
     <div className="demo-button">
-    To have access to ALL Features: 
+    To have access to ALL Features:
       <button type="submit"
          onClick={handleDemoSubmitStudio}>Demo Studio User Login</button>
       </div>

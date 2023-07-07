@@ -15,6 +15,7 @@ import { deleteUserFavoriteThunk, getSingleUserThunk, postUserFavoriteThunk } fr
 import { deleteEpisodeThunk } from "../../store/animeDetail";
 import DeleteEpisodeModal from "../DeleteEpisode";
 import "./animeDetail.css";
+import Loading from "../Loading";
 
 function AnimeDetail() {
 
@@ -34,16 +35,19 @@ function AnimeDetail() {
     userFavorites = user.favorites
   }
   const [isFavorite, setIsFavorite] = useState(userFavorites[animeId] || '')
+  const [isLoaded, setIsLoaded] = useState(false)
 
   const episodesOfAnimeObj = useSelector((state) => state.episodes);
   const [episodesArr, setEpisodesArr] = useState([...Object.values(episodesOfAnimeObj)])
   const episodesOfAnime = Object.values(episodesOfAnimeObj)
 
   const singleAnime = animeObj[animeId]
-  // console.log('find this thang -  -- - - - - - - - - - -- - -- -', singleAnime)
+  console.log('find this thang -  -- - - - - - - - - - -- - -- -', singleAnime)
 
   const reviewsObj = useSelector((state) => state.reviews)
   const reviewsArr = Object.values(reviewsObj)
+
+  console.log("THIS IS REVIEWSARR", reviewsArr)
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -51,13 +55,13 @@ function AnimeDetail() {
       dispatch(deleteUserFavoriteThunk(animeId))
       dispatch(removeUserFavorite(animeId))
       setIsFavorite(false)
-      return alert("Removed from Favorites!")
+      return
     } else {
       dispatch(postUserFavoriteThunk(animeId))
       dispatch(addUserSessionFavoriteThunk(animeId))///this htunk is not adding anything to the db. It's only altering the store!
       dispatch(getSingleUserThunk(user.id))
       setIsFavorite(true)
-      return alert("Added to Favorites!")
+      return
     }
   };
   const handleClickDeleteEpisode = (e) => {
@@ -79,12 +83,20 @@ function AnimeDetail() {
 
 
   useEffect(() => {
-    dispatch(getAllAnimeThunk());
-    dispatch(getAnimeReviewsThunk(animeId));
-    dispatch(getAnimeEpisodesThunk(animeId));
-    setEpisodesArr([...Object.values(episodesOfAnimeObj)])
+    const promiseArr = []
+    promiseArr.push(dispatch(getAllAnimeThunk()))
+    promiseArr.push(dispatch(getAnimeReviewsThunk(animeId)))
+    promiseArr.push(dispatch(getAnimeEpisodesThunk(animeId)))
+    return Promise.all(promiseArr).then(() => setIsLoaded(true)).then(() => setEpisodesArr([...Object.values(episodesOfAnimeObj)]))
+
+    // dispatch(getAllAnimeThunk());
+    // dispatch(getAnimeReviewsThunk(animeId));
+    // dispatch(getAnimeEpisodesThunk(animeId));
+    // setEpisodesArr([...Object.values(episodesOfAnimeObj)])
+
 
   }, [dispatch, Object.values(episodesOfAnimeObj).length]);
+
 
   if (!singleAnime || false) return null
   console.log(singleAnime)
@@ -93,10 +105,16 @@ function AnimeDetail() {
   //     <h1>Loading</h1>
   //   )
   // }
+  if (!isLoaded) {
+    return (
+      <Loading />
+    )
+  }
 
   return (
     <div className="wholeContainer">
       <div className="desc-and-photo-split">
+
         <div className="desc-container">
           <div className="TitleAnimeDetail">
             <h2 className='showNameHeader'>{singleAnime.showname}</h2>
@@ -139,35 +157,53 @@ function AnimeDetail() {
           <img src={singleAnime.coverPicture} />
         </div>
       </div>
+      <div className="episode-list-wrapper">
 
+        <div className='listOfEpisodesDiv'>
+          {episodesOfAnime.map((episode) => (
 
-      <div className='listOfEpisodesDiv'>
-        {episodesOfAnime.map((episode) => (
+            <div className="singleEpisodeDiv" key={episode.id}>
+              <div className='episodeWatchNow'>
 
-          <div className="singleEpisodeDiv" key={episode.id}>
-            <div className='episodeWatchNow'>
-              <h3>Episode: {episode.episodeNumber}, {episode.title}</h3>
-
-              <NavLink exact to={`/anime/${singleAnime.id}/episodes/${episode.id}`}>
-                <div className='episodeCoverImageDiv'>
-                  <img className='episodeCoverImage' src={episode.episodeCoverImage} />
-                </div>
-              </NavLink>
-              {user && user.id == animeObj[animeId].authorId && (
-                <div className='delete-episode-button'>
+                  <div className='episodeCoverImageDiv'>
+                    <img className='episodeCoverImage' src={episode.episodeCoverImage} />
+                  </div>
+                  <div className='episodeTileShow'>{singleAnime.showname}</div>
+                  <div className="episodeTileTitle">Episode: {episode.episodeNumber}, {episode.title}</div>
+                {/* {user && user.id == animeObj[animeId].authorId && (
+                  <div className='delete-episode-button'>
                   <OpenModalMenuItem
-                    className="delete-button"
-                    itemText="Delete this episode"
-                    modalComponent={<DeleteEpisodeModal episode={episode} key={`${episode.id}-episode`} />}
+                  className="delete-button"
+                  itemText="Delete this episode"
+                  modalComponent={<DeleteEpisodeModal episode={episode} key={`${episode.id}-episode`} />}
                   />
-                </div>
-              )
+                  </div>
+                  )
+                } */}
+              </div>
+                <NavLink exact to={`/anime/${singleAnime.id}/episodes/${episode.id}`}>
+                <div className='episodePanelHover'>
+                <div className="showTitleHover">{singleAnime.showname}</div>
+                {user && user.id == animeObj[animeId].authorId && (
+                  <div className='delete-episode-button'>
+                    <OpenModalMenuItem
+                      className="delete-button"
+                      itemText="Delete this episode"
+                      modalComponent={<DeleteEpisodeModal episode={episode} key={`${episode.id}-episode`} />}
+                      />
+                  </div>
+                )
               }
-            </div>
-            <p className='episodeDescription'>{episode.desc}</p>
-          </div>
+                <div className="episodeTitleHover">Episode: {episode.episodeNumber}, {episode.title}</div>
+                <div className="episodeDateHover">{episode.releaseDate}</div>
+                <div className="episodeDescriptionHover">{episode.desc}</div>
 
-        ))}
+              </div>
+              </NavLink>
+            </div>
+
+          ))}
+        </div>
       </div>
       {(!user) ? null : (singleAnime.authorId === user.id) ? (
         <div className='delete-anime-button'>
@@ -191,7 +227,7 @@ function AnimeDetail() {
           </div>) : null
       }
 
-      <h1 className='reviewsHeaderDetail'>Reviews:</h1>
+      <h1 className='reviewsHeaderDetail'>Reviews ({reviewsArr.length}) | {singleAnime.avgRating}⭐</h1>
       <div className='reviewsMapDiv'>
         {reviewsArr.map((review) => (
           <Review review={review} user={user} key={review.id} />

@@ -14,6 +14,7 @@ class Anime(db.Model):
     desc = db.Column(db.String(1000),nullable = False)
     release_date = db.Column(db.Date, nullable = False)
     cover_picture=db.Column(db.String(500), nullable = False)
+    # carousel_picture=db.Column(db.String(500), nullable= True)
 
 
 
@@ -62,5 +63,6 @@ class Anime(db.Model):
             'avgRating': avg_rating,
             'releaseDate':self.release_date.strftime('%m/%d/%Y'),
             'coverPicture':self.cover_picture,
-            'episodeCount': episode_count
+            'episodeCount': episode_count,
+            # 'carouselPicture': self.carousel_picture
         }
