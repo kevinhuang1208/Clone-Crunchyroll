@@ -4,56 +4,6 @@
     margin: 5px;
     padding-top:3px;
 }
-
-.allColumns {
-    display: flex;
-    justify-content: space-around;
-}
-
-.footerColumn3 {
-    display: flex;
-    flex-direction: column;
-}
-
-.danishKevin,
-.taylorSteven {
-    display: flex;
-}
-.contributers{
- margin-right: 30px;
-}
-.footerNameBlock{
-    display:flex;
-}
-
-/* .allFooterContainer {
-    position: relative;
-    bottom: 0;
-    width: 100%;
-} */
-
-.allFooterContainer>h2{
-    padding-left:15px;
-}
-.allColumns{
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-
-
-
-.firsttwo-columns {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.titles {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
 .tech-icons-container {
     display: flex;
     align-items: center;
@@ -90,6 +40,3 @@
     align-items: center;
     justify-content: center;
 }
-/* .footerNameBlock > a {
-    height: 15px;
-} */
