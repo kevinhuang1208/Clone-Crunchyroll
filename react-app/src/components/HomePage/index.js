@@ -94,12 +94,6 @@ function HomePage() {
 
   return (
     <div className='homePageDiv'>
-      <div className = 'backGroundGradient'> 
-        <div className='bg1'> </div>
-        <div className = 'bg2'> </div>
-        <div bg2> </div>
-        
-      </div>
       <div className='bigCarroDiv'>
         <Carousel showArrows={true} showThumbs={false} showStatus={false} autoPlay={true} interval={1700} >
           <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1126642313364508734/image.png' />
