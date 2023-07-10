@@ -16,10 +16,6 @@
     flex-direction: row;
 }
 
-.reviewsMapDiv {
-
-}
-
 .entireSingleReviewDiv{
     display:inline-flex;
     flex-direction: column;
