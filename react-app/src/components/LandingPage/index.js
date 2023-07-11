@@ -48,7 +48,7 @@ function LandingPage() {
       <div className='landingPageSignUpContainer'>
         <SignupFormPage />
       </div>
-	  <div className='landingPageLoginContainer'>
+	  <div className='demo-button'>
       Already Have An Account?
 		<OpenModalButton
       className='button'
