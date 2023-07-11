@@ -1,13 +1,22 @@
 import { useHistory } from "react-router-dom";
+import React, { useState } from 'react';
 import './index.css'
 
 
 function AnimeTile({ anime }) {
     const history = useHistory();
+    const [isHovered, setIsHovered] = useState(false)
 
     const handleClick = () => {
         history.push(`/anime/${anime.id}`)
     }
+    const handleMouseEnter = () => {
+        setIsHovered(true);
+      };
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+      };
 
     //   console.log('single anime ->>>>>>>>------wakanda4life',anime)
     if (!anime) return null
@@ -16,12 +25,43 @@ function AnimeTile({ anime }) {
 
     else
         return (
-            <div key={anime.id} id={anime.id} className='animeTileHomePage' onClick={handleClick}>
-
+            <div
+                key={anime.id}
+                id={anime.id}
+                className='animeTileHomePage'
+                onClick={handleClick}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+             >
                 <div className='tileCoverPhotoHomePageDiv'>
-                    <img className='tileCoverPhotoHomePage' src={anime.coverPicture} />
+                    <img
+                    className='tileCoverPhotoHomePage'
+                    src={anime.coverPicture}
+                    style={{
+                        width: '250px',
+                        height: isHovered ? '353px' : '300px',
+                      }}
+
+                     />
                 </div>
-                <div className="hover-div">
+                {!isHovered &&
+                <div>
+                    <div className="anime-tile-name">
+                        {anime.showname}
+                    </div>
+                    <div className="show-lang">
+                        Sub | Dub
+                    </div>
+                </div>
+                }
+                <div
+                className="hover-div"
+                // style={{
+                //         backgroundImage: `url(${anime.coverPicture})`, backgroundSize: 'cover',
+                //         backgroundPosition: 'center',
+                //         backgroundRepeat: 'no-repeat',
+                //         }}
+                        >
                     <div className='animeShowName'>
                         <h2>{anime.showname}</h2>
                     </div>

@@ -55,7 +55,7 @@ function HomePage() {
     }
   }
 
-  
+
 
   useEffect(() => {
 
@@ -94,15 +94,18 @@ function HomePage() {
 
   return (
     <div className='homePageDiv'>
+      <div className="gradientBG">
+
       <div className='bigCarroDiv'>
-        <Carousel showArrows={true} showThumbs={false} showStatus={false} autoPlay={true} interval={1700} >
+        <Carousel showArrows={true} showThumbs={false} showStatus={false} autoPlay={true} interval={2000} >
           <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1126642313364508734/image.png' />
           <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1126650347478335608/52b8dd8a-eff2-4ed2-9b8d-7c0039df1c53.png' />
           <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1126643229299834991/Rick-and-Morty-S6.png' />
-          <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1126650650432909512/70153391.png' />
+          <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1128014858009460767/p185179_b_h10_ab.png' />
           <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1126643524415266940/1123312.png' />
         </Carousel>
         </div>
+      </div>
 
       {
         (user && animeIds && animeIds.length) ? <FavoritesBar animes={animes} user={user} animeIds={animeIds} /> : null
