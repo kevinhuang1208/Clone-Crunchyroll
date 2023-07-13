@@ -11,7 +11,7 @@ const Review = ({review,user})=> {
 
     const dispatch = useDispatch()
     const {closeModal} = useModal();
-    console.log("THIS IS THE REIVEW", user)
+    // console.log("THIS IS THE REIVEW", user)
 
     // console.log('what is a single review do ---------', review)
     // if user.id == review.userId render the button if not do null if no user, do null

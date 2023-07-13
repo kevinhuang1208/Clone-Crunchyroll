@@ -19,7 +19,7 @@ export const deleteSingleUserThunk = (userId) => async (dispatch) => {
         method: 'DELETE'
     })
     if(response.ok) {
-        console.log("BGFEIWUBGFIWEBGIWEBIGBIWEG")
+        // console.log("BGFEIWUBGFIWEBGIWEBIGBIWEG")
         dispatch(deleteSingleUser())
         // dispatch(removeUser())
         return

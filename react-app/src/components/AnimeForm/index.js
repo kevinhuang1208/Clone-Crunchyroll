@@ -104,7 +104,7 @@ const AnimeForm = ({ anime, formType }) => {
         if (coverPicture) {
             formData.append("cover_picture", coverPicture)
         }
-        console.log('FORM DATA FROM REACT COMPONENT ->', formData)
+        // console.log('FORM DATA FROM REACT COMPONENT ->', formData)
 
         if (formType === 'edit') {
             const res = await dispatch(editAnimeThunk(anime.id, formData))

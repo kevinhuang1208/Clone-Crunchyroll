@@ -97,6 +97,7 @@ ul>li {
   /* padding: 20px 0px; */
   /* border-bottom: solid 1px darkgray; */
   color: #d3d3d3;
+  cursor: pointer;
 }
 .navlink-list:hover {
   /* padding: 20px 0px; */

@@ -42,12 +42,12 @@ function AnimeDetail() {
   const episodesOfAnime = Object.values(episodesOfAnimeObj)
 
   const singleAnime = animeObj[animeId]
-  console.log('find this thang -  -- - - - - - - - - - -- - -- -', singleAnime)
+  // console.log('find this thang -  -- - - - - - - - - - -- - -- -', singleAnime)
 
   const reviewsObj = useSelector((state) => state.reviews)
   const reviewsArr = Object.values(reviewsObj)
 
-  console.log("THIS IS REVIEWSARR", reviewsArr)
+  // console.log("THIS IS REVIEWSARR", reviewsArr)
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -79,7 +79,7 @@ function AnimeDetail() {
     return true
   }
 
-  console.log('EPISODES OF ANIME ---------', episodesOfAnime)
+  // console.log('EPISODES OF ANIME ---------', episodesOfAnime)
 
 
   useEffect(() => {
@@ -166,7 +166,7 @@ function AnimeDetail() {
                   </div>
                   <div className='episodeTileShow'>{singleAnime.showname}</div>
                   <div className="episodeTileTitle">Episode: {episode.episodeNumber}, {episode.title}</div>
-        
+
               </div>
                 <NavLink exact to={`/anime/${singleAnime.id}/episodes/${episode.id}`}>
                 <div className='episodePanelHover'>
