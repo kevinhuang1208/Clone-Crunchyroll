@@ -16,6 +16,7 @@ import { deleteEpisodeThunk } from "../../store/animeDetail";
 import DeleteEpisodeModal from "../DeleteEpisode";
 import "./animeDetail.css";
 import Loading from "../Loading";
+import PageNotFound from "../PageNotFound";
 
 function AnimeDetail() {
 
@@ -41,8 +42,9 @@ function AnimeDetail() {
   const [episodesArr, setEpisodesArr] = useState([...Object.values(episodesOfAnimeObj)])
   const episodesOfAnime = Object.values(episodesOfAnimeObj)
 
+
   const singleAnime = animeObj[animeId]
-  console.log('find this thang -  -- - - - - - - - - - -- - -- -', singleAnime)
+  // console.log('find this thang -  -- - - - - - - - - - -- - -- -', singleAnime)
 
   const reviewsObj = useSelector((state) => state.reviews)
   const reviewsArr = Object.values(reviewsObj)
@@ -103,7 +105,11 @@ function AnimeDetail() {
       <Loading />
     )
   }
-  if (!singleAnime || false) return null
+  if (!singleAnime || false){
+    return (
+      <PageNotFound />
+    )
+  }
   // console.log(singleAnime)
 
 
@@ -161,31 +167,31 @@ function AnimeDetail() {
             <div className="singleEpisodeDiv" key={episode.id}>
               <div className='episodeWatchNow'>
 
-                  <div className='episodeCoverImageDiv'>
-                    <img className='episodeCoverImage' src={episode.episodeCoverImage} />
-                  </div>
-                  <div className='episodeTileShow'>{singleAnime.showname}</div>
-                  <div className="episodeTileTitle">Episode: {episode.episodeNumber}, {episode.title}</div>
-        
-              </div>
-                <NavLink exact to={`/anime/${singleAnime.id}/episodes/${episode.id}`}>
-                <div className='episodePanelHover'>
-                <div className="showTitleHover">{singleAnime.showname}</div>
-                {user && user.id == animeObj[animeId].authorId && (
-                  <div className='delete-episode-button'>
-                    <OpenModalMenuItem
-                      className="delete-button"
-                      itemText="Delete this episode"
-                      modalComponent={<DeleteEpisodeModal episode={episode} key={`${episode.id}-episode`} />}
-                      />
-                  </div>
-                )
-              }
-                <div className="episodeTitleHover">Episode: {episode.episodeNumber}, {episode.title}</div>
-                <div className="episodeDateHover">{episode.releaseDate}</div>
-                <div className="episodeDescriptionHover">{episode.desc}</div>
+                <div className='episodeCoverImageDiv'>
+                  <img className='episodeCoverImage' src={episode.episodeCoverImage} />
+                </div>
+                <div className='episodeTileShow'>{singleAnime.showname}</div>
+                <div className="episodeTileTitle">Episode: {episode.episodeNumber}, {episode.title}</div>
 
               </div>
+              <NavLink exact to={`/anime/${singleAnime.id}/episodes/${episode.id}`}>
+                <div className='episodePanelHover'>
+                  <div className="showTitleHover">{singleAnime.showname}</div>
+                  {user && user.id == animeObj[animeId].authorId && (
+                    <div className='delete-episode-button'>
+                      <OpenModalMenuItem
+                        className="delete-button"
+                        itemText="Delete this episode"
+                        modalComponent={<DeleteEpisodeModal episode={episode} key={`${episode.id}-episode`} />}
+                      />
+                    </div>
+                  )
+                  }
+                  <div className="episodeTitleHover">Episode: {episode.episodeNumber}, {episode.title}</div>
+                  <div className="episodeDateHover">{episode.releaseDate}</div>
+                  <div className="episodeDescriptionHover">{episode.desc}</div>
+
+                </div>
               </NavLink>
             </div>
 
