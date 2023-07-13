@@ -49,7 +49,7 @@ function AnimeDetail() {
   const reviewsObj = useSelector((state) => state.reviews)
   const reviewsArr = Object.values(reviewsObj)
 
-  console.log("THIS IS REVIEWSARR", reviewsArr)
+  // console.log("THIS IS REVIEWSARR", reviewsArr)
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -81,7 +81,7 @@ function AnimeDetail() {
     return true
   }
 
-  console.log('EPISODES OF ANIME ---------', episodesOfAnime)
+  // console.log('EPISODES OF ANIME ---------', episodesOfAnime)
 
 
   useEffect(() => {
@@ -167,11 +167,11 @@ function AnimeDetail() {
             <div className="singleEpisodeDiv" key={episode.id}>
               <div className='episodeWatchNow'>
 
-                <div className='episodeCoverImageDiv'>
-                  <img className='episodeCoverImage' src={episode.episodeCoverImage} />
-                </div>
-                <div className='episodeTileShow'>{singleAnime.showname}</div>
-                <div className="episodeTileTitle">Episode: {episode.episodeNumber}, {episode.title}</div>
+                  <div className='episodeCoverImageDiv'>
+                    <img className='episodeCoverImage' src={episode.episodeCoverImage} />
+                  </div>
+                  <div className='episodeTileShow'>{singleAnime.showname}</div>
+                  <div className="episodeTileTitle">Episode: {episode.episodeNumber}, {episode.title}</div>
 
               </div>
               <NavLink exact to={`/anime/${singleAnime.id}/episodes/${episode.id}`}>

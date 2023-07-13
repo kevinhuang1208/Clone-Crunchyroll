@@ -52,7 +52,7 @@ const CreateReview = ({ anime, user }) => {
 
                 <div className="ratingDiv" onMouseLeave={() => setStars(actualRating)}>
                     {starArr.map((index) => {
-                        // console.log(index)
+                    
                         return (
                             <div
                                 // className={index <= stars ? "filled" : "empty"}
