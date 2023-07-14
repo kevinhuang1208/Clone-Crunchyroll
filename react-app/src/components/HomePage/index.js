@@ -92,6 +92,22 @@ function HomePage() {
     )
   }
 
+  const toPage2 = () => {
+    history.push('/anime/2')
+  }
+
+  const toPage1 = () => {
+    history.push('/anime/1')
+  }
+
+  const toPage3 = () => {
+    history.push('/anime/3')
+  }
+
+  const toPage4 = () => {
+    history.push('/anime/4')
+  }
+
   return (
     <div className='homePageDiv'>
       <div className="gradientBG">
@@ -99,10 +115,18 @@ function HomePage() {
       <div className='bigCarroDiv'>
         <Carousel infiniteLoop ={true} showArrows={true} showThumbs={false} showStatus={false} autoPlay={true} interval={2000} >
           <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1126642313364508734/image.png' />
-          <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1126650347478335608/52b8dd8a-eff2-4ed2-9b8d-7c0039df1c53.png' />
-          <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1126643229299834991/Rick-and-Morty-S6.png' />
-          <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1128014858009460767/p185179_b_h10_ab.png' />
-          <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1126643524415266940/1123312.png' />
+          <div className='toLinksHomePage' onClick={toPage2}>
+            <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1126650347478335608/52b8dd8a-eff2-4ed2-9b8d-7c0039df1c53.png' />
+          </div>
+          <div className='toLinksHomePage' onClick={toPage1}>
+            <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1126643229299834991/Rick-and-Morty-S6.png' />
+          </div>
+          <div className='toLinksHomePage' onClick={toPage3}>
+            <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1128014858009460767/p185179_b_h10_ab.png' />
+          </div>
+          <div className='toLinksHomePage' onClick={toPage4}>
+            <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1126643524415266940/1123312.png' />
+          </div>
         </Carousel>
         </div>
       </div>
