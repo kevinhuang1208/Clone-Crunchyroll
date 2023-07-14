@@ -114,7 +114,7 @@ function HomePage() {
 
       <div className='bigCarroDiv'>
         <Carousel infiniteLoop ={true} showArrows={true} showThumbs={false} showStatus={false} autoPlay={true} interval={3500} >
-          <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1129530695191105536/Steven_Taylor_Cornwall.png' />
+          <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1129533526988050502/Steven_Taylor_Cornwall_1.png' />
           <div className='toLinksHomePage' onClick={toPage2}>
             <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1126650347478335608/52b8dd8a-eff2-4ed2-9b8d-7c0039df1c53.png' />
           </div>
