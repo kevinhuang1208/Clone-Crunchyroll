@@ -55,7 +55,7 @@ function HomePage() {
     }
   }
 
-  
+
 
   useEffect(() => {
 
@@ -92,21 +92,47 @@ function HomePage() {
     )
   }
 
+  const toPage2 = () => {
+    history.push('/anime/2')
+  }
+
+  const toPage1 = () => {
+    history.push('/anime/1')
+  }
+
+  const toPage3 = () => {
+    history.push('/anime/3')
+  }
+
+  const toPage4 = () => {
+    history.push('/anime/4')
+  }
+
   return (
     <div className='homePageDiv'>
-      <div className = 'backGroundGradient'> 
+      <div className = 'backGroundGradient'>
         <div className='bg1'> </div>
         <div className = 'bg2'> </div>
         <div bg2> </div>
-        
+
       </div>
       <div className='bigCarroDiv'>
         <Carousel showArrows={true} showThumbs={false} showStatus={false} autoPlay={true} interval={1700} >
+          <>
           <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1126642313364508734/image.png' />
+          </>
+          <div className='linkToCarousel' onClick={toPage2}>
           <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1126650347478335608/52b8dd8a-eff2-4ed2-9b8d-7c0039df1c53.png' />
+          </div>
+          <div className='linkToCarousel' onClick={toPage1}>
           <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1126643229299834991/Rick-and-Morty-S6.png' />
+          </div>
+          <div className='linkToCarousel' onClick={toPage3}>
           <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1126650650432909512/70153391.png' />
+          </div>
+          <div className='linkToCarousel' onClick={toPage4}>
           <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1126643524415266940/1123312.png' />
+          </div>
         </Carousel>
         </div>
 

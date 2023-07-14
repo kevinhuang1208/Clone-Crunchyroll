@@ -91,13 +91,17 @@ margin-top: 14px;
 }
 
 .bigCarroDiv{
-   
+
    margin:20px auto;
    max-width: 882px;
-   
+
 }
 
 .backGroundGradient{
    background-color: #2abdbb;
    background-image: linear-gradient(to var(--cr-end-direction),#f47521,#fab818);
+}
+
+.linkToCarousel {
+   cursor: pointer;
 }
