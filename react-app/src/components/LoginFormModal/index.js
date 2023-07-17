@@ -69,11 +69,11 @@ function LoginFormModal() {
         </label>
         <button type="submit" disabled={password.length<1 || email.length <1}>Log In</button>
       </form>
-      <div className="demo-button">
+      <div className="demo-button-login">
       <button type="submit"
          onClick={handleDemoSubmit}>Demo User Login</button>
       </div>
-      <div className="demo-button">
+      <div className="demo-button-login ">
       <button type="submit"
          onClick={handleDemoSubmitStudio}>Demo Studio User Login</button>
       </div>

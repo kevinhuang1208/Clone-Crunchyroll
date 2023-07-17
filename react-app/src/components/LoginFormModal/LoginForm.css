@@ -21,3 +21,17 @@ button:enabled:hover{
 .demo-button {
     margin-right: 17px;
 }
+
+.demo-button-login > button {
+    margin: 0px;
+    text-align: center;
+    width: 170px;
+    height: 40px;
+    background-color: #f47521;
+    color: black;
+    border: none;
+    cursor: pointer;
+}
+.demo-button-login {
+    margin-bottom: 20px;
+}

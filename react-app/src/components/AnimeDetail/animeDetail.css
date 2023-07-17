@@ -146,9 +146,14 @@
     color: black;
     font-size: 20px;
     border: none;
-    text-align: center;
-    margin: 10px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+.CreateReviewModal > div:hover {
+    background-color: orange;
 }
 
 .delete-episode-button > div{
