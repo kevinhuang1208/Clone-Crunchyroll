@@ -47,7 +47,7 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <div className="button-with-arrow" onClick={openMenu}>
+      <div className={`button-with-arrow ${showMenu? 'menu-opened':'menu-closed'}`} onClick={openMenu}>
       <div className="profile-div">
         <img src="https://cdn.discordapp.com/attachments/1113213089702228038/1116759825104257104/morty-smith-pfp-30.jpg"/>
       </div>
@@ -59,7 +59,7 @@ function ProfileButton({ user }) {
             <li className="username-img-li"><img src="https://cdn.discordapp.com/attachments/1113213089702228038/1116759825104257104/morty-smith-pfp-30.jpg"/> {user.username}</li>
             {user.studio ? <li className='generic-list'>Studio Member</li> : null}
             <li className='generic-list'>{user.email}</li>
-            <li className='navlink-list'>
+            <li className='navlink-list' onClick={(e)=> history.push(`/user/${user.id}`)}>
             <NavLink exact to={`/user/${user.id}`} onClick={closeMenu}>
                 My Account
                <div className='text-below-navlink'>Manage your profile and settings.</div>
@@ -77,14 +77,14 @@ function ProfileButton({ user }) {
               onItemClick={closeMenu}
               modalComponent={<LoginFormModal />}
             />
-            
+
             <OpenModalButton
               className='nonuser-buttons'
               buttonText="Sign Up"
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
             />
-            
+
           </div>
         )}
       </ul>

@@ -6,14 +6,15 @@ justify-content: flex-start;
 }
 
 .favoritesDiv{
-    border-top: 5px #F47521 solid;
+    /* border-top: 5px #F47521 solid; */
     margin-top:4px;
-    width:80%;
+    width:100%;
     padding:5px;
     align-self: center;
+    max-width: 1306px;
 }
 .favoritesDiv>h1{
-margin-left:50px;
+/* margin-left:50px; */
 }
 .animeTileHomePage{
 

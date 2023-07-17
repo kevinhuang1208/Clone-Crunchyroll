@@ -49,7 +49,7 @@ def seed_episodes():
         title="The Garden Party",
         desc = "The Freemans are adjusting to life in Woodcrest. Robert is invited to a ritzy garden party by tycoon Ed Wuncler, but is concerned that his grandsons will embarrass him in front of his new neighbors. At the party, Huey tries to enlighten the partygoers with the 'truth' and Ed III dares Riley to shoot him with a shotgun.",
         release_date = date(2005, 11, 6),
-        video_link = "https://crunchyclone.s3.us-east-2.amazonaws.com/The+Boondocks+(2005)+-+S01E01+-+The+Garden+Party+(1080p+HMAX+WEB-DL+x265+YOGI).mp4", 
+        video_link = "https://crunchyclone.s3.us-east-2.amazonaws.com/The+Boondocks+(2005)+-+S01E01+-+The+Garden+Party+(1080p+HMAX+WEB-DL+x265+YOGI).mp4",
         episode_cover_image = "https://cdn.discordapp.com/attachments/1116044689452322926/1116046679175594156/p3187935_e_v8_ab.png"
     )
 
@@ -209,7 +209,7 @@ def seed_episodes():
         episode_cover_image ='https://cdn.discordapp.com/attachments/1113213089702228038/1116840082905768076/MV5BNzdkNTc3Y2ItNjAwNy00NWZmLTg1MTgtNDFlYzNhYjhhZDIyXkEyXkFqcGdeQXVyNTkzNjY2NTc.png'
     )
     superman2 = Episodes(
-        episode_number = 1,
+        episode_number = 2,
         title="Billion Dollar Limited",
         anime_id = 6,
         desc = 'The Daily Planet reports the shipment of a billion dollars of gold to the US mint',
@@ -218,7 +218,7 @@ def seed_episodes():
         episode_cover_image ='https://cdn.discordapp.com/attachments/1113213089702228038/1116840486603329546/MV5BNzhjYmM5OWEtM2RhNC00MzYyLTg0N2EtOTA3Zjk1ZTJiZWRlXkEyXkFqcGdeQXVyNTkzNjY2NTc.png'
     )
     superman3 = Episodes(
-        episode_number = 1,
+        episode_number = 3,
         title="Destruction Inc",
         anime_id = 6,
         desc = 'One night in Metropolis, the elderly night watchman from the Metropolis Munitions Works is found dead in a swamp.',

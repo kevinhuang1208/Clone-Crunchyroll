@@ -48,6 +48,12 @@
 
 .demo-button {
     text-align: center;
+        width: 75%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        flex-wrap: wrap;
 }
 
 .guest-button {
@@ -72,12 +78,17 @@
 .imgs-with-form > #boondock-right {
     position: relative;
     right: 80px;
+    height: 500px;
+    top: 100px;
 }
 
 
 .imgs-with-form > #boondock-left {
     position: relative;
     left: 150px;
+    height: 500px;
+    top: 100px;
+    max-width: 40%;
 }
 
 .guest-button-a{
@@ -88,4 +99,6 @@
 
 .landingPageLogo{
     margin-top: 5px;
+    width: 40%;
+    padding-bottom: 20px;
 }

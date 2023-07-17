@@ -14,6 +14,7 @@ import ProfilePage from "./components/ProfilePage";
 import EpisodeComponent from './components/EpisodeComponent'
 import EpisodeForm from './components/EpisodeForm'
 import EditAnime from "./components/EditAnime";
+import PageNotFound from "./components/PageNotFound";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,7 +31,8 @@ function App() {
   // <div className="master-container"> 
   // </div>
   return (
-    <>
+    <div className="main-body">
+      <div className="content-body">
 
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
@@ -77,11 +79,14 @@ function App() {
           <Route exact path='/anime/:animeId/episodes/:episodeId'>
             <EpisodeComponent />
           </Route>
-    
+          <Route>
+            <PageNotFound/>
+          </Route>
         </Switch>
       )}
+      </div>
       <Footer />
-    </>
+    </div>
   );
 }
 

@@ -1,0 +1,8 @@
+.loading-container {
+  height: 100%;
+  text-align: center;
+}
+
+.loading-gif {
+  border-radius: 60px;
+}

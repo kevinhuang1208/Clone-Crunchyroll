@@ -44,11 +44,11 @@ const AnimeForm = ({ anime, formType }) => {
     //     setCoverPicture(undefined)
     // }
     // Date object
-// const date = new Date();
-// const currDay= String(date.getDate()).padStart(2, '0');
-// const currMonth = String(date.getMonth()+1).padStart(2,"0");
-// const currYear = date.getFullYear();
-// const currDate = `${currDay}-${currMonth}-${currYear}`;
+    // const date = new Date();
+    // const currDay= String(date.getDate()).padStart(2, '0');
+    // const currMonth = String(date.getMonth()+1).padStart(2,"0");
+    // const currYear = date.getFullYear();
+    // const currDate = `${currDay}-${currMonth}-${currYear}`;
     const userId = useSelector(state => state.session.user)
     // console.log(userId)
     if (!userId) {
@@ -104,7 +104,7 @@ const AnimeForm = ({ anime, formType }) => {
         if (coverPicture) {
             formData.append("cover_picture", coverPicture)
         }
-        console.log('FORM DATA FROM REACT COMPONENT ->', formData)
+        // console.log('FORM DATA FROM REACT COMPONENT ->', formData)
 
         if (formType === 'edit') {
             const res = await dispatch(editAnimeThunk(anime.id, formData))
@@ -155,11 +155,11 @@ const AnimeForm = ({ anime, formType }) => {
     return (
         <div className="createAnimeFormContainer">
             {
-                (formType === 'edit') ? <h1 className = 'formHeader'>Edit an Anime </h1> :
-                <h1 className="formHeader">Create an Anime</h1>
+                (formType === 'edit') ? <h1 className='formHeader'>Edit an Anime </h1> :
+                    <h1 className="formHeader">Create an Anime</h1>
             }
-            
-            
+
+
             {errors.length ?
                 <ul>
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}

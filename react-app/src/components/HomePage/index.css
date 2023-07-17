@@ -1,62 +1,125 @@
 .homePageDiv{
-display:flex;
-flex-direction: column;
-}
-.tileCoverPhotoHomePage{
-
-   width:100%;
-   max-height: 300px;
-}
-
-.tileCoverPhotoHomePageDiv > img {
-   height: 300px;
-   border-radius: 6px;
-}
-
-.allAnimeContainer{
-   border-top:5px #F47521 solid;
-   margin-top:0px;
-   padding-top:0px;
    display:flex;
-   flex-wrap:wrap;
-   justify-content: center;
-   border-bottom:5px #F47521 solid;
-   padding:5px;
-   width:80%;
-   align-self: center;
-}
-
-.animeTileHomePage{
-   margin: 20px;
-   width: 250px;
-   margin-top: 10px;
-   position: relative;
-   border-radius: 6px;
-   align-self: flex-start;
-   
-   
-}
-
-.animeTileHomePage .hover-div{
-   visibility: hidden;
-   text-align: center;
-   background-color: black;
-   position: absolute;
-   /* z-index: 1; */
-   text-overflow: ellipsis;
-   overflow: hidden;
-   bottom: 5px;
-   height: 310px;
-   border-radius: 6px;
+   flex-direction: column;
    }
-   
-.animeTileHomePage:hover .hover-div{
-   visibility: visible;
-   opacity: 0.8;
-   cursor:pointer;
-}
+   .tileCoverPhotoHomePage{
+
+      width:100%;
+      /* max-height: 300px; */
+   }
+
+   .tileCoverPhotoHomePageDiv > img {
+      object-fit: cover;
+      /* width: 150px;
+      height: 230px; */
+      /* height: 300px; */
+      /* border-radius: 6px; */
+   }
+
+   .allAnimeContainer{
+      border-top:5px #F47521 solid;
+      margin-top:0px;
+      padding-top:0px;
+      display:flex;
+      flex-wrap:wrap;
+      /* justify-content: center; */
+      border-bottom:5px #F47521 solid;
+      padding:5px;
+      max-width: 1296px;
+      align-self: center;
+      margin: 0 auto;
+      /* width: 90%; */
+   }
+
+   .animeTileHomePage{
+      margin: 20px;
+      width: 250px;
+      margin-top: 10px;
+      position: relative;
+      border-radius: 6px;
+      align-self: flex-start;
 
 
-.animeShowName>h2{
-margin-top: 14px;
-}
+   }
+
+   .animeTileHomePage .hover-div{
+      visibility: hidden;
+      text-align: left;
+      background-color: #23252b;
+      position: absolute;
+      /* z-index: 1; */
+      text-overflow: ellipsis;
+      overflow: hidden;
+      bottom: 0;
+      height: 358px;
+      /* border-radius: 6px; */
+      width: 100%;
+      overflow-y: auto;
+      padding: 10px;
+      box-sizing: border-box;
+      }
+
+   .animeTileHomePage:hover .hover-div{
+      visibility: visible;
+      opacity: 0.9;
+      cursor:pointer;
+   }
+
+
+   .animeShowName>h2{
+   margin-top: 14px;
+   }
+
+   .reccomendCaro{
+      height:300px;
+      object-position: 50% -20%
+
+
+   }
+   .divofCarro{
+      display:flex;
+      flex-direction: column;
+      justify-content: Center;
+      margin: 0 auto;
+      max-width: 1296px;
+   }
+
+   .bigBanners{
+      width:882px;
+   }
+
+   .anime-container-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+   }
+
+   .bigCarroDiv{
+
+      margin:20px auto;
+      max-width: 882px;
+
+   }
+   .gradientBG{
+      background-color: #2abdbb;
+      opacity: 0.8;
+      background-image:  linear-gradient(30deg, #27a6a6 12%, transparent 12.5%, transparent 87%, #27a6a6 87.5%, #27a6a6), linear-gradient(150deg, #27a6a6 12%, transparent 12.5%, transparent 87%, #27a6a6 87.5%, #27a6a6), linear-gradient(30deg, #27a6a6 12%, transparent 12.5%, transparent 87%, #27a6a6 87.5%, #27a6a6), linear-gradient(150deg, #27a6a6 12%, transparent 12.5%, transparent 87%, #27a6a6 87.5%, #27a6a6), linear-gradient(60deg, #27a6a677 25%, transparent 25.5%, transparent 75%, #27a6a677 75%, #27a6a677), linear-gradient(60deg, #27a6a677 25%, transparent 25.5%, transparent 75%, #27a6a677 75%, #27a6a677);
+      background-size: 80px 140px;
+      background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+   }
+
+   li.react-multi-carousel-item.react-multi-carousel-item--active {
+      width: auto;
+   }
+   .anime-tile-name {
+      height: 36px;
+      font-size: 13pt;
+   }
+   .show-lang {
+      color: rgb(195, 195, 195);
+      font-size: 12pt;
+   }
+
+   .toLinksHomePage {
+      cursor: pointer;
+   }

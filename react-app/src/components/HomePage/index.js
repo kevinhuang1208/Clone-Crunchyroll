@@ -6,47 +6,188 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import AnimeTile from './AnimeTile';
 import FavoritesBar from '../Favorite';
 import { getSingleUserThunk } from '../../store/user';
+
+import Carousel1 from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+
+import Loading from '../Loading';
+
 function HomePage() {
   const dispatch = useDispatch()
   const history = useHistory()
   const animes = useSelector((state) => state.anime)
   const user = useSelector((state) => state.session.user)
+  const [loaded, setLoaded] = useState(false)
+
   let animeIds = []
-  if(user){
+  if (user) {
     animeIds = user.favorites
     animeIds = Object.values(animeIds)
   }
 
-  useEffect(() => {
-    dispatch(getAllAnimeThunk())
-    if(user){
-      dispatch(getSingleUserThunk(user.id))
+  const responsive = {
+    desktop: {
+      breakpoint: {
+        max: 3000,
+        min: 1024
+      },
+      items: 3,
+      partialVisibilityGutter: 40
+    },
+    mobile: {
+      breakpoint: {
+        max: 464,
+        min: 0
+      },
+      items: 1,
+      partialVisibilityGutter: 30
+    },
+    tablet: {
+      breakpoint: {
+        max: 1024,
+        min: 464
+      },
+      items: 2,
+      partialVisibilityGutter: 30
     }
+  }
+
+
+
+  useEffect(() => {
+
+    setTimeout(async () => {
+      dispatch(getAllAnimeThunk()).then(() => setLoaded(true));
+      if (user) {
+        dispatch(getSingleUserThunk(user.id))
+      }
+    }, 1500);
+
   }, [dispatch])
   // console.log(user)
   // console.log(animeIds)
   // console.log(animeIds.length)
   const animesArr = Object.values(animes)
+
+  function selectRandomItems(array) {
+    const copyArray = array.slice(); // Create a copy of the original array
+    const randomItems = [];
+
+    while (randomItems.length < 4 && copyArray.length > 0) {
+      const randomIndex = Math.floor(Math.random() * copyArray.length);
+      const selectedItem = copyArray.splice(randomIndex, 1)[0];
+      randomItems.push(selectedItem);
+    }
+
+    return randomItems;
+  }
+  const randomAnimes = selectRandomItems(animesArr)
+  // console.log('random Anime Array-----', randomAnimes)
+  if (!loaded) {
     return (
-      <div className = 'homePageDiv'>
-        {
-          // user && animeIds && animeIds.length && (<FavoritesBar animes={animes} user={user} animeIds={animeIds}/>)
-          (user && animeIds && animeIds.length) ? <FavoritesBar animes={animes} user={user} animeIds={animeIds}/> : null
-        }
-        <div className = 'allAnimeContainer'>
-          {/* <span>
-          <h2>Anime</h2>
-          </span> */}
-        {
+      <Loading />
+    )
+  }
 
-          animesArr.map(anime => (
-            <AnimeTile key ={`anime-tile-${anime.id}`} anime={anime} />
-          ))
+  const toPage2 = () => {
+    history.push('/anime/2')
+  }
 
-        }
+  const toPage1 = () => {
+    history.push('/anime/1')
+  }
+
+  const toPage3 = () => {
+    history.push('/anime/3')
+  }
+
+  const toPage4 = () => {
+    history.push('/anime/4')
+  }
+
+  return (
+    <div className='homePageDiv'>
+      <div className="gradientBG">
+
+      <div className='bigCarroDiv'>
+        <Carousel infiniteLoop ={true} showArrows={true} showThumbs={false} showStatus={false} autoPlay={true} interval={3500} >
+          <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1129533526988050502/Steven_Taylor_Cornwall_1.png' />
+          <div className='toLinksHomePage' onClick={toPage2}>
+            <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1126650347478335608/52b8dd8a-eff2-4ed2-9b8d-7c0039df1c53.png' />
+          </div>
+          <div className='toLinksHomePage' onClick={toPage1}>
+            <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1126643229299834991/Rick-and-Morty-S6.png' />
+          </div>
+          <div className='toLinksHomePage' onClick={toPage3}>
+            <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1128014858009460767/p185179_b_h10_ab.png' />
+          </div>
+          <div className='toLinksHomePage' onClick={toPage4}>
+            <img className='bigBanners' src='https://cdn.discordapp.com/attachments/1113213089702228038/1126643524415266940/1123312.png' />
+          </div>
+        </Carousel>
         </div>
       </div>
-    )
+
+      {
+        (user && animeIds && animeIds.length) ? <FavoritesBar animes={animes} user={user} animeIds={animeIds} /> : null
+      }
+      <div className='divofCarro'>
+        <h1> Recommended for you!</h1>
+
+
+        <Carousel1
+          additionalTransfrom={0}
+          arrows
+          autoPlaySpeed={3000}
+          centerMode={true}
+          className=""
+          containerClass="container-with-dots"
+          dotListClass=""
+          draggable
+          focusOnSelect={false}
+          infinite
+          itemClass=""
+          keyBoardControl
+          minimumTouchDrag={80}
+          pauseOnHover
+          renderArrowsWhenDisabled={false}
+          renderButtonGroupOutside={false}
+          renderDotsOutside={false}
+          responsive={responsive}
+          rewind={false}
+          rewindWithAnimation={false}
+          rtl={false}
+          shouldResetAutoplay
+          showDots={false}
+          sliderClass=""
+          slidesToSlide={1}
+          swipeable
+        >
+          {randomAnimes.map((anime) => (
+            <AnimeTile key={`anime-tile-${anime.id}`} anime={anime} />
+          ))}
+        </Carousel1>
+      </div>
+
+      <div className='anime-container-wrapper'>
+
+        <div className='allAnimeContainer'>
+          {
+
+            animesArr.map(anime => (
+              <AnimeTile key={`anime-tile-${anime.id}`} anime={anime} />
+            ))
+
+          }
+        </div>
+      </div>
+
+
+    </div>
+  )
 }
 
 export default HomePage;
