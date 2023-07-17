@@ -7,10 +7,16 @@
     border: none;
     margin: 10px;
     cursor: pointer;
-    text-align: center;
-    vertical-align: center;
+    /* text-align: center; */
+    /* vertical-align: center; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+.review-buttons-div > div:hover {
+    background-color: orange;
 
+}
 .review-buttons-div {
     display: flex;
     flex-direction: row;
