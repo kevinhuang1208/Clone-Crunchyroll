@@ -1,6 +1,6 @@
 # PhillyRoll
 
-This is a full-stack project reflecting what we have learned over the course of the program. PhillyRoll (https://phillyroll.onrender.com/), tasked to clone CrunchyRoll (https://www.crunchyroll.com/), is a project that encorporates the backend (databases, servers, routes) as well as the frontend (user/client side). Various technologies were used to help us achieve the site that it is today (listed below).
+This is a full-stack project reflecting what we have learned over the course of the program. PhillyRoll (https://phillyroll-f73u.onrender.com), tasked to clone CrunchyRoll (https://www.crunchyroll.com/), is a project that encorporates the backend (databases, servers, routes) as well as the frontend (user/client side). Various technologies were used to help us achieve the site that it is today (listed below).
 
 ## Technologies
 
